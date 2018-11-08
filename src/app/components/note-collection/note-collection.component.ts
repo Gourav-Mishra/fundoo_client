@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import{ HttpService} from '../../service/http/http.service'
+import{ HttpService} from '../../core/service/http/http.service'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { PopupComponent } from '../popup/popup.component';
-import { GeneralService } from 'src/app/service/general.service';
+import { GeneralService } from 'src/app/core/service/general.service';
 
 
 @Component({

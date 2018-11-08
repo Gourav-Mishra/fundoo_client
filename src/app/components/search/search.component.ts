@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import{ HttpService} from '../../service/http/http.service'
-import { GeneralService } from 'src/app/service/general.service';
+import{ HttpService} from '../../core/service/http/http.service'
+import { GeneralService } from 'src/app/core/service/general.service';
 
 
 @Component({

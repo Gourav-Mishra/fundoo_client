@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/service/http/http.service';
+import { HttpService } from 'src/app/core/service/http/http.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 

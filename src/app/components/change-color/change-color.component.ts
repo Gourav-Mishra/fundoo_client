@@ -1,5 +1,5 @@
 import { Component, OnInit,Input,Output,EventEmitter} from '@angular/core';
-import { HttpService } from 'src/app/service/http/http.service';
+import { HttpService } from 'src/app/core/service/http/http.service';
 
 @Component({
   selector: 'app-change-color',

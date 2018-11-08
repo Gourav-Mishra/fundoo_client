@@ -2,11 +2,11 @@ import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpService } from '../../service/http/http.service'
+import { HttpService } from '../../core/service/http/http.service'
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddLablesComponent } from '../add-lables/add-lables.component';
-import { GeneralService } from '../../service/general.service';
+import { GeneralService } from '../../core/service/general.service';
 import { HttpClient } from '@angular/common/http'
 import { ImageCroppedEvent } from 'ngx-image-cropper/src/image-cropper.component';
 import { Router } from '@angular/router'
