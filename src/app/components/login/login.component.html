@@ -1,0 +1,101 @@
+<div fxLayout="column" fxLayoutGap="11%">
+  <div fxFlex="25"> </div>
+  <div fxFlex="50" fxFlex.xs="0" fxFlex.sm="12" fxFlex.md="24" fxFlex.lg="36" fxFlex.xl="48">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="38%" fxFlex.xs="0" fxFlex.sm="8" fxFlex.md="16" fxFlex.lg="22"> </div>
+      <div fxFlex="24% " fxFlex.xs="100%" fxFlex.sm="84" fxFlex.md="68" fxFlex.lg="56">
+        <div>
+          <mat-card>
+            <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+              <div leftPane>
+                <div class="container1">
+
+                  <div class="header">
+                    <p fxLayoutAlign="center" class="logo" dir="ltr" fxLayoutGap="30px">
+                      <span class="blue"> F </span>
+                      
+                      <span class="red"> U </span>
+                     
+                      <span class="yellow"> N </span>
+                      <span class="blue"> D </span>
+                      <span class="green"> O </span>
+                      <span class="red"> O </span>
+                    </p>
+                    <h2 fxLayoutAlign="center" style="font-family: 'Google Sans',arial,sans-serif;"> Sign In</h2>
+                    <h4 class="tagline" fxLayoutAlign="center"> with your Fundoo Account</h4>
+                  </div>
+
+                  <div fxLayout="column">
+                    <mat-form-field>
+                      <input matInput placeholder="Email" [(ngModel)]="body.email">
+                    </mat-form-field>
+
+
+                    <div class="button-row" fxLayoutAlign="space-between center">
+
+                      <a mat-button routerLink="/signup" style="color: blue"> <b>Create account </b></a>
+
+                      <button (click)="isLeftVisible = !isLeftVisible" mat-raised-button color="primary">Next</button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div rightPane>
+
+                <div class="container1">
+
+                  <div class="header">
+                    <p fxLayoutAlign="center" class="logo">
+                      <span class="blue"> F </span>
+                      <span class="red"> U </span>
+                      <span class="yellow"> N </span>
+                      <span class="blue"> D </span>
+                      <span class="green"> O </span>
+                      <span class="red"> O </span>
+                    </p>
+                    <h2 fxLayoutAlign="center" style="font-family: 'Google Sans',arial,sans-serif;"> Sign up </h2>
+                    <h4 class="tagline" fxLayoutAlign="center"> with your Fundoo Account</h4>
+                  </div>
+
+                  <div fxLayout="column">
+
+
+                    <mat-form-field>
+                      <input type="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [(ngModel)]="body.password">
+                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+                    <div class="button-row" fxLayoutAlign="space-between center">
+
+                      
+                      <a mat-button routerLink="/forgot" style="color: blue"> <b>Forgot Password</b></a>
+                      
+                      <span fxLayout="row" fxLayoutGap="10%">
+                        <button (click)="isLeftVisible = !isLeftVisible" mat-raised-button color="primary">Back</button>
+                        <button mat-raised-button color="primary" (click)= "login()" >Login</button>
+                      </span>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </my-slide-panel>
+          </mat-card>
+
+        </div>
+       
+
+      </div>
+
+
+
+
+      <div fxFlex="25">
+
+      </div>
+    </div>
+  </div>
+</div>

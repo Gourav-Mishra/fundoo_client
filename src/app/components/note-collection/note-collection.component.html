@@ -1,0 +1,46 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between start" style="padding:50px ;margin-bottom:10%; padding:80px">
+  <mat-card class="card" style=" margin-top: 30px; margin-bottom: 20px; border-radius: 2%"
+            *ngFor='let notes of notesArray | LockFilter: searchNote' 
+            [style.backgroundColor]="notes.color">
+    <div [ngClass]="{
+    'cardgrid':!toggle,
+    'cardlist':toggle 
+    }">
+    <div fxLayout="column" (click)=openDialog(notes)>
+      <mat-card-title class="title" [innerHTML]="notes.title">
+      
+      </mat-card-title>
+      <br>
+      <mat-card-content class="description" [innerHTML]="notes.description">
+        
+
+
+      </mat-card-content>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+      <div *ngFor="let item of notes.noteLabels" >
+    <mat-chip-list class="chip">
+        <mat-chip class="chip_color" *ngIf="item.isDeleted==false">{{item.label}}
+          <mat-icon class="delete_label"
+                    mat-button (click)="removeLabel(notes.id,item.id)">cancel</mat-icon>
+        </mat-chip>
+     </mat-chip-list>
+    </div>
+  </div>
+
+    <mat-card-actions>
+      <div fxLayoutAlign="space-evenly end" class="icon">
+        <app-remind-btn></app-remind-btn>
+        <app-collaborator></app-collaborator>
+        <app-change-color [noteDetails]="notes" 
+                          (notescolor)="changeColor($event)"></app-change-color>
+        <app-add-image></app-add-image>
+        <app-archive-btn></app-archive-btn>
+        <app-more-btn [noteDetails]="notes" (notesDelete)="deleteDone($event)"></app-more-btn>
+      </div>
+    </mat-card-actions>
+
+</div>
+  </mat-card>
+
+</div>

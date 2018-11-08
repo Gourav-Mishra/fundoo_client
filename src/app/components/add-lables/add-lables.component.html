@@ -1,0 +1,39 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <mat-card class="card">
+    <div fxLayout="column">
+      <p style="font-size:24px;font-family:'Roboto',arial,sans-serif">Edit Lable</p>
+      <div Fxlayout="row" fxLayoutAlign="space-between end">
+        <span fxFlex=10%>
+          <mat-icon>add</mat-icon>
+        </span>
+
+        <div class="border1" fxFlex="80%" id="label1" contentEditable="true" data-text="Create new label"></div>
+        <div> {{message}}</div>
+        <span fxFlex="10%">
+          <mat-icon>done</mat-icon>
+        </span>
+      </div>
+    </div>
+    <div *ngFor="let labels of notes">
+      <div fxFlex=10%>
+        <mat-icon class="delete_icon" (click)="deleteLabel(labels.id)">delete</mat-icon>
+      </div>
+      <div fxFlex=80%>{{labels.label}}</div>
+      <div fxFlex=10%>
+        <mat-icon class="edit_icon">edit</mat-icon>
+      </div>
+
+    </div>
+
+    <mat-card-actions>
+      <div fxLayoutAlign="end end" class="icon">
+
+        <button mat-button (click)="addLabel()"> Done </button>
+      </div>
+
+    </mat-card-actions>
+
+
+  </mat-card>
+
+</div>

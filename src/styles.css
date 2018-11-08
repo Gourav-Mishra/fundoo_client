@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.blue{
+    color: #4285F4;
+    font-size: 40px;
+    }
+    .red{
+    color: #EA4335;
+    font-size: 28px;
+    }
+    .green{
+    color: #FBBC05;
+    font-size: 28px;
+    }
+    .yellow{
+    color:#34A853;
+    font-size:28px;
+    }
+    body{
+        margin:0px;
+    }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+.img_btn{
+    opacity: 0.7;
+}

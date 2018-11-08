@@ -1,0 +1,96 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    
+   
+  }
+  
+  .container > * {
+    width:100%;
+  }
+
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+.blue{
+    color: #4285F4;
+    font-size: 50px;
+    font-family: cursive;
+    }
+    .red{
+    color: rgb(235, 75, 61);
+    font-size: 28px;
+    }
+    
+    .green{
+    color: #FBBC05;
+    font-size: 22px;
+  
+    }
+    .yellow{
+    color:#34A853;
+    font-size: 22px;
+    }
+    .red2{
+      color: rgb(253, 21, 0);
+      font-size: 38px;
+      }
+    .logo{
+        margin: 8px;
+        font-family: sans-serif;
+        
+        font-weight: bold;
+        padding: 0px;
+      }
+      .field{
+        width:50%
+      }
+      .services{
+        color: red;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 24px;
+      }
+      .card1{
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        height:120px;
+        border-radius: 15px;
+        color:white;
+        text-transform: uppercase;
+        
+      }
+      
+      .signin{
+          color:blue;
+          font-size: 20px;
+      }
+      .signup_button{
+          font-size: 20px;
+      }
+      .fname{
+      width:45%
+      }
+      .lname{
+        width:45%
+      }
+      .maindiv{
+        width:50%
+      }
+      .notselected{
+background-color:black;
+
+      }
+      .selected{
+        background-color: rgba(142, 235, 88, 0.849);
+      }
+       button:disabled,
+button[disabled]{
+  border: 1px solid #0004ffd7;
+  color: #000000;
+  cursor:progress;
+  text-decoration-color: #000000
+} 

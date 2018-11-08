@@ -1,0 +1,161 @@
+<!------fundoo Dashboard(Toolbar & sidebar )------->
+<mat-toolbar class="toolbar">
+  <div>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button 
+            (click)="drawer.toggle()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <span class="title">fundoo</span>
+
+  </div>
+  <img class="img" src="../../../assets/images/search.svg">
+
+  <!--    ----        Search bar  starts      -----        -->
+  <div class="search_flex" routerLink="/home/search" fxShow.xs=false fxShow.sm=false
+       fxShow.md=true fxShow.lg=true>
+    <input class="searchbar" matTooltip="Search Bar" aria-label="Search" 
+           autocomplete="off" placeholder="Search" value=""
+           name="q" role="combobox" type="text" aria-hidden="false" 
+           [(ngModel)]="body.data" (keyup)="onKeyUp($event)">
+  </div>
+  <!--    ----        Search bar  Ends        -----        -->
+
+
+  <!--    ----        side bar starts       -----        -->
+  <div>
+    <div fxLayoutAlign="end end" fxLayout="row wrap">
+      <span class="right_icons" fxLayoutAlign="end end">
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
+          <mat-icon matTooltip="Refresh" aria-label="Side nav toggle icon">refresh
+
+          </mat-icon>
+        </button>
+      </span>
+      <span class="left_icons" fxLayoutAlign="end end">
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" 
+                fxshow.xs="true" fxShow.sm="true"
+          fxShow.md="true" fxShow.lg="true">
+          <mat-icon matTooltip="switch to list" (click)="listView()" *ngIf="view==0" 
+                    aria-label="Side nav toggle icon">view_stream</mat-icon>
+          <mat-icon matTooltip="switch to grid" (click)="gridView()" *ngIf="view==1"
+                    aria-label="Side nav toggle icon">view_module</mat-icon>
+        </button>
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
+          <mat-icon matTooltip="Notifications" aria-label="Side nav toggle icon">
+                notifications
+          </mat-icon>
+        </button>
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
+
+          <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+
+            <div fxLayoutAlign="row wrap">
+              <div fxFlex=40>
+                <button class="profilebutton" (click)="$event.stopPropagation()" 
+                        [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                  (click)="selectFile.click()" matTooltip="fundoo Account" 
+                  mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">
+                </button>
+                <input style="display:none" (click)="$event.stopPropagation()" class="image" type="file" 
+                        (change)="onFileUpload($event)" #selectFile>
+              </div>
+              <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left">{{firstName | titlecase}}
+                {{lastName | titlecase}} </mat-content>
+
+            </div><br>
+            <p class="mail"> {{email}}</p>
+
+            <mat-content class="contentstyle">{{raw_data}}</mat-content>
+            <hr>
+
+            <button class="signup_button" mat-raised-button color="primary" style="float:right" (click)="logout()">Logout</button>
+          </mat-menu>
+
+
+          <button mat-icon-button [matMenuTriggerFor]="appMenu">
+
+            <button class="profilebutton2" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+
+            </button>
+          </button>
+          <!--           profile-pic upload   ends                -->
+        </button>
+      </span>
+    </div>
+  </div>
+
+
+
+</mat-toolbar>
+<!-------------------sidenav-Bar------------------------->
+<mat-sidenav-container class="sidenav-container" hasBackdrop="false">
+
+  <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+         [mode]="(isHandset$ | async) ? 'over' : 'side'"
+         [opened]="!(isHandset$ | async)">
+
+    <mat-nav-list>
+
+
+      <a mat-list-item routerLink="/home/notes"><img class="img" 
+           src="../../../assets/images/notes.svg">
+        <span class="space_sidebar"> Notes</span> </a>
+      <a mat-list-item routerLink="/home/reminders"><img class="img"
+           src="../../../assets/images/reminders.svg"><span
+          class="space_sidebar">Reminders</span></a>
+      <hr class="line">
+      <div>
+        <span fxLayoutAlign="space-between center">
+          <p class="labels">Labels<p> <a class="edit" mat-button> EDIT </a>
+        </span>
+        <span>
+          <a mat-list-item *ngFor="let labels of notes">
+            <mat-icon>label_outline</mat-icon><span class="child-links" (click)="lablelist(labels)">{{labels.label}}</span>
+          </a>
+        </span>
+
+        <span fxLayoutAlign="center center"> <a mat-list-item (click)=openDialog()>
+            <img src="../../../assets/images/add.svg">Create
+            new lable</a></span>
+
+      </div>
+      <hr>
+      <a mat-list-item routerLink="/home/archive"><img class="img" 
+         src="../../../assets/images/archive.svg">
+        <span class="space_sidebar">
+          Archive</span></a>
+      <a mat-list-item routerLink="/home/trash"><img class="img"
+          src="../../../assets/images/trash.svg">
+        <span class="space_sidebar">Trash</span></a>
+      <hr>
+
+      <hr>
+      <div>
+        <span fxLayoutAlign="start start">
+          <a href="#">
+            <p class="sidenav_last">Privacy<p></p>
+          </a> &nbsp; &nbsp; <a href="#">
+            <p class="sidenav_last1"> Terms </p>
+          </a>
+        </span>
+        <span> <a href="#">
+            <p class="sidenav_last"> Open source licenses</p>
+          </a></span>
+
+      </div>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="margin-top:5%">
+
+
+    <router-outlet> </router-outlet>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-------------------sidenav-Bar------------------------->
+<!---------------------fundoo Dashboard(Toolbar & sidebar )---------------->

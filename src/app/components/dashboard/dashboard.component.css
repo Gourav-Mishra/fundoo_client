@@ -1,0 +1,165 @@
+
+
+.sidenav-container {
+  height: 100%;
+  
+  
+ 
+  
+}
+
+.sidenav {
+  background:rgb(230, 230, 215);
+  width: 300px;
+  margin-top:4%;
+  position: fixed;
+  
+}
+.toolbar{
+ 
+  background-color: #fb0;
+  height:70px;
+  position:fixed;
+  z-index: 2
+  
+}
+.endbutton{
+  display:flex;
+  
+}
+.title{
+  font-size: 28px;
+  padding-left:20px;
+  padding-right:20px; 
+  font-family: 'Product Sans',Arial,sans-serif;
+
+}
+.spacer{
+  padding-right: 50px
+}
+.searchbar {
+  
+
+  background: rgba(80, 80, 79, 0.096);
+  border: none;
+  font: normal 20px Roboto,sans-serif;
+  font-variant-ligatures: none;
+  height: 50px;
+  outline: none;
+  padding: 11px 16px 11px 16px;
+  box-sizing: border-box;
+  width:stretch;
+
+}
+input:focus{
+  background-color:white
+}
+.menu{
+  background-color: rgb(255, 255, 255);
+
+
+}
+.img{
+  opacity: .54;
+  
+}
+.sidebar_list{
+  height:70px;
+}
+.space_sidebar{
+  padding-left:36px;
+}
+
+.sidebar_height{
+  height:50px;
+}
+.search_flex{
+  flex: 1 1 auto;
+}
+.mat-drawer-content {
+  position: relative;
+  
+  display: block;
+  height: 100%;
+  overflow: auto;
+  background: rgb(255, 255, 255)
+}
+.line{
+  opacity:1;
+}
+.signout{
+/* width:9px; */
+height:150px
+}
+.mat-menu-content {
+  /* padding-top: 1px;
+  padding-bottom: 1px; */
+  background:rgb(255, 255, 255);
+}
+.labels{
+  padding-left: 20px;
+  font-family: 'Roboto',arial,sans-serif;
+}
+.spacer_last{
+  padding-bottom: 50px;
+}
+.sidenav_last{
+  font-size: 14px;
+  padding-left: 40px;
+}
+.sidenav_last1{
+  font-size: 14px;
+  
+}
+.signup_avatar{
+
+  border-radius: 100%;
+  width:10px;
+  height:10px;
+  background:rgba(152, 235, 19, 0.808);
+  font-size: 15px;
+}
+.child-links{
+  padding-left:20px;
+}
+.name_onscreen{
+  font-size: 25px;
+  font-weight:300;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+.mail{
+  font-weight:200;
+  font-size: 20px
+}
+.fabicon{
+  font-size:20px;
+}
+.testButton1
+{
+
+height:10%;
+ width: 25%
+}
+
+.testButton1 img
+{
+height:80%;
+vertical-align:middle;
+}
+.profilebutton{
+  width:100px; 
+  height:100px; 
+  border: none;
+ border-radius: 50%;
+ background:white;
+ 
+}
+.profilebutton2{
+  width:50px; 
+  height:50px; 
+  border: none;
+ border-radius: 50%;
+ background: transparent;
+ outline:none;
+ 
+}

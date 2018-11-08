@@ -1,0 +1,60 @@
+.cardgrid{
+
+min-height:150px;
+min-width:240px;
+max-width:250px;
+border-radius: 15%;
+}
+.cardlist{
+
+    min-height:150px;
+   width:900px;
+    border-radius: 5%;
+    }
+
+
+
+.card:hover{
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.568);
+    
+    
+}
+.icon{
+    padding-bottom: 0px;
+    opacity:0;
+}
+.icon:hover{
+    opacity: 1;
+}
+.title{
+text-transform:capitalize;
+font-weight: 500;
+font-size:27px
+}
+.description{
+    font-size: 20px;
+    font-weight:400;
+
+}.chip_color{
+    background: rgb(9, 2, 99);
+    color:rgb(255, 255, 255);
+    height:25px;
+    text-transform:capitalize;
+    font-weight:500;
+ 
+
+}
+.chip{
+    margin-top:5px
+}
+
+.delete_label{
+    opacity:0
+
+}
+.delete_label:hover{
+    opacity:1
+}
+
+
+    

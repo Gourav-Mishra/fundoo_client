@@ -1,0 +1,32 @@
+<div>
+  <button mat-icon-button class="fundoo" matTooltip="more options" [matMenuTriggerFor]="menuMore">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menuMore="matMenu" yPosition="below" [overlapTrigger]="false" class="colorCard">
+
+    <div>
+      <button mat-menu-item (click)="delete()"> delete note </button>
+
+      <button mat-menu-item [matMenuTriggerFor]="lables" >Add Lable</button>
+
+      <button mat-menu-item> Add checkboxes</button>
+    </div>
+  </mat-menu>
+  <mat-menu #lables="matMenu">
+      <div class="search_flex">
+       
+            <input class="searchbar" matTooltip="Search Bar" aria-label="Search" autocomplete="off" placeholder="Search" value=""
+            name="q" role="combobox" type="text" aria-hidden="false" (click) = "$event.stopPropagation()" [(ngModel)]="query">
+        
+         
+        </div>
+      
+    <div *ngFor="let lables of notes| newSearch: query" fxLayoutAlign="space-between center">
+      <mat-checkbox (click) = "$event.stopPropagation(); addLabel(lables.id)">{{lables.label}}
+
+      </mat-checkbox>
+      <!-- <mat-icon (click)="removeLabel(lables.id)" style="opacity:0.5">cancel</mat-icon> -->
+
+    </div>
+  </mat-menu>
+</div>

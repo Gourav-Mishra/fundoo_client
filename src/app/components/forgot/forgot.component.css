@@ -1,0 +1,33 @@
+.container2 {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 20px;
+    border-radius: 15px;
+   
+  }
+  
+  .container1 > * {
+    width: 100%;
+  }
+  .button-row button,
+.button-row a {
+  margin-right: 8px;
+  margin-top:5px;
+}
+  .blue{
+    color: #4285F4;
+    font-size: 40px;
+    }
+    .red{
+    color: #EA4335;
+    font-size: 28px;
+    }
+    .green{
+    color: #FBBC05;
+    font-size: 28px;
+    }
+    .yellow{
+    color:#34A853;
+    font-size:28px;
+    }

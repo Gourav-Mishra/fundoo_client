@@ -1,0 +1,27 @@
+<div fxLayoutAlign="center"><p ><i> Notes can be deleted Forever in more menu</i></p></div>
+
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between start" style="margin-bottom:10%; padding:80px;padding:50px" >
+    <mat-card class="card" style=" margin-top: 30px" *ngFor='let notes of notes' [style.backgroundColor]="notes.color" >
+      <div fxLayout="column" (click)=openDialog(notes)>
+        <mat-card-title class="title" [innerHTML]="notes.title"> </mat-card-title>
+        <br>
+        <mat-card-content class="description" [innerHTML]="notes.description"> </mat-card-content>
+      </div>
+    
+      <button mat-icon-button class="fundoo" matTooltip="more options" [matMenuTriggerFor]="menuMore">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menuMore="matMenu" yPosition="below" [overlapTrigger]="false" class="colorCard">
+    
+        <div>
+          <button mat-menu-item (click)="restore(notes.id)"> Restore </button>
+          <button mat-menu-item (click)="delForever(notes.id)"> Delete Forever </button>
+        </div>
+      </mat-menu>
+  
+     
+  
+    </mat-card>
+  
+  </div>
