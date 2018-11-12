@@ -4,7 +4,7 @@ import{ HttpService} from '../../core/service/http/http.service'
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
  show=true;
@@ -34,7 +34,7 @@ if(event){
     this.records= this.httpService.httpGetNotes('notes/getNotesList',token).subscribe(result =>{
     this.notes=[];
       for(var i=result['data']['data'].length-1;i>0;i--){
-        if(result['data']['data'][i].isDeleted==false){
+        if(result['data']['data'][i].isDeleted==false && result['data']['data'][i].isArchived==false){
          this.notes.push(result['data']['data'][i])
         }
        

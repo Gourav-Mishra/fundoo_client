@@ -1,42 +1,53 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,EventEmitter,Output } from '@angular/core';
 import { HttpService} from '../../core/service/http/http.service'
 import { MatSnackBar} from '@angular/material'
 
 @Component({
   selector: 'app-archive-btn',
   templateUrl: './archive-btn.component.html',
-  styleUrls: ['./archive-btn.component.css']
+  styleUrls: ['./archive-btn.component.scss']
 })
 export class ArchiveBtnComponent implements OnInit {
-  body={
-  "isArchived":true,
-  "noteIdList":[]
-  }
-  records={};
-  constructor(private httpService: HttpService,
-  public snackBar: MatSnackBar) { }
-  @Input() noteDetails;
   
+  token = localStorage.getItem('token')
+  constructor(private httpService: HttpService, public matSnackBar:MatSnackBar) { }
+  @Input() archive;
+  @Output() archiveNote = new EventEmitter
+  @Output() unArchiveNote = new EventEmitter<boolean>()
+  body;
+
   ngOnInit() {
   }
-  
-  archive(id) {
-  var token = localStorage.getItem('token');
-  this.body={
-  "isArchived": true,
-  "noteIdList": [this.noteDetails.id]
+
+  archiveNotes() {
+    this.body = {
+      "isArchived": true,
+      "noteIdList": [this.archive.id]
+    }
+    this.httpService.httpPostArchive('notes/archiveNotes', this.body, this.token).subscribe(res => {
+      console.log(res);
+      this.matSnackBar.open("Archived",'Successfully',{
+        duration: 3000,
+      });
+      this.archiveNote.emit();
+    }, error => {
+      console.log(error);
+    })
   }
-  this.records = this.httpService.httpArchiveNote('notes/archiveNotes',this.body, token).subscribe(result => {
-  this.snackBar.open('Note archived', 'Successfully', {
-  duration: 3000,
-  });
-  
-  }, error => {
-  console.log(error);
-  console.log(this.noteDetails.id);
-  this.snackBar.open('Note archiving', 'Failed', {
-  duration: 3000,
-  });
-  });
+
+  unArchiveNotes() {
+    this.body = {
+      "isArchived": false,
+      "noteIdList": [this.archive.id]
+    }
+    this.httpService.httpPostArchive('notes/archiveNotes', this.body, this.token).subscribe(res => {
+      this.matSnackBar.open("UnArchived",'Successfully',{
+        duration: 3000,
+      });
+      console.log(res);
+      this.unArchiveNote.emit(true);
+    }, error => {
+      console.log(error);
+    })
   }
   }

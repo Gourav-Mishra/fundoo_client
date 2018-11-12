@@ -6,10 +6,10 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Component({
   selector: 'app-add-lables',
   templateUrl: './add-lables.component.html',
-  styleUrls: ['./add-lables.component.css']
+  styleUrls: ['./add-lables.component.scss']
 })
 export class AddLablesComponent implements OnInit {
-  notes = []
+  notes = [];
   
 
   constructor(private httpservice: HttpService) { }

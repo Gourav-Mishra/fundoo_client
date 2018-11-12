@@ -9,7 +9,7 @@ import { ActivatedRoute} from '@angular/router'
 @Component({
   selector: 'app-forgot',
   templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.css']
+  styleUrls: ['./forgot.component.scss']
 })
 export class ForgotComponent implements OnInit {
   recoveryForm: FormGroup;

@@ -64,17 +64,27 @@
 
 
                     <mat-form-field>
-                      <input type="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [(ngModel)]="body.password">
-                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <input type="password" matInput [type]="hide ? 'password' : 'text'" 
+                              placeholder="Password" [(ngModel)]="body.password">
+                      <mat-icon matSuffix (click)="hide = !hide">
+                          {{hide ? 'visibility_off' : 'visibility'}}
+                      
+                        </mat-icon>
                     </mat-form-field>
                     <div class="button-row" fxLayoutAlign="space-between center">
 
                       
-                      <a mat-button routerLink="/forgot" style="color: blue"> <b>Forgot Password</b></a>
+                      <a mat-button routerLink="/forgot" style="color: blue">
+                         <b>Forgot Password</b>
+                      </a>
                       
                       <span fxLayout="row" fxLayoutGap="10%">
-                        <button (click)="isLeftVisible = !isLeftVisible" mat-raised-button color="primary">Back</button>
-                        <button mat-raised-button color="primary" (click)= "login()" >Login</button>
+                        <button (click)="isLeftVisible = !isLeftVisible" 
+                              mat-raised-button color="primary">Back
+                        </button>
+                        <button mat-raised-button color="primary" (click)= "login()" >
+                            Login
+                        </button>
                       </span>
                     </div>
 

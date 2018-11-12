@@ -5,7 +5,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-lable-window',
   templateUrl: './lable-window.component.html',
-  styleUrls: ['./lable-window.component.css']
+  styleUrls: ['./lable-window.component.scss']
 })
 export class LableWindowComponent implements OnInit {
 

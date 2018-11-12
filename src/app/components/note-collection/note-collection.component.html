@@ -1,5 +1,6 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between start" style="padding:50px ;margin-bottom:10%; padding:80px">
-  <mat-card class="card" style=" margin-top: 30px; margin-bottom: 20px; border-radius: 2%"
+
+<div fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="center center" fxLayoutGap="20px" style=" margin-bottom:50px ;margin-top:20px">
+  <mat-card class="card" 
             *ngFor='let notes of notesArray | LockFilter: searchNote' 
             [style.backgroundColor]="notes.color">
     <div [ngClass]="{
@@ -27,15 +28,25 @@
      </mat-chip-list>
     </div>
   </div>
+  <br>
+  <div *ngIf="notes.reminder.length!=0">
+    <mat-chip-list class="chip">
+    <mat-chip  class="chip_color">
+    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{notes.reminder | date:'medium'}}
+    <mat-icon (click)="$event.stopPropagation(); removeReminder(notes.id)">
+    cancel</mat-icon>
+    </mat-chip>
+    </mat-chip-list>
+    </div>
 
     <mat-card-actions>
       <div fxLayoutAlign="space-evenly end" class="icon">
-        <app-remind-btn></app-remind-btn>
+        <app-remind-btn [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
         <app-collaborator></app-collaborator>
         <app-change-color [noteDetails]="notes" 
                           (notescolor)="changeColor($event)"></app-change-color>
         <app-add-image></app-add-image>
-        <app-archive-btn></app-archive-btn>
+        <app-archive-btn [archive]="notes" (archiveNote)="archiveParent($event)" (unArchiveNote)="unArchive($event)"> </app-archive-btn>
         <app-more-btn [noteDetails]="notes" (notesDelete)="deleteDone($event)"></app-more-btn>
       </div>
     </mat-card-actions>

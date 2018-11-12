@@ -10,11 +10,11 @@
     <span class="title">fundoo</span>
 
   </div>
-  <img class="img" src="../../../assets/images/search.svg">
+  <img class="img" src="../../../assets/images/search.svg" fxHide.xs="true">
 
   <!--    ----        Search bar  starts      -----        -->
-  <div class="search_flex" routerLink="/home/search" fxShow.xs=false fxShow.sm=false
-       fxShow.md=true fxShow.lg=true>
+  <div class="search_flex" routerLink="/home/search" fxShow.xs=false fxShow.sm=true
+       fxShow.md=true fxShow.lg=true fxShow.gt-xs=true>
     <input class="searchbar" matTooltip="Search Bar" aria-label="Search" 
            autocomplete="off" placeholder="Search" value=""
            name="q" role="combobox" type="text" aria-hidden="false" 
@@ -27,7 +27,8 @@
   <div>
     <div fxLayoutAlign="end end" fxLayout="row wrap">
       <span class="right_icons" fxLayoutAlign="end end">
-        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" fxHide.xs="true" 
+                fxHide.gt-xs="true"fxHide.md="false"fxHide.lg="false">
           <mat-icon matTooltip="Refresh" aria-label="Side nav toggle icon">refresh
 
           </mat-icon>
@@ -57,7 +58,9 @@
                         [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
                   (click)="selectFile.click()" matTooltip="fundoo Account" 
                   mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">
+                  <div class="change_btn"><p class="change_btn">change</p></div>
                 </button>
+                <!-- <div class="change_btn">change</div> -->
                 <input style="display:none" (click)="$event.stopPropagation()" class="image" type="file" 
                         (change)="onFileUpload($event)" #selectFile>
               </div>
@@ -99,26 +102,28 @@
     <mat-nav-list>
 
 
-      <a mat-list-item routerLink="/home/notes"><img class="img" 
-           src="../../../assets/images/notes.svg">
-        <span class="space_sidebar"> Notes</span> </a>
-      <a mat-list-item routerLink="/home/reminders"><img class="img"
-           src="../../../assets/images/reminders.svg"><span
-          class="space_sidebar">Reminders</span></a>
+      <a mat-list-item routerLink="/home/notes">
+        <img class="img"  src="../../../assets/images/notes.svg">
+        <span class="space_sidebar"> Notes</span> 
+      </a>
+      <a mat-list-item routerLink="/home/reminders">
+        <img class="img" src="../../../assets/images/reminders.svg">
+        <span class="space_sidebar">Reminders</span>
+      </a>
       <hr class="line">
       <div>
         <span fxLayoutAlign="space-between center">
-          <p class="labels">Labels<p> <a class="edit" mat-button> EDIT </a>
+          <p class="labels">Labels<p> 
         </span>
         <span>
-          <a mat-list-item *ngFor="let labels of notes">
-            <mat-icon>label_outline</mat-icon><span class="child-links" (click)="lablelist(labels)">{{labels.label}}</span>
+          <a mat-list-item *ngFor="let labels of notes" (click)="lablelist(labels)">
+            <mat-icon>label_outline</mat-icon><span class="child-links" >{{labels.label}}</span>
           </a>
         </span>
 
         <span fxLayoutAlign="center center"> <a mat-list-item (click)=openDialog()>
             <img src="../../../assets/images/add.svg">Create
-            new lable</a></span>
+            new Label</a></span>
 
       </div>
       <hr>
@@ -131,15 +136,9 @@
         <span class="space_sidebar">Trash</span></a>
       <hr>
 
-      <hr>
+      
       <div>
-        <span fxLayoutAlign="start start">
-          <a href="#">
-            <p class="sidenav_last">Privacy<p></p>
-          </a> &nbsp; &nbsp; <a href="#">
-            <p class="sidenav_last1"> Terms </p>
-          </a>
-        </span>
+        
         <span> <a href="#">
             <p class="sidenav_last"> Open source licenses</p>
           </a></span>

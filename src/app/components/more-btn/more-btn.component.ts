@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-more-btn',
   templateUrl: './more-btn.component.html',
-  styleUrls: ['./more-btn.component.css']
+  styleUrls: ['./more-btn.component.scss']
 })
 
 export class MoreBtnComponent implements OnInit {

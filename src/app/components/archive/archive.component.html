@@ -1,3 +1,7 @@
-<p>
-  archive works!
-</p>
+
+
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between start" style="margin-bottom:10%; padding:80px;padding:50px" >
+ 
+    <app-note-collection [notesArray]="array" (unArchiveParent)="get($event)"> </app-note-collection>
+  </div>

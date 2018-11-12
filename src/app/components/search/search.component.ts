@@ -1,12 +1,12 @@
 import { Component, OnInit,Input } from '@angular/core';
 import{ HttpService} from '../../core/service/http/http.service'
-import { GeneralService } from 'src/app/core/service/general.service';
+import { GeneralService } from 'src/app/core/service/data/general.service';
 
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
   notes=[];

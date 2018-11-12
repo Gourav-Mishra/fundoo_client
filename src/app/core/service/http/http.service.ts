@@ -160,6 +160,43 @@ export class HttpService {
           return this.http.post(environment.baseUrl + "/" + name, body, httpheaders);
         }
 
-      
-     
+        httpAddReminder(nexturl,token,body){
+          console.log(token);
+          var httpOptions={
+            headers:new HttpHeaders({
+             
+             'Authorization':token
+            })
+          };
+          return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
+        }
+        
+       public httpGetReminder(nexturl,token){
+          console.log(token);
+          var httpOptions={
+            headers:new HttpHeaders({
+             
+             'Authorization':token
+            })
+          };
+          return this.http.get(environment.baseUrl+"/"+nexturl,httpOptions)
+        }
+        public httpGetNote(name,token){
+          var httpheaders = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization': token
+            })
+          };
+          return this.http.get(environment.baseUrl+ "/" + name,httpheaders);
+        }
+        httpPostArchive(nexturl,body,token){
+          var httpOptions={
+            headers:new HttpHeaders({
+             'Content-Type': 'application/json',
+             'Authorization':token
+            })
+          };
+          return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
+        }
 }

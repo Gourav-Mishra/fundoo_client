@@ -4,20 +4,21 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpService } from '../../core/service/http/http.service'
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { AddLablesComponent } from '../add-lables/add-lables.component';
-import { GeneralService } from '../../core/service/general.service';
+import { GeneralService } from '../../core/service/data/general.service';
 import { HttpClient } from '@angular/common/http'
 import { ImageCroppedEvent } from 'ngx-image-cropper/src/image-cropper.component';
 import { Router } from '@angular/router'
 import { environment}from '../../../environments/environment'
+import {CroppedImageComponent } from '../../components/cropped-image/cropped-image.component'
 
 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
   notes = [];
@@ -33,7 +34,8 @@ export class DashboardComponent {
 
 
   constructor(private breakpointObserver: BreakpointObserver,
-    private httpService: HttpService, public dialog: MatDialog,
+    private httpService: HttpService, 
+    public dialog: MatDialog,
     private data: GeneralService,
     private http: HttpClient,
     private router: Router
@@ -70,7 +72,6 @@ export class DashboardComponent {
     this.firstName = localStorage.getItem('firstName');
     this.email = localStorage.getItem('email');
     this.lastName = localStorage.getItem('lastName');
-
     var token = localStorage.getItem('token');
     this.httpService.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
      
@@ -96,27 +97,22 @@ export class DashboardComponent {
   onKeyUp(event) {
     this.body.data = event.target.value;
     this.data.searchData(this.body.data)
+    console.log(event);
+    
   }
 
 
-  /**   *********  profile pic upload  ****************   */
+  /**  *********  profile pic upload  ****************  */
   
   selectedFile = null;
 public image2=localStorage.getItem('imageUrl');
-img=environment.profieUrl+this.image2;
+public img=environment.profieUrl+this.image2;
 onFileUpload(event){
+this.openDialogCrop(event);
 var token=localStorage.getItem('token');
 this.selectedFile=event.path[0].files[0];
 const uploadData = new FormData();
 uploadData.append('file', this.selectedFile, this.selectedFile.name);
-this.httpService.httpAddImage('user/uploadProfileImage',uploadData,token).subscribe(res=>{
-
-
-this.img=environment.profieUrl+res['status'].imageUrl;
-},error=>{
-
-})
-
 }
 image={};
   /** ***********profile pic upload Done */
@@ -152,5 +148,21 @@ image={};
     let labelName = labels.label;
     this.router.navigate(['home/label/' + labelName])
   }
+  public pic;
+  openDialogCrop(data): void {
+    const dialogRef1 = this.dialog.open(CroppedImageComponent, {
+      width: '500px',
+      
+      data: data
 
+    });
+   
+    dialogRef1.afterClosed().subscribe(result => {
+    this.data.currentMessage1.subscribe(message =>this.pic=message)
+    if(this.pic==true){
+      this.image2 = localStorage.getItem('imageUrl');
+      this.img =environment.profieUrl+this.image2;
+    }
+    });
+}
 }

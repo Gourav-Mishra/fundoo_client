@@ -1,9 +1,6 @@
-<app-add-note (onNewEntryAdded)='addNewEntry($event)'></app-add-note>
-<app-note-collection [notesArray]="notes" (deleteParent)="addNewEntry($event)" 
-                     (changeColorAgain)="addNewEntry($event)">
+<div fxLayout="column">
+<app-add-note fxFlex="10" (onNewEntryAdded)='addNewEntry($event)'></app-add-note>
+
+<app-note-collection fxFlex="90"[notesArray]="notes" (deleteParent)="addNewEntry($event)" (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
-
-     
-
-
-
+</div>

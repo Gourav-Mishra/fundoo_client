@@ -3,13 +3,13 @@ import { HttpService} from '../../core/service/http/http.service'
 import { Router } from '@angular/router';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 
-import{passwordValidator} from '../../utils/passwordValidator.util';
+import{passwordValidator} from '../../core/utils/passwordValidator.util';
 import {MatSnackBar} from '@angular/material';
  
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
   hide=true;
@@ -41,7 +41,6 @@ cards=[];
     this.regform=new FormGroup({
       'firstName':new FormControl('' , [Validators.required, Validators.minLength(1)]),
       'lastName':new FormControl('' , [Validators.required, Validators.minLength(1)]),     
-     
       'email':new FormControl('' , [Validators.required]),
       'phoneNumber':new FormControl('' , [Validators.required, Validators.minLength(10)]),
       'password':new FormControl('' , [Validators.required, Validators.minLength(3)]),

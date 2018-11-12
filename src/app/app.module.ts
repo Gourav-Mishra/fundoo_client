@@ -61,11 +61,12 @@ import { TrashComponent } from './components/trash/trash.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { AddLablesComponent } from './components/add-lables/add-lables.component';
 
-import { SearchPipe } from './search.pipe';
+import { SearchPipe } from './core/pipes/search.pipe';
 import { SearchComponent } from './components/search/search.component';
-import { LabelSearchPipe } from './label-search.pipe';
+import { LabelSearchPipe } from './core/pipes/label-search.pipe';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { LableWindowComponent } from './components/lable-window/lable-window.component';
+import { CroppedImageComponent } from './components/cropped-image/cropped-image.component';
 
 
 
@@ -102,6 +103,7 @@ import { LableWindowComponent } from './components/lable-window/lable-window.com
     SearchComponent,
     LabelSearchPipe,
     LableWindowComponent,
+    CroppedImageComponent,
 
 
   ],
@@ -145,6 +147,6 @@ import { LableWindowComponent } from './components/lable-window/lable-window.com
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [HttpService,AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents:[PopupComponent,AddLablesComponent]
+  entryComponents:[PopupComponent,AddLablesComponent, CroppedImageComponent, DashboardComponent]
 })
 export class AppModule { }
