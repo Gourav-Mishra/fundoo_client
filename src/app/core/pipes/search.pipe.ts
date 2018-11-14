@@ -4,15 +4,19 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'LockFilter'
 })
 export class SearchPipe implements PipeTransform {
-  transform(value: any, args?: any): any {
-
-      if(!value)return null;
-      if(!args)return value;
-
-      args = args.toLowerCase();
-
-      return value.filter(function(item){
-          return (item.title.toLowerCase().includes(args)) || (item.description.toLowerCase().includes(args))});
-          
-  }
+  transform(items: any, searchText?: any): any 
+  
+  {
+    if(!items) return null;
+    if(!searchText) return items;
+    searchText = searchText.toLowerCase();
+    return items.filter( it => {
+    var object={
+    'title': it.title,
+    'description': it.description,
+    'noteLabels': it.noteLabels
+    }
+    return JSON.stringify(it).toLowerCase().includes(searchText);
+    });
+    } 
 }

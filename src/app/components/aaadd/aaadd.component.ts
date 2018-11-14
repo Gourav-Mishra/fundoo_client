@@ -1,82 +1,3 @@
-// import { Component, OnInit, Output,EventEmitter } from '@angular/core';
-// import { HttpService } from 'src/app/core/service/http/http.service';
-// import { MatSnackBar } from '@angular/material';
-
-
-// @Component({
-//   selector: 'app-add-note',
-//   templateUrl: './add-note.component.html',
-//   styleUrls: ['./add-note.component.scss']
-// })
-// export class AddNoteComponent implements OnInit 
-// {
-//  public show=true;
-//  public visible=true;;
-//  public notes=[]
-//  public  record={};
-//  public title;
-//  public note;
-//  public parentColor;
-// body={
-// "title":"",
-// "description":""
-// }
-// @Output() onNewEntryAdded=new EventEmitter();
- 
-//    constructor(private  httpService:HttpService,
-//     public snacBar:MatSnackBar) { }
- 
-//    ngOnInit() {
- 
-//    }
-//    changeMainBoxColor(event){
-//      if(event){
-//       this.parentColor=event;
-//       console.log(this.parentColor);
-      
-//      }
-   
-
-//    }
-
-//  close(){
-//    if(!this.show){
-//      this.show=!this.show;
-//      var token=localStorage.getItem('token');
-//      this.title=document.getElementById("title").innerHTML;
-//      this.note=document.getElementById("take-note").innerHTML;
-//      console.log(this.title);
-//      console.log(this.note);
-//      console.log('token',token);
-     
-//      var note={
-//        'title':this.title,
-//        'description': this.note,
-//        'labelIdList':'',
-//        'checklist':'',
-//        "isPinned":'false',
-//        "color":this.parentColor
-//      };
-//      this.parentColor="#ffffff";
-//      this.record=this.httpService.httpAddNote('notes/addNotes',note,token).subscribe(result=>{
-//        this.snacBar.open("Notes Added","Sucessfull",{
-//          duration:3000,
-//        });
-//        this.onNewEntryAdded.emit({});
-      
-//      },error=>{
-//        console.log(error);
-//        this.snacBar.open('notes addition ', 'Failed',{
-//          duration: 3000,
-//        })
-//      })
-
-//    }
-
-//  }
- 
-
-//  }
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service';
@@ -84,13 +5,11 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-add-note',
-    templateUrl: './add-note.component.html',
-    styleUrls: ['./add-note.component.scss']
+    selector: 'app-aaadd',
+    templateUrl: './aaadd.component.html',
+    styleUrls: ['./aaadd.component.scss']
   })
-
-  
-  export class AddNoteComponent implements OnInit 
+  export class AaaddComponent implements OnInit 
   {
     public hide: boolean = true;
     public labelId = [];
@@ -106,24 +25,13 @@ import { Router } from '@angular/router';
     checked = false;
     status = "open";
     accessToken = localStorage.getItem('token');
-    public parentColor;
-     @Output() onNewEntryAdded=new EventEmitter();
+    @Output() newEvent = new EventEmitter();
     labelArray: any[];
-    note = {
-      'id' : ''
-    }
     constructor(private  httpService:HttpService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
         this.getAllLabels();
     }
-    changeMainBoxColor(event){
-             if(event){
-              this.parentColor=event;
-              console.log(this.parentColor);
-              
-             }
-            }
     toggle() {
         this.show = 1;
     }
@@ -138,17 +46,17 @@ import { Router } from '@angular/router';
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': '',
                 'isPined': 'false',
-                "color":this.parentColor
+                'color': this.color
             }, this.accessToken).subscribe(response => {
-               
-                this.onNewEntryAdded.emit({});
+                this.newEvent.emit({
+                })
                 this.labelName = [];
                 this.hide = !this.hide;
-                this.parentColor = "#fafafa";
+                this.color = "#fafafa";
                 this.show = 0
             }, error => {
                 console.log("failed", error)
-                this.parentColor = "#fafafa";
+                this.color = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
                 this.show = 0
@@ -175,13 +83,14 @@ import { Router } from '@angular/router';
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
-                "color":this.parentColor
+                'color': this.color
             }, this.accessToken).subscribe(response => {
-                this.onNewEntryAdded.emit({});
+                this.newEvent.emit({
+                })
                 this.dataArrayCheck = [];
                 this.labelName = [];
                 this.hide = !this.hide;
-                this.parentColor = "#fafafa";
+                this.color = "#fafafa";
                 this.show = 0
             }, error => {
                 this.dataArrayCheck = [];
@@ -275,6 +184,3 @@ import { Router } from '@angular/router';
         }
     }
 }
-
-
-

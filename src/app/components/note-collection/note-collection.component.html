@@ -7,17 +7,38 @@
     'cardgrid':!toggle,
     'cardlist':toggle 
     }">
-    <div fxLayout="column" (click)=openDialog(notes)>
-      <mat-card-title class="title" [innerHTML]="notes.title">
+    <div fxLayout="column" >
+      <mat-card-title class="title" [innerHTML]="notes.title" (click)=openDialog(notes)>
       
-      </mat-card-title>
+      </mat-card-title><app-pin [arrayPin]="notes" (emitter)="changeColor($event)"></app-pin>
       <br>
-      <mat-card-content class="description" [innerHTML]="notes.description">
+      <mat-card-content class="description" [innerHTML]="notes.description" (click)=openDialog(notes)>
         
 
 
       </mat-card-content>
+
+<div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row" class="check">
+  
+  <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted"
+    (click)=checkBox(checklist,notes)>
+  </mat-checkbox>
+    <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+    [(ngModel)]=checklist.itemName fxFlex="90%" class="check"
+    (click)="open(notes)" [style.backgroundColor]="notes.color">
+ </div> 
+
+    <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row"  class="check">
+    <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+    (click)=checkBox(checklist,notes)>
+    </mat-checkbox>
+   
+    <del class = "check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
+    (click)="open(notes)">{{checklist.itemName}}</del>
     </div>
+   
+    </div>
+
     <div fxLayout="row wrap" fxLayoutGap="10px">
       <div *ngFor="let item of notes.noteLabels" >
     <mat-chip-list class="chip">

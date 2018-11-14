@@ -1,6 +1,10 @@
 <div fxLayout="column">
 <app-add-note fxFlex="10" (onNewEntryAdded)='addNewEntry($event)'></app-add-note>
+<div>pinned</div>
+<app-note-collection fxFlex="90"[notesArray]="notesPin" (deleteParent)="addNewEntry($event)" (changeColorAgain)="addNewEntry($event)">
+</app-note-collection>
 
+<div>Others</div>
 <app-note-collection fxFlex="90"[notesArray]="notes" (deleteParent)="addNewEntry($event)" (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
 </div>

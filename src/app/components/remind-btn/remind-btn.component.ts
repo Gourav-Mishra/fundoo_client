@@ -38,7 +38,7 @@ export class RemindBtnComponent implements OnInit {
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 8, 0, 0, 0)
     }
     this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-      console.log(result);
+     
       this.todayEvent.emit()
     })
   }
@@ -50,7 +50,7 @@ export class RemindBtnComponent implements OnInit {
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
     }
     this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-      console.log(result);
+      
       this.todayEvent.emit()
     })
   }
@@ -62,7 +62,7 @@ export class RemindBtnComponent implements OnInit {
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
     }
     this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-      console.log(result);
+     
       this.todayEvent.emit()
     })
   }
@@ -80,8 +80,7 @@ export class RemindBtnComponent implements OnInit {
   }
   
   addRemCustom(date,timing){
-    // console.log(date);
-    // console.log(timing);
+    
     timing.match('^[0-2][0-3]:[0-5][0-9]$');
     
     if(timing=='8:00 AM'){
@@ -90,7 +89,7 @@ export class RemindBtnComponent implements OnInit {
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
       }
       this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-        console.log(result);
+       
         this.todayEvent.emit()
       })
     }else if(timing=='1:00 PM'){
@@ -99,7 +98,7 @@ export class RemindBtnComponent implements OnInit {
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
       }
       this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-        console.log(result);
+        
         this.todayEvent.emit()
       })
     }else if(timing=='6:00 PM'){
@@ -108,7 +107,7 @@ export class RemindBtnComponent implements OnInit {
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
       }
       this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-        console.log(result);
+       
         this.todayEvent.emit()
       })
     }else if(timing=='9:00 PM'){
@@ -117,25 +116,24 @@ export class RemindBtnComponent implements OnInit {
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0)
       }
       this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-        console.log(result);
+        
         this.todayEvent.emit()
       })
     }else if(timing==this.reminderBody.time){
+     
       var x;
       var splitTime=this.reminderBody.time.split("",8);
       var hour= Number(splitTime[0]+splitTime[1]);
       var minute= Number(splitTime[3]+splitTime[4]);
       var ampm = (splitTime[6]+splitTime[7]);
-      console.log(ampm);
-      console.log(hour);
-      console.log(minute);
+     
       if(ampm=='AM' || ampm=='am'){
         this.body = {
           "noteIdList": [this.noteDetails.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
         }
         this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-          console.log(result);
+          
           this.todayEvent.emit()
         })
       }else if(ampm=='PM' || ampm=='pm'){
@@ -144,7 +142,7 @@ export class RemindBtnComponent implements OnInit {
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0)
         }
         this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-          console.log(result);
+        
           this.todayEvent.emit()
         })
       }

@@ -67,6 +67,8 @@ import { LabelSearchPipe } from './core/pipes/label-search.pipe';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { LableWindowComponent } from './components/lable-window/lable-window.component';
 import { CroppedImageComponent } from './components/cropped-image/cropped-image.component';
+import { AaaddComponent } from './components/aaadd/aaadd.component';
+import { PinComponent } from './components/pin/pin.component';
 
 
 
@@ -104,6 +106,8 @@ import { CroppedImageComponent } from './components/cropped-image/cropped-image.
     LabelSearchPipe,
     LableWindowComponent,
     CroppedImageComponent,
+    AaaddComponent,
+    PinComponent,
 
 
   ],

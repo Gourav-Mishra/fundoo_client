@@ -1,0 +1,66 @@
+.mat-card
+{
+    padding: 8px;
+    width: 45%;
+}
+.click
+{
+  cursor: pointer;
+}
+.noteButton
+{
+    float: right;
+    padding-right: 2%;
+}
+.close
+{
+    float: right;
+}
+.reset
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    word-wrap: break-word;
+    font-style: bold;
+}
+.edit
+{
+    padding-top: 6%;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+.space
+{
+    padding-top: 4%;
+}
+.edit1
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    word-wrap: break-word;
+}
+.topping{
+    padding-top: 4%;
+}.pin{
+    float: right;
+    cursor: pointer;
+}
+.check{
+    margin-bottom: 10px;
+
+}
+.items
+{
+    margin-bottom: 10px;
+}

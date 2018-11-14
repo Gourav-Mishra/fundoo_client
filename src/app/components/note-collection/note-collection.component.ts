@@ -15,6 +15,7 @@ export class NoteCollectionComponent implements OnInit {
   notes = [];
   interval;
   labelBody = {};
+  public modifiedCheckList;
   @Input() notesArray;
   @Input() searchNote;
   @Output() deleteParent = new EventEmitter();
@@ -94,6 +95,29 @@ this.unArchiveParent.emit(event)
 }
 archiveParent(event){
   this.deleteParent.emit({
+
+  })
+}
+checkBox(checkList, note) {
+
+  if (checkList.status == "open") {
+    checkList.status = "close"
+  }
+  else {
+    checkList.status = "open"
+  }
+  console.log(checkList);
+  this.modifiedCheckList = checkList;
+  this.updatelist(note.id);
+}
+updatelist(id) {
+  var apiData = {
+    "itemName": this.modifiedCheckList.itemName,
+    "status": this.modifiedCheckList.status
+  }
+  var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+  this.httpService.postNotes(url, JSON.stringify(apiData), localStorage.getItem('token')).subscribe(response => {
+    console.log(response);
 
   })
 }

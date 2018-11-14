@@ -1,12 +1,10 @@
-<!-- <div fxLayout="column" fxLayoutGap="2%">
-    <div fxFlex="0"> </div>
-    <div fxFlex="100" fxFlex.xs="0" fxFlex.sm="12" fxFlex.md="24" fxFlex.lg="36" fxFlex.xl="48">-->
+<!-- 
         <div fxLayout="row" fxLayoutAlign="center">
             <div fxFlex="15%" fxFlex.xs=0 fxFlex.sm=0 fxFlex.md=15 fxFlex.lg=20> </div> 
             <div fxFlex="70% "  > 
-                <!-- ---------------work Area------------------------ -->
+               
 
-                <div *ngIf="visible">
+                
                     <div class="margin" fxLayoutAlign="center">
                         <mat-card class="pannel" *ngIf="show" >
                             <mat-card-content>
@@ -28,8 +26,9 @@
                             </mat-card-content>
 
                         </mat-card>
+                        
+                        
 
-                        <!--                 2nd Card                 -->
 
                         <mat-card *ngIf="!show" class="pannel2" [ngStyle]="{'background-color':parentColor}">
                             <mat-card-content>
@@ -45,7 +44,7 @@
                                         <app-collaborator></app-collaborator>
                                         <app-change-color (mainBoxColor)="changeMainBoxColor($event)"></app-change-color>
                                         <app-add-image></app-add-image>
-                                        <app-archive-btn></app-archive-btn>
+                                       
                                         <app-more-btn></app-more-btn>
                                        
                                         <button style="float:right" mat-button (click)="close()">close</button>
@@ -54,77 +53,94 @@
 
 
                             </mat-card-content>
-                        </mat-card>
-                    </div>
-                </div>
+                        </mat-card>         
+</div>
 
-                <!--    --------         3rd Card      --------------         -->
-                <div>
-                    <mat-card *ngIf="!visible" class="pannel3">
-                    
-                        <div class="area_content" id="title" contenteditable="true" data-text="Title"></div>
-                        <hr>
-                        <div class=row_container3 FxFlexLayout="row">
-                            <div fxFlex=10%>
-                                    <button class="img_btn" mat-icon-button>
-                                            <mat-icon matTooltip="add"  >add</mat-icon>
-                                    </button>
-                            </div>
-                             <div fxFlex=80% id="take-note" class="area_content2" data-text="List Item" *ngFor="let items of array">
-                                <mat-checkbox> 
-                                    <div   >
-
-                                     </div>
-                                    
-                                </mat-checkbox>
-                               <!-- <div>
-                                    <mat-checkbox>
-                                        <input placeholder="items" type="text" (keydown)="nextLine($event)" [(ngModel)]="items.checkText">
-                                    </mat-checkbox>
-                                </div>
-                        -->
-
-                            </div>
-
-
-
-
-
-                        </div>
-                        <mat-card-footer>
-                                <div fxLayout="row" fxLayoutAlign="space-around center">
-
-                                    <app-remind-btn></app-remind-btn>
-                                    <app-collaborator></app-collaborator>
-                                    <app-change-color (mainBoxColor)="changeMainBoxColor($event)"></app-change-color>
-                                    <app-add-image></app-add-image>
-                                    <app-archive-btn></app-archive-btn>
-                                    <app-more-btn></app-more-btn>
-                                    <button class="img_btn" mat-icon-button>
-                                        <mat-icon matTooltip="undo">undo</mat-icon>
-                                    </button>
-                                    <button class="img_btn" mat-icon-button>
-                                        <mat-icon matTooltip="redo">redo</mat-icon>
-                                    </button>
-                                    <button style="float:right" mat-button (click)="closeChecklist()">close</button>
-                                </div>
-                            </mat-card-footer>
-                    
-                    
-                    </mat-card>
-
-
-                </div>
-
-
-
-                <!-- ---------------work Area------------------------ -->
              </div>
         
-          <!-- <div fxFlex="20%" fxFlex.xs="0" fxFlex.sm="8" fxFlex.md="16" fxFlex.lg="22"> </div>
-        </div>
-    </div>
-    <div fxFlex="0"> </div>
-</div> -->
 <div fxFlex="15%" fxFlex.xs="0" fxFlex.sm="8" fxFlex.md="16" fxFlex.lg="22"> </div>
+</div> -->
+
+<div  fxLayout="row" fxLayoutAlign="center">
+        <div fxFlex="10%" > </div> 
+        <div fxFlex="60% "  > 
+
+<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:100px">
+
+    <mat-card *ngIf="hide" (click)="hide=!hide" class="pannel">
+        <mat-card-content>
+                <div fxFlexLayout="row">
+                    <div fxFlex=80% class="area_content" contenteditable="true" >Take
+                        a Note...</div>
+                    <div fxFlex=20% style="float:right">
+
+                        <button mat-icon-button>
+                            <mat-icon (click)="toggle()">check_circle_outline</mat-icon>
+                        </button> 
+                    </div>
+                </div>
+            </mat-card-content>
+    </mat-card>
+  
+    
+    <mat-card class="pannel2" *ngIf="!hide" [ngStyle]="{'background-color':parentColor}">
+        <mat-card-content>
+       
+     
+        <div class="area_content" id="titleId" contenteditable="true" data-text="Title"></div>
+        <div *ngIf="show == 0">
+            <div  id="notesId" class="area_content" contenteditable="true" data-text="Take a Note..." (click)="checked=false"></div>
+        </div>
+  
+  
+        
+         <div class = "items"></div>
+        <div  *ngIf="show ==1" id="title" autofocus #description style="margin-bottom: 20px;">
+            <div  *ngFor="let data of dataArray" id="note" fxLayout="row"
+             style="margin-bottom: 5px;">
+                <mat-checkbox fxFlex="5%"></mat-checkbox>
+                <input   class="inputNote" fxFlex="90" *ngIf="show ==1" class="inputchecklist" id="note"
+                 [(ngModel)]=data.data (keydown)="editing($event.data)">
+                <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" 
+                style="cursor: pointer;">cancel</mat-icon>
+            </div>
+            <mat-divider></mat-divider>
+            <div  fxLayout="row" autofocus id="notesId">
+                <mat-icon fxFlex="5%">add</mat-icon>
+                <input id="note" [(ngModel)]=data (click)="checked=true" fxFlex="95%" 
+                class="inputNote" [(ngModel)]=data.data
+                    placeholder="List item" (keydown.enter)="enter()">
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+  
+  
+  
+        <div *ngFor="let index of labelName">
+            <mat-chip-list>
+                <mat-chip>{{index.label}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+       
+      
+            <div class="function_btn" fxLayout="row wrap" fxLayoutAlign="space-around center" >
+
+                <app-remind-btn></app-remind-btn>
+                <app-collaborator></app-collaborator>
+                <app-change-color [noteDetails]='note' (mainBoxColor)="changeMainBoxColor($event)"></app-change-color>
+                <app-add-image></app-add-image>
+               
+                <app-more-btn></app-more-btn>
+               
+                <button style="float:right" mat-button (click)="addNotes()">close</button>
+            </div>
+      
+    </mat-card-content>
+    
+    </mat-card>
+  </div>
 </div>
+<div fxFlex="10%" > </div>
+</div> 

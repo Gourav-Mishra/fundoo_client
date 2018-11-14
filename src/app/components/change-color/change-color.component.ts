@@ -63,22 +63,25 @@ export class ChangeColorComponent implements OnInit {
   ngOnInit() {
   }
 
-  setcolor(id){
-    this.mainBoxColor.emit(id);
-
-    var token=localStorage.getItem('token')
-    this.body={
-      "color":id,
-      "noteIdList":[this.noteDetails.id]
-    }
-    this.httpService.httpColorNote('notes/changesColorNotes',this.body,token).subscribe(result=>{
-      this.notescolor.emit(id);
-      console.log(this.noteDetails.id);
+  setcolor(color){
+    this.mainBoxColor.emit(color);
+if (this.noteDetails.id != '') {
+  var token=localStorage.getItem('token')
+  this.body={
+    "color":color,
+    "noteIdList":[this.noteDetails.id]
+  }
+  this.httpService.httpColorNote('notes/changesColorNotes',this.body,token).subscribe(result=>{
+    this.notescolor.emit(color);
+    console.log(this.noteDetails.id);
+    
+  },error=>{
+    console.log(this.noteDetails.id);
+  })
+}
+   
       
-    },error=>{
-      console.log(this.noteDetails.id);
-      
-    })
+   
 
   }
 
