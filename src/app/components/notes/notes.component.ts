@@ -17,8 +17,9 @@ export class NotesComponent implements OnInit {
  constructor(private httpService:HttpService) { }
 
   ngOnInit() {
-    this.getNotes();
     this.getpin();
+    this.getNotes();
+    
 
   }
 close(){

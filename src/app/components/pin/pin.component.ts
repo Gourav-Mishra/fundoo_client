@@ -12,7 +12,7 @@ export class PinComponent implements OnInit {
 
   @Input() arrayPin
   body={}
-  @Output() emitter = new EventEmitter()
+  @Output() emitter = new EventEmitter();
   constructor(private httpService:HttpService) { }
   token=localStorage.getItem('token')
   ngOnInit() 
