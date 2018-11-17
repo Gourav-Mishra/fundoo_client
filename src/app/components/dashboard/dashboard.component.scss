@@ -4,6 +4,7 @@
   height: 100%;
   
   
+  
  
   
 }
@@ -11,7 +12,7 @@
 .sidenav {
   background:rgb(230, 230, 215);
   width: 300px;
-  margin-top:4%;
+padding-top:60px;
   position: fixed;
   
 }
@@ -29,8 +30,8 @@
 }
 .title{
   font-size: 28px;
-  padding-left:20px;
-  padding-right:20px; 
+  padding-left:10px;
+  padding-right:10px; 
   font-family: 'Product Sans',Arial,sans-serif;
 
 }
@@ -129,7 +130,8 @@ height:150px
 }
 .mail{
   font-weight:200;
-  font-size: 20px
+  font-size: 18px;
+  word-break:break-all;
 }
 .fabicon{
   font-size:20px;
@@ -187,4 +189,13 @@ vertical-align:middle;
     text-align: center;
     width: 96px; */
 
+}
+.name{
+  font-size: 20px;
+  word-break: break-all;
+}
+::ng-deep.mat-selection-list {
+  padding-top: 50px;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
 }

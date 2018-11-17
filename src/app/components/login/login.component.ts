@@ -33,18 +33,22 @@ export class LoginComponent implements OnInit {
       public httpService: HttpService,
       public snackbar:MatSnackBar
 
-    )
-    {}
+    ){}
+     /**   
+     * @description    The annimation of the sliding login page 
+     */
   toggleShowDiv(divName: string) {
     this.show = !this.show;
     if (divName === 'divA') {
-      console.log(this.animationState);
+      
       this.animationState = this.animationState === 'out' ? 'in' : 'out';
-      console.log(this.animationState);
+      
     }
 
   }
-
+    /**   
+     * @description    The validation dor the email and password .
+     */
 
   ngOnInit() {
     this.loginFormEmail= new FormGroup({
@@ -59,6 +63,9 @@ export class LoginComponent implements OnInit {
 
 
   }
+     /**   
+     * @description    Api hitting for the login 
+     */
   login(){
     
     this.records=this.httpService.httpPost('user/login',this.body)

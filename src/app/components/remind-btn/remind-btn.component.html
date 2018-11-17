@@ -11,20 +11,20 @@
 
         <button mat-menu-item (click)="addRemToday()">
             <div fxFlex="20">Later today</div>
-            <div fxFlex="60"></div>
-            <div fxFlex="20"><span>08.00 PM</span></div>
+            <div fxFlex="50"></div>
+            <div fxFlex="30"><span>08.00 PM</span></div>
         </button>
 
         <button mat-menu-item (click)="addRemTomorrow()">
             <div fxFlex="20">Tomorrow</div>
-            <div fxFlex="60"></div>
-            <div fxFlex="20"><span>08.00 AM</span></div>
+            <div fxFlex="50"></div>
+            <div fxFlex="30"><span>08.00 AM</span></div>
         </button>
 
         <button mat-menu-item (click)="addRemNextWeek()">
             <div fxFlex="20">Next week</div>
-            <div fxFlex="60"></div>
-            <div fxFlex="20"><span>08.00 AM</span></div>
+            <div fxFlex="50"></div>
+            <div fxFlex="30"><span>08.00 AM</span></div>
         </button>
 
         <button mat-menu-item (click)="$event.stopPropagation(); datePickReminder()">
@@ -64,16 +64,7 @@
                         
                 </button>
                 
-            <!-- <mat-form-field (click)="$event.stopPropagation()">
-                <mat-select placeholder="Choose time" [(ngModel)]="body.time">
-                    <mat-option *ngFor="let timing of reminders"  [value]="timing.viewTime">
-                            <div fxFlex="35">{{timing.viewPeriod}}</div>
-                            <div fxFlex="40"></div>
-                            <div fxFlex="35"><span>{{timing.viewTime}}</span></div>
-                    </mat-option>
-                    
-                </mat-select>
-            </mat-form-field> -->
+            
         </div>
         <div>
             <button mat-button (click)="$event.stopPropagation()">Custom Time</button>

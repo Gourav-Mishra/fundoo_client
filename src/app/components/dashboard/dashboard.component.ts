@@ -40,10 +40,22 @@ export class DashboardComponent {
     private http: HttpClient,
     private router: Router
   ) { }
-  firstName; Router
+  firstName; 
+  Router;
   lastName;
   email;
   message;
+     /**   
+     * @description  the changing names in the toolbar 
+     */
+  public changeName="keep";
+  nameChange(changeName){
+    this.changeName=changeName;
+
+  }
+     /**   
+     * @description  The dialog box of the lable 
+     */
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddLablesComponent, {
@@ -57,6 +69,9 @@ export class DashboardComponent {
       this.labelList();
     });
   }
+     /**   
+     * @description  Api gor getting all the lables in the list
+     */
   labelList() {
     var token = localStorage.getItem('token');
     this.httpService.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
@@ -68,6 +83,9 @@ export class DashboardComponent {
       console.log(error);
     })
   }
+     /**   
+     * @description  Api for getitng all the notes in a lable
+     */
   ngOnInit() {
     this.firstName = localStorage.getItem('firstName');
     this.email = localStorage.getItem('email');
@@ -88,12 +106,18 @@ export class DashboardComponent {
     this.data.currentMsg.subscribe(message => this.message = message)
 
   }
+     /**   
+     * @description  the changing names in the toolbar 
+     */
   logout() {
     window.location.href = "/login";
     localStorage.clear()
 
 
   }
+     /**   
+     * @description  the changing names in the toolbar 
+     */
   onKeyUp(event) {
     this.body.data = event.target.value;
     this.data.searchData(this.body.data)
@@ -148,15 +172,15 @@ image={};
     let labelName = labels.label;
     this.router.navigate(['home/label/' + labelName])
   }
+   /**   
+     * @description  The dialog box for the cropping of the image 
+     */
   public pic;
   openDialogCrop(data): void {
     const dialogRef1 = this.dialog.open(CroppedImageComponent, {
       width: '500px',
-      
       data: data
-
     });
-   
     dialogRef1.afterClosed().subscribe(result => {
     this.data.currentMessage1.subscribe(message =>this.pic=message)
     if(this.pic==true){

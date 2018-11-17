@@ -42,10 +42,8 @@ if(event){
         if(result['data']['data'][i].isDeleted==false && result['data']['data'][i].isArchived==false &&result['data']['data'][i].isPined==false ){
          this.notes.push(result['data']['data'][i])
         }
-       
-
       }
-      // this.notes=result['data']['data'].reverse();
+     
        console.log(this.notes);
      },error=>{
        console.log(error);
@@ -60,12 +58,8 @@ if(event){
         if(result['data']['data'][i].isDeleted==false && result['data']['data'][i].isArchived==false && result['data']['data'][i].isPined==true){
          this.notesPin.push(result['data']['data'][i])
         }
-      
-        
-       
-
       }
-      // this.notes=result['data']['data'].reverse();
+    
        
      },error=>{
        

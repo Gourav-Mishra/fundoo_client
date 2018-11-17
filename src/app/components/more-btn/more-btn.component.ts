@@ -95,6 +95,14 @@ export class MoreBtnComponent implements OnInit {
     //   })
 
     // }
-   
+    selectCheck(labelOption){
+      if (this.noteDetails.noteLabels.some((data) => data.label == labelOption.label)) {
+      return true;
+      }
+      else {
+  
+       return false;
+    }
+    }
 
 }

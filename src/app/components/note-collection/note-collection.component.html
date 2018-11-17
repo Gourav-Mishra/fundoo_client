@@ -1,5 +1,5 @@
-
-<div fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="center center" fxLayoutGap="20px" style=" margin-bottom:50px ;margin-top:20px">
+<div fxFlex=10% ></div>
+<div  fxLayout="row wrap" fxLayoutWrap  fxLayoutGap="30px" style=" margin-bottom:50px ;margin-top:20px">
   <mat-card class="card" 
             *ngFor='let notes of notesArray | LockFilter: searchNote' 
             [style.backgroundColor]="notes.color">
@@ -8,9 +8,12 @@
     'cardlist':toggle 
     }">
     <div fxLayout="column" >
+      <span fxLayoutAlign="space-between none">
       <mat-card-title class="title" [innerHTML]="notes.title" (click)=openDialog(notes)>
       
-      </mat-card-title><app-pin [arrayPin]="notes" (emitter)="changeColor($event)"></app-pin>
+      </mat-card-title>
+      <app-pin [arrayPin]="notes" (emitter)="changeColor($event)"></app-pin>
+    </span>
       <br>
       <mat-card-content class="description" [innerHTML]="notes.description" (click)=openDialog(notes)>
         
@@ -50,15 +53,53 @@
     </div>
   </div>
   <br>
-  <div *ngIf="notes.reminder.length!=0">
+  <!--- chip list for reminders starts--->
     <mat-chip-list class="chip">
-    <mat-chip  class="chip_color">
-    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{notes.reminder | date:'medium'}}
-    <mat-icon (click)="$event.stopPropagation(); removeReminder(notes.id)">
-    cancel</mat-icon>
-    </mat-chip>
-    </mat-chip-list>
-    </div>
+      <div *ngFor='let reminder of notes.reminder'>
+          <div *ngIf="(todayDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
+              <mat-chip class="chip_color">
+                  Today, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
+                        <app-remind-btn style="opacity:0;width:50px;" (todayEvent)=addReminder($event)></app-remind-btn>
+                      <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
+                  </span>
+              </mat-chip>
+          </div>
+  
+          <div *ngIf="(tomorrowDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
+              <mat-chip class="chip_color">
+                  Tomorrow, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
+                        <app-remind-btn style="opacity:0;width:50px" [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
+
+                      <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
+                  </span>
+              </mat-chip>
+  
+          </div>
+          <div *ngIf="(todayDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy') && (tomorrowDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy')">
+              <div *ngIf="(todayDate | date:'dd/MM/yyyy') > (reminder | date:'dd/MM/yyyy') ; else higherDate">
+                  <mat-chip class="chip_color">
+  
+                      <del>{{reminder | date:"medium"}}</del> <span style="margin-top:5px">
+                            <app-remind-btn style="opacity:0;width:50px" [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
+                          <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
+                      </span>
+  
+                  </mat-chip>
+              </div>
+              <ng-template #higherDate>
+                  <mat-chip class="chip_color">
+                      {{reminder | date:"medium"}} <span style="margin-top:5px">
+                            <app-remind-btn style="opacity:0;width:50px" [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
+                          <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
+                      </span>
+                  </mat-chip>
+  
+              </ng-template>
+          </div>
+      </div>
+  </mat-chip-list>
+    
+     <!--- chip list for reminders Ends--->
 
     <mat-card-actions>
       <div fxLayoutAlign="space-evenly end" class="icon">
@@ -76,3 +117,4 @@
   </mat-card>
 
 </div>
+

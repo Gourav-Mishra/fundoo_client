@@ -16,7 +16,9 @@ import { MatSnackBar } from '@angular/material';
   ngOnInit() {
     this.myFunc();
   }
-
+     /**
+     * @description  API for getting the Archive notes
+     */
   myFunc() {
     var token = localStorage.getItem('token');
     this.httpService.httpGetNotes('notes/getArchiveNotesList', token).subscribe(res => {
@@ -29,7 +31,9 @@ import { MatSnackBar } from '@angular/material';
       console.log(error);
     })
   }
-
+     /**
+     * @description Event emmitor for Archive
+     */
   get(event) {
     if (event) {
       this.myFunc();

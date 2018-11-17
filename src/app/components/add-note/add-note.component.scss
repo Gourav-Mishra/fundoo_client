@@ -8,19 +8,19 @@
 .pannel{
     
     margin-top:50px;
-    width:500px;
+    width:75%;
     box-shadow: 0 10px 10px rgba(0,0,0,0.20);
     border-radius: 5px;
     height:30px;
-
-   
+    flex:auto;
 }
 
 .pannel2{
     border-radius: 15px;
     margin-top:50px;
-    width:500px;
+    width:75%;
     box-shadow: 0 10px 10px rgba(0,0,0,0.20);
+    flex:auto;
 
 }
 [contentEditable=true]:empty:not(:focus):before{

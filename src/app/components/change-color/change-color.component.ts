@@ -16,6 +16,9 @@ export class ChangeColorComponent implements OnInit {
     "color":"",
     "noteIdList":[]
   }
+  /**  
+     * @description  color code array
+     */
   colorArray = [
   { 'color': '#ffffff', 'name': 'White' },
   { 'color': '#f28b82', 'name': 'Red' },
@@ -55,14 +58,13 @@ export class ChangeColorComponent implements OnInit {
   { 'color': '#260126', 'name': 'voilet' },
   { 'color': '#F2EEB3', 'name': 'shade' },
   { 'color': '#F7FF3F', 'name': 'ShineYellow' },
-  { 'color': '#FF66CC', 'name': 'BabyPink' },
-
- 
-                ]
+  { 'color': '#FF66CC', 'name': 'BabyPink' } ]
   
   ngOnInit() {
   }
-
+    /**   
+     * @description  Api to Change color
+     */
   setcolor(color){
     this.mainBoxColor.emit(color);
 if (this.noteDetails.id != '') {
@@ -73,10 +75,9 @@ if (this.noteDetails.id != '') {
   }
   this.httpService.httpColorNote('notes/changesColorNotes',this.body,token).subscribe(result=>{
     this.notescolor.emit(color);
-    console.log(this.noteDetails.id);
-    
+       
   },error=>{
-    console.log(this.noteDetails.id);
+    
   })
 }
    

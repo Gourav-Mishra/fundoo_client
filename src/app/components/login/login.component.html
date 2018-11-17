@@ -1,3 +1,4 @@
+<!-- The login page -->
 <div fxLayout="column" fxLayoutGap="11%">
   <div fxFlex="25"> </div>
   <div fxFlex="50" fxFlex.xs="0" fxFlex.sm="12" fxFlex.md="24" fxFlex.lg="36" fxFlex.xl="48">
@@ -7,9 +8,10 @@
         <div>
           <mat-card>
             <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+              <!-- The left side of the login page For EMAIL-->
               <div leftPane>
                 <div class="container1">
-
+                  <!-- The logo of the  App  -->
                   <div class="header">
                     <p fxLayoutAlign="center" class="logo" dir="ltr" fxLayoutGap="30px">
                       <span class="blue"> F </span>
@@ -24,6 +26,8 @@
                     <h2 fxLayoutAlign="center" style="font-family: 'Google Sans',arial,sans-serif;"> Sign In</h2>
                     <h4 class="tagline" fxLayoutAlign="center"> with your Fundoo Account</h4>
                   </div>
+                  <!-- The logo of the  App  -->
+
 
                   <div fxLayout="column">
                     <mat-form-field>
@@ -42,7 +46,9 @@
 
                 </div>
               </div>
+              <!-- The left side of the login page For EMAIL-->
 
+              <!-- The right side of the login page For PASSWORD-->
               <div rightPane>
 
                 <div class="container1">
@@ -92,6 +98,7 @@
 
                 </div>
               </div>
+              <!-- The right side of the login page For PASSWORD-->
             </my-slide-panel>
           </mat-card>
 
@@ -109,3 +116,4 @@
     </div>
   </div>
 </div>
+<!-- The login page -->

@@ -1,3 +1,4 @@
+<!-- The image cropper implimentation-->
 <image-cropper
     [imageChangedEvent]="data"
     [maintainAspectRatio]="true"
@@ -7,4 +8,4 @@
     (imageCropped)="imageCropped($event)"
  
 ></image-cropper>
-<button  mat-raised-button color="primary" (click)=onUpload()> click to change profile picture </button>
+<button class="button_cropper"  mat-raised-button color="primary" (click)=onUpload()> click to change profile picture </button>

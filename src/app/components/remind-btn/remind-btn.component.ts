@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service';
-import { MatDatepickerModule } from "@angular/material";
+import { MatDatepickerModule, throwMatDialogContentAlreadyAttachedError } from "@angular/material";
 import { FormControl } from '@angular/forms';
 
 
@@ -14,14 +14,18 @@ export class RemindBtnComponent implements OnInit {
 
   @Input() noteDetails;
   @Output() todayEvent = new EventEmitter();
+  @Output() newEvent= new EventEmitter();
 
   constructor(private httpService: HttpService,
   ) { }
   public message;
+  public today;
+  public date;
+  
   ngOnInit() {
 
   }
-
+ 
   body = {};
   public currentDate = new Date();
   reminders: any[] = [
@@ -37,6 +41,7 @@ export class RemindBtnComponent implements OnInit {
       "noteIdList": [this.noteDetails.id],
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 8, 0, 0, 0)
     }
+    this.newEvent.emit(this.body['reminder']);
     this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
      
       this.todayEvent.emit()
@@ -49,6 +54,7 @@ export class RemindBtnComponent implements OnInit {
       "noteIdList": [this.noteDetails.id],
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
     }
+    this.newEvent.emit(this.body['reminder']);
     this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
       
       this.todayEvent.emit()
@@ -61,6 +67,7 @@ export class RemindBtnComponent implements OnInit {
       "noteIdList": [this.noteDetails.id],
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
     }
+    this.newEvent.emit(this.body['reminder']);
     this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
      
       this.todayEvent.emit()
@@ -79,6 +86,8 @@ export class RemindBtnComponent implements OnInit {
     "time":""
   }
   
+  
+  
   addRemCustom(date,timing){
     
     timing.match('^[0-2][0-3]:[0-5][0-9]$');
@@ -88,6 +97,7 @@ export class RemindBtnComponent implements OnInit {
         "noteIdList": [this.noteDetails.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
       }
+      this.newEvent.emit(this.body['reminder']);
       this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
        
         this.todayEvent.emit()

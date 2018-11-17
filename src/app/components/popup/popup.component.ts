@@ -5,6 +5,7 @@ import { HttpService } from "../../core/service/http/http.service";
 
 
 
+
 export interface DialogData {
   id:string;
   title:string;
@@ -18,6 +19,7 @@ export interface DialogData {
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent implements OnInit {
+  
   @Output() updateNow=new EventEmitter();
   @Input() noteDetails
   labelBody={};
@@ -41,6 +43,9 @@ export class PopupComponent implements OnInit {
      this.updateNow.emit();
    })
   }
+
+
+ 
   
   
 }

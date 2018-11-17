@@ -19,6 +19,9 @@ export class LableWindowComponent implements OnInit {
         this.getCard(this.label)
       })
   }
+     /**   
+     * @description Api for  Getting  all cards by lables 
+     */
   public notes=[];
   public label;
   private token=localStorage.getItem('token');
@@ -34,6 +37,9 @@ export class LableWindowComponent implements OnInit {
           console.log(error);
         })
   }
+     /**   
+     * @description Event emmition
+     */
   addNewEntry(event){
    this.getCard(this.label)
   }

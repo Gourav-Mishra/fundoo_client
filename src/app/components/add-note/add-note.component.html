@@ -1,78 +1,16 @@
-<!-- 
-        <div fxLayout="row" fxLayoutAlign="center">
-            <div fxFlex="15%" fxFlex.xs=0 fxFlex.sm=0 fxFlex.md=15 fxFlex.lg=20> </div> 
-            <div fxFlex="70% "  > 
-               
-
-                
-                    <div class="margin" fxLayoutAlign="center">
-                        <mat-card class="pannel" *ngIf="show" >
-                            <mat-card-content>
-                                <div fxFlexLayout="row">
-                                    <div fxFlex=80% class="area_content" contenteditable="true" (click)="show=!show">Take
-                                        a Note...</div>
-                                    <div fxFlex=20% style="float:right">
-
-                                        <button mat-icon-button>
-                                            <mat-icon (click)="visible=!visible">check_circle_outline</mat-icon>
-                                        </button>
-
-                                        
-                                    </div>
-                                </div>
-
-
-
-                            </mat-card-content>
-
-                        </mat-card>
-                        
-                        
-
-
-                        <mat-card *ngIf="!show" class="pannel2" [ngStyle]="{'background-color':parentColor}">
-                            <mat-card-content>
-
-                                <div class="area_content" id="title" contenteditable="true" data-text="Title"></div>
-                                <br>
-                                <div id="take-note" class="area_content" contenteditable="true" data-text="Take a Note..."></div>
-                                <br>
-                                <mat-card-footer>
-                                    <div class="function_btn" fxLayout="row wrap" fxLayoutAlign="space-around center" >
-
-                                        <app-remind-btn></app-remind-btn>
-                                        <app-collaborator></app-collaborator>
-                                        <app-change-color (mainBoxColor)="changeMainBoxColor($event)"></app-change-color>
-                                        <app-add-image></app-add-image>
-                                       
-                                        <app-more-btn></app-more-btn>
-                                       
-                                        <button style="float:right" mat-button (click)="close()">close</button>
-                                    </div>
-                                </mat-card-footer>
-
-
-                            </mat-card-content>
-                        </mat-card>         
-</div>
-
-             </div>
-        
-<div fxFlex="15%" fxFlex.xs="0" fxFlex.sm="8" fxFlex.md="16" fxFlex.lg="22"> </div>
-</div> -->
-
+<!-- add Note collection-->
 <div  fxLayout="row" fxLayoutAlign="center">
         <div fxFlex="10%" > </div> 
-        <div fxFlex="60% "  > 
-
+        <div fxFlex="80% "  > 
+<!-- 1 st card starts  -->
 <div fxLayout='column' fxLayoutAlign="center center" style="margin-top:100px">
 
     <mat-card *ngIf="hide" (click)="hide=!hide" class="pannel">
         <mat-card-content>
                 <div fxFlexLayout="row">
-                    <div fxFlex=80% class="area_content" contenteditable="true" >Take
+                    <div fxFlex=90% class="area_content" contenteditable="true" >Take
                         a Note...</div>
-                    <div fxFlex=20% style="float:right">
+                    <div fxFlex=10% style="float:right">
 
                         <button mat-icon-button>
                             <mat-icon (click)="toggle()">check_circle_outline</mat-icon>
@@ -82,7 +20,10 @@
             </mat-card-content>
     </mat-card>
   
-    
+    <!-- 1 st card starts  -->
+
+
+    <!-- 2nd card Starts-->
     <mat-card class="pannel2" *ngIf="!hide" [ngStyle]="{'background-color':parentColor}">
         <mat-card-content>
        
@@ -115,7 +56,7 @@
         </div>
   
   
-  
+  <!--        chip list for lables   -->
         <div *ngFor="let index of labelName">
             <mat-chip-list>
                 <mat-chip>{{index.label}}
@@ -124,10 +65,57 @@
             </mat-chip-list>
         </div>
        
-      
+        <!--      chip list For Rseminder Chip      -->
+
+        <mat-chip-list>
+            <div *ngFor='let reminder of reminderArr'>
+                <div *ngIf="(todayDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
+                    <mat-chip>
+                        Today, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
+                            <mat-icon matChipRemove (click)='deleteReminder()'>cancel</mat-icon>
+                        </span>
+                    </mat-chip>
+                </div>
+        
+                <div *ngIf="(tomorrowDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
+                    <mat-chip>
+                        Tomorrow, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
+                            <mat-icon matChipRemove (click)='deleteReminder()'>cancel</mat-icon>
+                        </span>
+                    </mat-chip>
+        
+                </div>
+                <div *ngIf="(todayDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy') && (tomorrowDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy')">
+                    <div *ngIf="(todayDate | date:'dd/MM/yyyy') > (reminder | date:'dd/MM/yyyy') ; else higherDate">
+                        <mat-chip>
+        
+                            <del>{{reminder | date:"medium"}}</del> <span style="margin-top:5px">
+                                <mat-icon matChipRemove (click)='deleteReminder()'>cancel</mat-icon>
+                            </span>
+        
+                        </mat-chip>
+                    </div>
+                    <ng-template #higherDate>
+                        <mat-chip>
+                            {{reminder | date:"medium"}} <span style="margin-top:5px">
+                                <mat-icon matChipRemove (click)='deleteReminder()'>cancel</mat-icon>
+                            </span>
+                        </mat-chip>
+        
+                    </ng-template>
+                </div>
+            </div>
+        </mat-chip-list>
+
+        <!--      chip list For Reminder Chip      -->
+
+
+        <!--  All Note Buttons     -->
+
+
             <div class="function_btn" fxLayout="row wrap" fxLayoutAlign="space-around center" >
 
-                <app-remind-btn></app-remind-btn>
+                <app-remind-btn [noteDetails]='note' (newEvent)="emitRemainder($event)"></app-remind-btn>
                 <app-collaborator></app-collaborator>
                 <app-change-color [noteDetails]='note' (mainBoxColor)="changeMainBoxColor($event)"></app-change-color>
                 <app-add-image></app-add-image>
@@ -136,6 +124,8 @@
                
                 <button style="float:right" mat-button (click)="addNotes()">close</button>
             </div>
+        <!--  All Note Buttons     -->
+
       
     </mat-card-content>
     
@@ -144,3 +134,5 @@
 </div>
 <div fxFlex="10%" > </div>
 </div> 
+ <!-- 2nd card Starts-->
+<!-- add Note collection-->

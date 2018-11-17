@@ -17,12 +17,14 @@ export class AddLablesComponent implements OnInit {
   ngOnInit() {
    this.getLabel();
   }
+  /**
+   *   @description : Api call for Getting Label
+   **/
   getLabel(){
     var token = localStorage.getItem('token');
     this.httpservice.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
       console.log("labels= ",res);
       this.notes = [];
-      // this.notes = (res['data'].details);
       for(var i=0;i<res['data'].details.length;i++){
         if(res['data']['details'][i].isDeleted==false){
           this.notes.push(res['data']['details'][i])
@@ -34,6 +36,10 @@ export class AddLablesComponent implements OnInit {
   }
   id = localStorage.getItem('userId')
   token = localStorage.getItem('token')
+  /**
+   *   @description : Api call for Adding Label
+   **/
+
   addLabel() {
     
     
@@ -46,20 +52,22 @@ export class AddLablesComponent implements OnInit {
           "userId": this.id
         }, this.token).subscribe(
           (data) => {
-            console.log("POST Request is successfull ", data);
-            // console.log(data);
           },
           error => {
-            console.log("Error", error);
           })
   
     }
     else{
       var message="lable Exist"
+
     alert(message);
       
     }
      }
+    
+  /**
+   *   @description : Api call for Deleting Label 
+   **/
     deleteLabel(id){
       this.httpservice.labelDeleteService("noteLabels/"+id+"/deleteNoteLabel").subscribe(res=>{
         this.getLabel()

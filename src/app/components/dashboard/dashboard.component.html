@@ -7,12 +7,12 @@
     </button>
   </div>
   <div>
-    <span class="title">fundoo</span>
+    <span class="title">{{changeName}} </span>
 
   </div>
   <img class="img" src="../../../assets/images/search.svg" fxHide.xs="true">
 
-  <!--    ----        Search bar  starts      -----        -->
+  <!--    ----        Search bar  starts      -----  -->
   <div class="search_flex" routerLink="/home/search" fxShow.xs=false fxShow.sm=true
        fxShow.md=true fxShow.lg=true fxShow.gt-xs=true>
     <input class="searchbar" matTooltip="Search Bar" aria-label="Search" 
@@ -36,12 +36,12 @@
       </span>
       <span class="left_icons" fxLayoutAlign="end end">
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" 
-                fxshow.xs="true" fxShow.sm="true"
-          fxShow.md="true" fxShow.lg="true">
+                fxshow.xs="false" fxShow.sm="false"
+          fxShow.md="false" fxShow.lg="true" >
           <mat-icon matTooltip="switch to list" (click)="listView()" *ngIf="view==0" 
-                    aria-label="Side nav toggle icon">view_stream</mat-icon>
+                    aria-label="Side nav toggle icon" >view_stream</mat-icon>
           <mat-icon matTooltip="switch to grid" (click)="gridView()" *ngIf="view==1"
-                    aria-label="Side nav toggle icon">view_module</mat-icon>
+                    aria-label="Side nav toggle icon" >view_module</mat-icon>
         </button>
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
           <mat-icon matTooltip="Notifications" aria-label="Side nav toggle icon">
@@ -60,15 +60,21 @@
                   mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">
                   <div class="change_btn"><p class="change_btn">change</p></div>
                 </button>
-                <!-- <div class="change_btn">change</div> -->
+                
                 <input style="display:none" (click)="$event.stopPropagation()" class="image" type="file" 
                         (change)="onFileUpload($event)" #selectFile>
               </div>
-              <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left">{{firstName | titlecase}}
-                {{lastName | titlecase}} </mat-content>
+              <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left">
+              <div>
+                  <div class="name">{{firstName | titlecase}}
+                       {{lastName | titlecase}}</div>
+                  <div><p class="mail"> {{email}}</p></div>
+              </div>
+               </mat-content>
+                
 
             </div><br>
-            <p class="mail"> {{email}}</p>
+            
 
             <mat-content class="contentstyle">{{raw_data}}</mat-content>
             <hr>
@@ -83,7 +89,7 @@
 
             </button>
           </button>
-          <!--           profile-pic upload   ends                -->
+          <!------------ profile-pic upload   ends  ---------------->
         </button>
       </span>
     </div>
@@ -102,13 +108,13 @@
     <mat-nav-list>
 
 
-      <a mat-list-item routerLink="/home/notes">
+      <a  (click)="nameChange('Fundoo')"mat-list-item routerLink="/home/notes">
         <img class="img"  src="../../../assets/images/notes.svg">
         <span class="space_sidebar"> Notes</span> 
       </a>
-      <a mat-list-item routerLink="/home/reminders">
+      <a  (click)="nameChange('Reminders')" mat-list-item routerLink="/home/reminders">
         <img class="img" src="../../../assets/images/reminders.svg">
-        <span class="space_sidebar">Reminders</span>
+        <span class="space_sidebar"> Reminders</span>
       </a>
       <hr class="line">
       <div>
@@ -116,7 +122,7 @@
           <p class="labels">Labels<p> 
         </span>
         <span>
-          <a mat-list-item *ngFor="let labels of notes" (click)="lablelist(labels)">
+          <a (click)="nameChange(labels.label)"  mat-list-item *ngFor="let labels of notes" (click)="lablelist(labels)">
             <mat-icon>label_outline</mat-icon><span class="child-links" >{{labels.label}}</span>
           </a>
         </span>
@@ -127,11 +133,11 @@
 
       </div>
       <hr>
-      <a mat-list-item routerLink="/home/archive"><img class="img" 
+      <a (click)="nameChange('Archive')" mat-list-item routerLink="/home/archive"><img class="img" 
          src="../../../assets/images/archive.svg">
         <span class="space_sidebar">
           Archive</span></a>
-      <a mat-list-item routerLink="/home/trash"><img class="img"
+      <a (click)="nameChange('Trash')" mat-list-item routerLink="/home/trash"><img class="img"
           src="../../../assets/images/trash.svg">
         <span class="space_sidebar">Trash</span></a>
       <hr>
@@ -148,7 +154,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content style="margin-top:0%">
+  <mat-sidenav-content>
 
 
     <router-outlet> </router-outlet>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { HttpService} from '../../core/service/http/http.service'
 import {GeneralService } from "../../core/service/data/general.service"
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-reminders',
@@ -8,6 +9,7 @@ import {GeneralService } from "../../core/service/data/general.service"
   styleUrls: ['./reminders.component.scss']
 })
 export class RemindersComponent implements OnInit {
+ 
 
   constructor( private httpService:HttpService,
     private data: GeneralService ) { }
@@ -22,11 +24,9 @@ export class RemindersComponent implements OnInit {
        var token=localStorage.getItem('token');
        this.httpService.httpGetNote( 'notes/getReminderNotesList',token).subscribe(result=>{
          
-       console.log(result);
-       
-
-        // for(var i=0;i<result['data'].data.length;i++){
+         // for(var i=0;i<result['data'].data.length;i++){
           this.reminder= result['data'].data;
+          this.reminder.sort(this.compare)
         // }
          console.log(this.reminder);
 
@@ -37,6 +37,15 @@ export class RemindersComponent implements OnInit {
     this.data.currentMessage.subscribe(message => {
       this.toggle = message;
     })
+  }
+  compare(a,b) {
+    a = new Date(a.reminder);
+    b = new Date(b.reminder);
+    if (a < b)
+      return -1;
+    if (a > b)
+      return 1;
+    return 0;
   }
 }
 

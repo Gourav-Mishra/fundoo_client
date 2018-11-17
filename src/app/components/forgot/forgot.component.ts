@@ -30,7 +30,9 @@ records={};
     this.recoveryForm=new FormGroup({
       'email':new FormControl('',[Validators.required])
     });
-   
+    /**   
+     * @description  The api for getting the recovery mail... 
+     */
    }
    recovery(){
     

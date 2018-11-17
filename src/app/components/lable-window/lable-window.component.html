@@ -1,1 +1,4 @@
-<app-note-collection [notesArray]="notes" (deleteParent)="addNewEntry($event)" (changeColorAgain)="addNewEntry($event)"></app-note-collection>
+<!-- The window for labels to open seperately-->
+<div style="margin-top:100px">
+    <app-note-collection [notesArray]="notes" (deleteParent)="addNewEntry($event)" (changeColorAgain)="addNewEntry($event)"></app-note-collection>
+</div>

@@ -25,9 +25,13 @@ export class NoteCollectionComponent implements OnInit {
   constructor(private httpService: HttpService, public dialog: MatDialog,
     private data: GeneralService
   ) { }
+public todayDate=new Date();
+public tomorrowDate=new Date();
 
   ngOnInit() {
     this.viewCard();
+    this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
+
   }
   toggle = false;
   viewCard() {

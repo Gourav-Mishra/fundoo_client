@@ -18,7 +18,9 @@ export class ArchiveBtnComponent implements OnInit {
 
   ngOnInit() {
   }
-
+     /**  
+     * @description  Api For the archive notes
+     */
   archiveNotes() {
     this.body = {
       "isArchived": true,
@@ -34,6 +36,9 @@ export class ArchiveBtnComponent implements OnInit {
       console.log(error);
     })
   }
+     /**  
+     * @description  Api For the unArchive notes
+     */
 
   unArchiveNotes() {
     this.body = {

@@ -114,8 +114,12 @@ import { Router } from '@angular/router';
     }
     constructor(private  httpService:HttpService, private snackBar: MatSnackBar,
         private router: Router) { }
+        public todayDate= new Date();
+        public  tomorrowDate=new Date()
+         
     ngOnInit() {
         this.getAllLabels();
+        this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1)
     }
     changeMainBoxColor(event){
              if(event){
@@ -138,7 +142,9 @@ import { Router } from '@angular/router';
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': '',
                 'isPined': 'false',
-                "color":this.parentColor
+                "color":this.color,
+                'reminder':this.remindervar,
+
             }, this.accessToken).subscribe(response => {
                
                 this.onNewEntryAdded.emit({});
@@ -175,13 +181,14 @@ import { Router } from '@angular/router';
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
-                "color":this.parentColor
+                "color":this.color,
+                'reminder':this.remindervar,
             }, this.accessToken).subscribe(response => {
                 this.onNewEntryAdded.emit({});
                 this.dataArrayCheck = [];
                 this.labelName = [];
                 this.hide = !this.hide;
-                this.parentColor = "#fafafa";
+                this.color = "#fafafa";
                 this.show = 0
             }, error => {
                 this.dataArrayCheck = [];
@@ -198,7 +205,10 @@ import { Router } from '@angular/router';
      * @param event 
      */
     colorChanges(event) {
-        this.color = event;
+        if (event) {
+            this.color = event;
+        }
+        
     }
     /**
      * @description keydown event
@@ -273,6 +283,26 @@ import { Router } from '@angular/router';
             }
             console.log(this.dataArray);
         }
+    }
+    /**
+     * @description Adding reminder in add card
+     */
+    public remindervar;
+    public reminderArr=[];
+    
+    emitRemainder(event){
+        if(event){
+            this.remindervar=event;
+            if(this.reminderArr.length==0)
+            {
+            this.reminderArr.push(this.remindervar);
+            }
+        }
+    }
+    deleteReminder(){
+        this.reminderArr.pop();
+        this.remindervar='';
+
     }
 }
 

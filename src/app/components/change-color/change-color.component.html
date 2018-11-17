@@ -1,7 +1,10 @@
+<!-- The ChangeColor Icon-->
 <button  mat-icon-button >
-<mat-icon class="icon" style="cursor: pointer;" matTooltip="Change color" aria-label="change color" 
+<mat-icon class="icon" matTooltip="Change color" aria-label="change color" 
     [matMenuTriggerFor]="appMenu">palette 
-  </mat-icon></button>
+  </mat-icon>
+</button>
+<!-- The Matmenu of the change card options-->
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
     <ng-template matMenuContent >
       <div >

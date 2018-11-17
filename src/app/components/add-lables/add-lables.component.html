@@ -1,12 +1,14 @@
+<!-- Add lable Component   -->
 <div fxLayout="row wrap" fxLayoutAlign="space-between start">
   <mat-card class="card">
     <div fxLayout="column">
-      <p style="font-size:24px;font-family:'Roboto',arial,sans-serif">Edit Lable</p>
+      <p  class="edit_lable" style="font-size:24px;font-family:'Roboto',arial,sans-serif">Edit Lable</p>
+       <!-- Add lable Component main Div  --> 
       <div Fxlayout="row" fxLayoutAlign="space-between end">
         <span fxFlex=10%>
           <mat-icon>add</mat-icon>
         </span>
-
+       
         <div class="border1" fxFlex="80%" id="label1" contentEditable="true" 
               data-text="Create new label"></div>
         <div> {{message}}</div>
@@ -14,7 +16,9 @@
           <mat-icon>done</mat-icon>
         </span>
       </div>
+      
     </div>
+    <!-- Add lable Component main Div  --> 
     <div *ngFor="let labels of notes">
       <div fxFlex=10%>
         <mat-icon class="delete_icon" (click)="deleteLabel(labels.id)">delete</mat-icon>
@@ -38,3 +42,4 @@
   </mat-card>
 
 </div>
+<!-- Add lable Component ends  -->

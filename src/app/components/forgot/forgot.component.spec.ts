@@ -23,15 +23,3 @@ describe('ForgotComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-//   login(show){
-  //     if(!show){
-  //   this.records = this.httpService.httpPost('user/login', this.body)
-  // .subscribe(result => {
-  // console.log("post= ", result);
-  // for (let key in result) {
-  // if (result.hasOwnProperty(key)) {
-  // this.users.push(result[key]);
-  // }
-  // }
-  // console.log(this.users);
-  // }

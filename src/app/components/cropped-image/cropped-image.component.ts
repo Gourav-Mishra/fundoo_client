@@ -22,10 +22,15 @@ export class CroppedImageComponent implements OnInit {
 
   ngOnInit() {
   }
+  /**   
+     * @description  Event emmition for the cropped image
+     */
   imageCropped(event: any) {
     this.croppedImage = event.file;
   }
-
+     /**   
+     * @description  Api For image upload
+     */
   onUpload() {
 
     var token = localStorage.getItem('token');

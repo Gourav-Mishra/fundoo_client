@@ -49,7 +49,7 @@ import{ ArchiveComponent } from './components/archive/archive.component';
 import { RemindBtnComponent } from './components/remind-btn/remind-btn.component';
 import { CollaboratorComponent } from './components/collaborator/collaborator.component';
 import { ChangeColorComponent } from './components/change-color/change-color.component';
-import { AddImageComponent } from './components/add-image/add-image.component';
+
 import { ArchiveBtnComponent } from './components/archive-btn/archive-btn.component';
 import { MoreBtnComponent } from './components/more-btn/more-btn.component';
 import { AddNoteComponent } from './components/add-note/add-note.component';
@@ -67,9 +67,9 @@ import { LabelSearchPipe } from './core/pipes/label-search.pipe';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { LableWindowComponent } from './components/lable-window/lable-window.component';
 import { CroppedImageComponent } from './components/cropped-image/cropped-image.component';
-import { AaaddComponent } from './components/aaadd/aaadd.component';
-import { PinComponent } from './components/pin/pin.component';
 
+import { PinComponent } from './components/pin/pin.component';
+import { AaaddComponent} from'./components/aaadd/aaadd.component'
 
 
 
@@ -92,7 +92,7 @@ import { PinComponent } from './components/pin/pin.component';
     RemindBtnComponent,
     CollaboratorComponent,
     ChangeColorComponent,
-    AddImageComponent,
+   
     ArchiveBtnComponent,
     MoreBtnComponent,
     AddNoteComponent,
@@ -106,8 +106,9 @@ import { PinComponent } from './components/pin/pin.component';
     LabelSearchPipe,
     LableWindowComponent,
     CroppedImageComponent,
-    AaaddComponent,
+   
     PinComponent,
+    AaaddComponent
 
 
   ],

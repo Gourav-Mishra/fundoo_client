@@ -1,14 +1,23 @@
 <div fxLayout="column">
 <app-add-note fxFlex="10" (onNewEntryAdded)='addNewEntry($event)'></app-add-note>
-<div>pinned</div>
-<app-note-collection fxFlex="90"[notesArray]="notesPin" 
+<div *ngIf='notesPin.length!==0'>
+<div class="pinned">pinned</div>
+
+<app-note-collection [notesArray]="notesPin" 
                      (deleteParent)="addNewEntry($event)" 
                      (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
 
 
-<div>Others</div>
-<app-note-collection fxFlex="90"[notesArray]="notes" 
+<div class="others">Others</div>
+<app-note-collection [notesArray]="notes" 
+                     (deleteParent)="addNewEntry($event)" 
+                     (changeColorAgain)="addNewEntry($event)">
+</app-note-collection>
+</div>
+<div *ngIf='notesPin.length==0'>
+
+<app-note-collection [notesArray]="notes" 
                      (deleteParent)="addNewEntry($event)" 
                      (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>

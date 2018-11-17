@@ -1,14 +1,14 @@
 .cardgrid{
 
 min-height:150px;
-min-width:300px;
-max-width:300px;
+min-width:260px;
+max-width:260px;
 word-break: break-all;
 }
 .cardlist{
-    width:100%;
+    // width:100%;
     min-height:150px;
-   width:900px;
+//    width:900px;
    
     }
 
@@ -71,10 +71,13 @@ font-size:27px
     }
     
     .description{
-        border: none;
+    border: none;
     background: transparent;
     outline: none;
     word-wrap: break-word;
     border:transparent;
 
+    }
+    .pin{
+        float:right;
     }

@@ -7,6 +7,39 @@
         <div id="description1" class="area_content" contenteditable="true" 
                      [innerHTML]="data.description" data-text=""></div>
       </div>
+
+
+      <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+        <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
+        (click)=checkBox(check)></mat-checkbox>
+        <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
+        [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open'">
+        <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
+        *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+      </div>            
+        <mat-divider *ngIf="checklist"></mat-divider>
+        <div fxLayout="row" *ngIf="checklist">
+          <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+          <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
+          <input   fxFlex="95%" class="note" placeholder="List Item" 
+          [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
+        </div>
+        <mat-divider *ngIf="checklist"></mat-divider>
+       
+        <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+          <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted"
+           (click)=checkBox(check)></mat-checkbox>
+          <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;"
+           fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
+          [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
+          <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
+           *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+          </div>
+
+
+
+
+      
       <div fxLayout="row wrap" fxLayoutGap="10px">
         <div *ngFor="let item of data.noteLabels" >
       <mat-chip-list class="chip">
@@ -24,9 +57,9 @@
             <app-collaborator></app-collaborator>
             <app-change-color [noteDetails]="data"  ></app-change-color>
             <app-add-image></app-add-image>
-            <app-archive-btn></app-archive-btn>
-            <app-more-btn  ></app-more-btn>
-            <button mat-button (click)="onNoClick(data.id)"> close</button>
+            <app-archive-btn [archive]="data"></app-archive-btn>
+            <app-more-btn [noteDetails]="data"></app-more-btn>
+            <button mat-button (click)="onNoClick()"> close</button>
           </div>
          
         </mat-card-footer>

@@ -1,7 +1,9 @@
-
-  <button mat-icon-button class="fundoo" matTooltip="more options" [matMenuTriggerFor]="menuMore">
+<!-- The function available im more dropdown while adding card and in notes in Dashboard -->
+  <button mat-icon-button class="fundoo" matTooltip="more options" 
+          [matMenuTriggerFor]="menuMore">
     <mat-icon>more_vert</mat-icon>
   </button>
+<!-- Mat menu for the dropdown having some basic options like deeliting and adding labels-->
   <mat-menu #menuMore="matMenu" yPosition="below" [overlapTrigger]="false" class="colorCard">
 
     <div>
@@ -12,6 +14,7 @@
       <button mat-menu-item> Add checkboxes</button>
     </div>
   </mat-menu>
+  <!-- The search bar field-->
   <mat-menu #lables="matMenu">
     <div class="search_flex">
 
@@ -19,11 +22,12 @@
         value="" name="q" role="combobox" type="text" aria-hidden="false" (click)="$event.stopPropagation()"
         [(ngModel)]="query">
 
-
+ 
+  
     </div>
 
     <div *ngFor="let lables of notes| newSearch: query" fxLayoutAlign="space-between center">
-      <mat-checkbox (click)="$event.stopPropagation(); addLabel(lables.id)">{{lables.label}}
+      <mat-checkbox (click)="$event.stopPropagation(); addLabel(lables.id)" [checked]="selectCheck(lables)">{{lables.label}}
 
       </mat-checkbox>
 
