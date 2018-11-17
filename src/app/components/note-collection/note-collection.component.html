@@ -1,5 +1,5 @@
 <div fxFlex=10% ></div>
-<div  fxLayout="row wrap" fxLayoutWrap  fxLayoutGap="30px" style=" margin-bottom:50px ;margin-top:20px">
+<div  fxLayout="row wrap" fxLayoutWrap  fxLayoutGap="10px" style=" margin-bottom:50px ;margin-top:20px">
   <mat-card class="card" 
             *ngFor='let notes of notesArray | LockFilter: searchNote' 
             [style.backgroundColor]="notes.color">

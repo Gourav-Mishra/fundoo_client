@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
     this.records=this.httpService.httpPost('user/login',this.body)
     .subscribe(result =>{
       console.log(result);
+
       this.snackbar.open('Login','Sucess',{
         duration:3000,
       });
@@ -87,7 +88,13 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('imageUrl',imageUrl);
 
       localStorage.setItem('created',createdAt)
-      localStorage.setItem('userId',result['userId'])
+      localStorage.setItem('userId',result['userId']);
+      var pushNotification={
+        "pushToken":localStorage.getItem('pushToken')
+      }
+      this.httpService.httpAddReminder('user/registerPushToken',token,pushNotification).subscribe(result=>{
+        
+      })
 
       this.router.navigate(['home']);
     },error=>{

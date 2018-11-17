@@ -27,17 +27,14 @@
   <div>
     <div fxLayoutAlign="end end" fxLayout="row wrap">
       <span class="right_icons" fxLayoutAlign="end end">
-        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" fxHide.xs="true" 
-                fxHide.gt-xs="true"fxHide.md="false"fxHide.lg="false">
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" >
           <mat-icon matTooltip="Refresh" aria-label="Side nav toggle icon">refresh
 
           </mat-icon>
         </button>
       </span>
       <span class="left_icons" fxLayoutAlign="end end">
-        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" 
-                fxshow.xs="false" fxShow.sm="false"
-          fxShow.md="false" fxShow.lg="true" >
+        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav"  >
           <mat-icon matTooltip="switch to list" (click)="listView()" *ngIf="view==0" 
                     aria-label="Side nav toggle icon" >view_stream</mat-icon>
           <mat-icon matTooltip="switch to grid" (click)="gridView()" *ngIf="view==1"

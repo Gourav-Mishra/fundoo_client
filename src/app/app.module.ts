@@ -70,6 +70,7 @@ import { CroppedImageComponent } from './components/cropped-image/cropped-image.
 
 import { PinComponent } from './components/pin/pin.component';
 import { AaaddComponent} from'./components/aaadd/aaadd.component'
+import { MessagingService } from './core/service/messaging/messaging.service';
 
 
 
@@ -150,7 +151,7 @@ import { AaaddComponent} from'./components/aaadd/aaadd.component'
 
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpService,AuthGuard],
+  providers: [HttpService,AuthGuard,MessagingService],
   bootstrap: [AppComponent],
   entryComponents:[PopupComponent,AddLablesComponent, CroppedImageComponent, DashboardComponent]
 })
