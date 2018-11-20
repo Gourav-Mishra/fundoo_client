@@ -25,12 +25,12 @@ export class NoteCollectionComponent implements OnInit {
   constructor(private httpService: HttpService, public dialog: MatDialog,
     private data: GeneralService
   ) { }
-public todayDate=new Date();
-public tomorrowDate=new Date();
+// public todayDate=new Date();
+// public tomorrowDate=new Date();
 
   ngOnInit() {
     this.viewCard();
-    this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
+    // this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
 
   }
   toggle = false;
@@ -124,6 +124,17 @@ updatelist(id) {
     console.log(response);
 
   })
+}
+
+public todayDate= new Date();
+public tomorrowDate= new Date(this.todayDate.getFullYear(),this.todayDate.getMonth(), (this.todayDate.getDate()+1))
+public currDate= new Date(); 
+checkReminder(date){
+var showTime=new Date(date).getTime();
+var currTime=this.currDate.getTime();
+if(showTime<currTime){
+return true
+}else return false
 }
 }
 

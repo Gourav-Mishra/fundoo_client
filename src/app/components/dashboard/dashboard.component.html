@@ -10,7 +10,7 @@
     <span class="title">{{changeName}} </span>
 
   </div>
-  <img class="img" src="../../../assets/images/search.svg" fxHide.xs="true">
+  <img class="img" src="../../../assets/images/search.svg" fxHide.xs="false">
 
   <!--    ----        Search bar  starts      -----  -->
   <div class="search_flex" routerLink="/home/search" fxShow.xs=false fxShow.sm=true
@@ -26,13 +26,7 @@
   <!--    ----        side bar starts       -----        -->
   <div>
     <div fxLayoutAlign="end end" fxLayout="row wrap">
-      <span class="right_icons" fxLayoutAlign="end end">
-        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" >
-          <mat-icon matTooltip="Refresh" aria-label="Side nav toggle icon">refresh
-
-          </mat-icon>
-        </button>
-      </span>
+      
       <span class="left_icons" fxLayoutAlign="end end">
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav"  >
           <mat-icon matTooltip="switch to list" (click)="listView()" *ngIf="view==0" 

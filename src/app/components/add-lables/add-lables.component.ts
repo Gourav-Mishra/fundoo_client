@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/core/service/http/http.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import  { Note } from '../../core/model/note'
 
 
 @Component({
@@ -9,7 +10,8 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./add-lables.component.scss']
 })
 export class AddLablesComponent implements OnInit {
-  notes = [];
+  private notes = [];
+  private note:Note[]=[];
   
 
   constructor(private httpservice: HttpService) { }
@@ -23,15 +25,16 @@ export class AddLablesComponent implements OnInit {
   getLabel(){
     var token = localStorage.getItem('token');
     this.httpservice.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
-      console.log("labels= ",res);
+      
       this.notes = [];
-      for(var i=0;i<res['data'].details.length;i++){
-        if(res['data']['details'][i].isDeleted==false){
-          this.notes.push(res['data']['details'][i])
+      var myData:Note[]=res['data']['details'];
+      for(var i=0;i<myData.length;i++){
+        if(myData[i].isDeleted==false){
+          this.notes.push(myData[i])
         }
       }
     }, error => {
-      console.log(error);
+      
     })
   }
   id = localStorage.getItem('userId')
@@ -44,7 +47,7 @@ export class AddLablesComponent implements OnInit {
     
     
     if(!this.notes.some((result)=>result.label==document.getElementById('label1').innerHTML)){
-      console.log(this.id);
+     
       this.httpservice.httpPostLable('noteLabels',
         {
           "label": document.getElementById('label1').innerHTML,

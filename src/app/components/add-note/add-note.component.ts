@@ -1,87 +1,8 @@
-// import { Component, OnInit, Output,EventEmitter } from '@angular/core';
-// import { HttpService } from 'src/app/core/service/http/http.service';
-// import { MatSnackBar } from '@angular/material';
-
-
-// @Component({
-//   selector: 'app-add-note',
-//   templateUrl: './add-note.component.html',
-//   styleUrls: ['./add-note.component.scss']
-// })
-// export class AddNoteComponent implements OnInit 
-// {
-//  public show=true;
-//  public visible=true;;
-//  public notes=[]
-//  public  record={};
-//  public title;
-//  public note;
-//  public parentColor;
-// body={
-// "title":"",
-// "description":""
-// }
-// @Output() onNewEntryAdded=new EventEmitter();
- 
-//    constructor(private  httpService:HttpService,
-//     public snacBar:MatSnackBar) { }
- 
-//    ngOnInit() {
- 
-//    }
-//    changeMainBoxColor(event){
-//      if(event){
-//       this.parentColor=event;
-//       console.log(this.parentColor);
-      
-//      }
-   
-
-//    }
-
-//  close(){
-//    if(!this.show){
-//      this.show=!this.show;
-//      var token=localStorage.getItem('token');
-//      this.title=document.getElementById("title").innerHTML;
-//      this.note=document.getElementById("take-note").innerHTML;
-//      console.log(this.title);
-//      console.log(this.note);
-//      console.log('token',token);
-     
-//      var note={
-//        'title':this.title,
-//        'description': this.note,
-//        'labelIdList':'',
-//        'checklist':'',
-//        "isPinned":'false',
-//        "color":this.parentColor
-//      };
-//      this.parentColor="#ffffff";
-//      this.record=this.httpService.httpAddNote('notes/addNotes',note,token).subscribe(result=>{
-//        this.snacBar.open("Notes Added","Sucessfull",{
-//          duration:3000,
-//        });
-//        this.onNewEntryAdded.emit({});
-      
-//      },error=>{
-//        console.log(error);
-//        this.snacBar.open('notes addition ', 'Failed',{
-//          duration: 3000,
-//        })
-//      })
-
-//    }
-
-//  }
- 
-
-//  }
-
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import{ Note} from '../../core/model/note'
 
 @Component({
     selector: 'app-add-note',
@@ -92,24 +13,25 @@ import { Router } from '@angular/router';
   
   export class AddNoteComponent implements OnInit 
   {
-    public hide: boolean = true;
-    public labelId = [];
-    public labelName = [];
-    body: any = {};
-    data: any;
-    show: any = 0;
-    color: any = "#fafafa";
-    listing = true;
-    public i = 0;
-    dataArray = [];
-    dataArrayCheck = [];
-    checked = false;
-    status = "open";
-    accessToken = localStorage.getItem('token');
+    
+     hide: boolean = true;
+     labelId = [];
+     labelName = [];
+     body: any = {};
+     data: any;
+     show: any = 0;
+     color: any = "#fafafa";
+     listing = true;
+     i = 0;
+      dataArray = [];
+     dataArrayCheck = [];
+     checked = false;
+     status = "open";
+     accessToken = localStorage.getItem('token');
     public parentColor;
      @Output() onNewEntryAdded=new EventEmitter();
     labelArray: any[];
-    note = {
+     note = {
       'id' : ''
     }
     constructor(private  httpService:HttpService, private snackBar: MatSnackBar,
@@ -124,7 +46,7 @@ import { Router } from '@angular/router';
     changeMainBoxColor(event){
              if(event){
               this.parentColor=event;
-              console.log(this.parentColor);
+             
               
              }
             }
@@ -135,17 +57,23 @@ import { Router } from '@angular/router';
      * @description : Add Notes api Call starts
      */
     addNotes() {
-        if (this.checked == false) {
-            this.httpService.httpAddNote('notes/addNotes', {
-                'title': document.getElementById('titleId').innerHTML,
-                'description': document.getElementById('notesId').innerHTML,
-                'labelIdList': JSON.stringify(this.labelId),
-                'checklist': '',
-                'isPined': 'false',
-                "color":this.color,
-                'reminder':this.remindervar,
+        var body={
+            'title': document.getElementById('titleId').innerHTML,
+            'description': document.getElementById('notesId').innerHTML,
+            'labelIdList': JSON.stringify(this.labelId),
+            'checklist': '',
+            'isPined': 'false',
+            "color":this.color,
+            'reminder':'',
+    
+        }
+        if(this.remindervar!=undefined){
+            this.body.reminder=this.remindervar
+        }
 
-            }, this.accessToken).subscribe(response => {
+
+        if (this.checked == false) {
+            this.httpService.httpAddNote('notes/addNotes', body, this.accessToken).subscribe(response => {
                
                 this.onNewEntryAdded.emit({});
                 this.labelName = [];
@@ -153,7 +81,7 @@ import { Router } from '@angular/router';
                 this.parentColor = "#fafafa";
                 this.show = 0
             }, error => {
-                console.log("failed", error)
+                
                 this.parentColor = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
@@ -175,7 +103,7 @@ import { Router } from '@angular/router';
                 this.dataArrayCheck.push(apiObj)
                 this.status = "open"
             }
-            console.log(this.dataArrayCheck);
+            
             this.httpService.httpAddNote('notes/addNotes', {
                 'title': document.getElementById('titleId').innerHTML,
                 'labelIdList': JSON.stringify(this.labelId),
@@ -192,7 +120,7 @@ import { Router } from '@angular/router';
                 this.show = 0
             }, error => {
                 this.dataArrayCheck = [];
-                console.log("failed", error)
+               
                 this.color = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
@@ -216,7 +144,7 @@ import { Router } from '@angular/router';
      */
     onKeydown(event) {
         if (event.key === "Enter") {
-            console.log(event);
+           
         }
     }
     /**
@@ -237,6 +165,7 @@ import { Router } from '@angular/router';
      */
     getAllLabels() {
         let newArray = [];
+        
         this.httpService.httpGetNote('noteLabels/getNoteLabelList', this.accessToken)
             .subscribe(data => {
                 for (var i = 0; i < data['data']['details'].length; i++) {
@@ -253,7 +182,7 @@ import { Router } from '@angular/router';
     enter() {
         this.i++;
         if (this.data != null) {
-            console.log(event, "Keydown");
+           
             var obj = {
                 "index": this.i,
                 "data": this.data
@@ -263,7 +192,7 @@ import { Router } from '@angular/router';
         }
     }
     ondelete(deletedObj) {
-        console.log("Ondelete function runnig");
+       
         for (var i = 0; i < this.dataArray.length; i++) {
             if (deletedObj.index == this.dataArray[i].index) {
                 this.dataArray.splice(i, 1);
@@ -275,7 +204,7 @@ import { Router } from '@angular/router';
 
     editing(event, edited) {
         if (event.code == "Enter") {
-            console.log("enter pressed");
+          
             for (var i = 0; i < this.dataArray.length; i++) {
                 if (edited.index == this.dataArray[i].index) {
                     this.dataArray[i].data == edited.data

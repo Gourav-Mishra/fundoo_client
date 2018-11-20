@@ -3,6 +3,8 @@ import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service';
 import { GeneralService} from '../../core/service/data/general.service';
 import { MatSnackBar } from '@angular/material';
+import { NotesComponent } from '../notes/notes.component';
+import{Note } from '../../core/model/note'
 @Component({
     selector: 'app-archive',
     templateUrl: './archive.component.html',
@@ -10,7 +12,8 @@ import { MatSnackBar } from '@angular/material';
   })
  
   export class ArchiveComponent implements OnInit {
-    array = [];
+    public array:Note[]=[]
+   
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
@@ -21,8 +24,9 @@ import { MatSnackBar } from '@angular/material';
      */
   myFunc() {
     var token = localStorage.getItem('token');
+   
     this.httpService.httpGetNotes('notes/getArchiveNotesList', token).subscribe(res => {
-      console.log(res);
+      
       this.array = [];
       for (var i = res['data']['data'].length - 1; i > 0; i--) {
         this.array.push(res['data']['data'][i]);

@@ -45,7 +45,8 @@
     <div fxLayout="row wrap" fxLayoutGap="10px">
       <div *ngFor="let item of notes.noteLabels" >
     <mat-chip-list class="chip">
-        <mat-chip class="chip_color" *ngIf="item.isDeleted==false">{{item.label}}
+        <mat-chip class="chip_color" *ngIf="item.isDeleted==false">
+            <span class="span">{{item.label}}</span>
           <mat-icon class="delete_label"
                     mat-button (click)="removeLabel(notes.id,item.id)">cancel</mat-icon>
         </mat-chip>
@@ -54,50 +55,61 @@
   </div>
   <br>
   <!--- chip list for reminders starts--->
-    <mat-chip-list class="chip">
-      <div *ngFor='let reminder of notes.reminder'>
-          <div *ngIf="(todayDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
-              <mat-chip class="chip_color">
-                  Today, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
-                        <app-remind-btn style="opacity:0;width:50px;" (todayEvent)=addReminder($event)></app-remind-btn>
-                      <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
-                  </span>
-              </mat-chip>
-          </div>
-  
-          <div *ngIf="(tomorrowDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
-              <mat-chip class="chip_color">
-                  Tomorrow, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
-                        <app-remind-btn style="opacity:0;width:50px" [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
-
-                      <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
-                  </span>
-              </mat-chip>
-  
-          </div>
-          <div *ngIf="(todayDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy') && (tomorrowDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy')">
-              <div *ngIf="(todayDate | date:'dd/MM/yyyy') > (reminder | date:'dd/MM/yyyy') ; else higherDate">
-                  <mat-chip class="chip_color">
-  
-                      <del>{{reminder | date:"medium"}}</del> <span style="margin-top:5px">
-                            <app-remind-btn style="opacity:0;width:50px" [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
-                          <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
-                      </span>
-  
-                  </mat-chip>
-              </div>
-              <ng-template #higherDate>
-                  <mat-chip class="chip_color">
-                      {{reminder | date:"medium"}} <span style="margin-top:5px">
-                            <app-remind-btn style="opacity:0;width:50px" [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
-                          <mat-icon class="delete_label" matChipRemove (click)="$event.stopPropagation(); removeReminder(notes.id)">cancel</mat-icon>
-                      </span>
-                  </mat-chip>
-  
-              </ng-template>
-          </div>
-      </div>
-  </mat-chip-list>
+  <div *ngIf="notes.reminder.length!=0">
+<mat-chip-list>
+    <div *ngFor='let reminder of notes.reminder'>
+        <div *ngIf="(todayDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
+            <div *ngIf="!checkReminder(reminder)">
+                <mat-chip>
+                    Today, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
+                        <mat-icon matChipRemove (click)='removeReminder(notes.id)'>cancel</mat-icon>
+                    </span>
+                </mat-chip>
+            </div>
+            <div *ngIf="checkReminder(reminder)">
+                <mat-chip>
+                    <del>Today, {{reminder | date:"mediumTime"}}</del><span style="margin-top:5px">
+                        <mat-icon matChipRemove (click)='removeReminder(notes.id)'>cancel</mat-icon>
+                    </span>
+                </mat-chip>
+            </div>
+        </div>
+        <div *ngIf="(tomorrowDate | date:'dd/MM/yyyy') == (reminder | date:'dd/MM/yyyy')">
+            <div *ngIf="!checkReminder(reminder)">
+                <mat-chip>
+                    Tomorrow, {{reminder | date:"mediumTime"}}<span style="margin-top:5px">
+                        <mat-icon matChipRemove (click)='removeReminder(notes.id)'>cancel</mat-icon>
+                    </span>
+                </mat-chip>
+            </div>
+            <div *ngIf="checkReminder(reminder)">
+                <mat-chip>
+                    <del>Tomorrow, {{reminder | date:"mediumTime"}}</del><span style="margin-top:5px">
+                        <mat-icon matChipRemove (click)='removeReminder(notes.id)'>cancel</mat-icon>
+                    </span>
+                </mat-chip>
+            </div>
+        </div>
+        <div *ngIf="(todayDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy') && (tomorrowDate | date:'dd/MM/yyyy') != (reminder | date:'dd/MM/yyyy')">
+            <div *ngIf="checkReminder(reminder)">
+                <mat-chip>
+                    <del>{{reminder | date:"medium"}}</del> <span style="margin-top:5px">
+                        <mat-icon matChipRemove (click)='removeReminder(notes.id)'>cancel</mat-icon>
+                    </span>
+                </mat-chip>
+            </div>
+            <div *ngIf="!checkReminder(reminder)">
+                <mat-chip>
+                    {{reminder | date:"medium"}} <span style="margin-top:5px">
+                        <mat-icon matChipRemove (click)='removeReminder(notes.id)'>cancel</mat-icon>
+                    </span>
+                </mat-chip>
+            </div>
+        </div>
+    </div>
+</mat-chip-list>
+</div>
+   
     
      <!--- chip list for reminders Ends--->
 

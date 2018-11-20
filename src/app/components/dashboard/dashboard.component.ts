@@ -77,7 +77,23 @@ export class DashboardComponent {
     this.httpService.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
       console.log(res);
       this.notes = [];
-      this.notes = (res['data'].details);
+      // this.notes = (res['data'].details);
+      for(var i=0;i<res['data'].details.length;i++){
+       
+          this.notes.push(res['data']['details'][i])
+        }
+
+
+      this.notes.sort(function(a, b){
+        var nameA=a.label.toLowerCase(), nameB=b.label.toLowerCase()
+        if (nameA < nameB) 
+        return -1 
+        if (nameA > nameB)
+        return 1
+        return 0 
+        })   
+        console.log(this.notes);
+        
 
     }, error => {
       console.log(error);
@@ -100,6 +116,16 @@ export class DashboardComponent {
           this.notes.push(res['data']['details'][i])
         }
       }
+      this.notes.sort(function(a, b){
+        var nameA=a.label.toLowerCase(), nameB=b.label.toLowerCase()
+        if (nameA < nameB) 
+        return -1 
+        if (nameA > nameB)
+        return 1
+        return 0 
+        })   
+        console.log(this.notes);
+        
     }, error => {
      
     })

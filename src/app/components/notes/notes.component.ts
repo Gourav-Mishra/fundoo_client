@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import{ HttpService} from '../../core/service/http/http.service'
-
+import { Note} from '../../core/model/note'
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
- show=true;
- records={};
-  notes=[];
-  notesPin=[];
-  interval;
+ private show=true;
+ private records={};
+ private notes:Note[]=[];
+ private notesPin=[];
+ private interval;
 
 
  constructor(private httpService:HttpService) { }
@@ -38,9 +38,10 @@ if(event){
     var token=localStorage.getItem('token');
     this.records= this.httpService.httpGetNotes('notes/getNotesList',token).subscribe(result =>{
     this.notes=[];
-      for(var i=result['data']['data'].length-1;i>0;i--){
-        if(result['data']['data'][i].isDeleted==false && result['data']['data'][i].isArchived==false &&result['data']['data'][i].isPined==false ){
-         this.notes.push(result['data']['data'][i])
+    var myData:Note[]=result['data']['data'];
+      for(var i=myData.length-1;i>0;i--){
+        if(myData[i].isDeleted==false && myData[i].isArchived==false && myData[i].isPined==false ){
+         this.notes.push(myData[i])
         }
       }
      
@@ -54,9 +55,10 @@ if(event){
     var token=localStorage.getItem('token');
     this.records= this.httpService.httpGetNotes('notes/getNotesList',token).subscribe(result =>{
     this.notesPin=[];
-      for(var i=0;i<result['data']['data'].length-1;i++){
-        if(result['data']['data'][i].isDeleted==false && result['data']['data'][i].isArchived==false && result['data']['data'][i].isPined==true){
-         this.notesPin.push(result['data']['data'][i])
+    var myPin:Note[]=result['data']['data'];
+      for(var i=0;i<myPin.length-1;i++){
+        if(myPin[i].isDeleted==false && myPin[i].isArchived==false && myPin[i].isPined==true){
+         this.notesPin.push(myPin[i])
         }
       }
     

@@ -1,3 +1,20 @@
+@media only screen and (min-width: 200px) and  (max-width: 600px){
+  .searchbar {
+  
+
+    background: rgba(80, 80, 79, 0.096);
+    border: none;
+    font: normal 20px Roboto,sans-serif;
+    font-variant-ligatures: none;
+    height: 50px;
+    outline: none;
+    padding: 11px 16px 11px 16px;
+    box-sizing: border-box;
+    width:1em;
+   
+  
+  }
+}
 
 
 .sidenav-container {
@@ -50,6 +67,7 @@ padding-top:60px;
   padding: 11px 16px 11px 16px;
   box-sizing: border-box;
   width:stretch;
+ 
 
 }
 input:focus{

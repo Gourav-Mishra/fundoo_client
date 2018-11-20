@@ -28,13 +28,13 @@ export class PinComponent implements OnInit {
   }
   this.httpService.httpPostArchive('notes/pinUnpinNotes',this.body,this.token)
   .subscribe(data=>{
-    console.log(data)
+    
       this.emitter.emit({
       })
   })
   error=>
   {
-    console.log(error)
+    
   }
 }
 
@@ -46,13 +46,13 @@ this.body={
 }
 this.httpService.httpPostArchive('notes/pinUnpinNotes',this.body,this.token)
 .subscribe(data=>{
-  console.log(data)
+  
     this.emitter.emit({
     })
 })
 error=>
 {
-  console.log(error)
+  
 }
 }
 }

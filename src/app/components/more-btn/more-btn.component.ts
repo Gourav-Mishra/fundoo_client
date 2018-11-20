@@ -38,6 +38,15 @@ export class MoreBtnComponent implements OnInit {
           this.notes.push(res['data']['details'][i])
         }
       }
+      this.notes.sort(function(a, b){
+        var nameA=a.label.toLowerCase(), nameB=b.label.toLowerCase()
+        if (nameA < nameB) 
+        return -1 
+        if (nameA > nameB)
+        return 1
+        return 0 
+        })   
+        console.log(this.notes);
      
     }, error => {
       console.log(error);
