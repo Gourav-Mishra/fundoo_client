@@ -1,6 +1,9 @@
-import { Component, OnInit,Input,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter, OnDestroy} from '@angular/core';
 import {  HttpService} from '../../core/service/http/http.service'
 import { MatSnackBar } from '@angular/material';
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 // import { EventEmitter } from 'protractor';
 
 @Component({
@@ -9,7 +12,9 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./more-btn.component.scss']
 })
 
-export class MoreBtnComponent implements OnInit {
+export class MoreBtnComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   title;
   note;
   id;
@@ -24,12 +29,15 @@ export class MoreBtnComponent implements OnInit {
 
 
 
-  constructor(private httpService: HttpService,public snackBar: MatSnackBar) { }
+  constructor(private httpService: HttpService,public snackBar: MatSnackBar,
+    public noteService:NoteService) { }
   @Output() notesDelete=new EventEmitter();
 
   ngOnInit() {
     var token = localStorage.getItem('token');
-    this.httpService.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
+    this.httpService.httpGetNotes('noteLabels/getNoteLabelList', token)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
       console.log("labels= ", res);
      
       // this.notes = (res['data'].details);
@@ -64,7 +72,9 @@ export class MoreBtnComponent implements OnInit {
     "isDeleted": true,
     "noteIdList": [this.noteDetails.id]
     }
-    this.records = this.httpService.httpDeleteNote('notes/trashNotes',this.body, token).subscribe(result => {
+    this.records = this.httpService.httpDeleteNote('notes/trashNotes',this.body, token)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
     this.snackBar.open('Note deleted', 'Successfully', {
     duration: 3000,
     });
@@ -83,13 +93,20 @@ export class MoreBtnComponent implements OnInit {
         "noteId":this.noteDetails.id,
         "lableId":labelId
       }
-      this.httpService.httpAddNote('notes/'+this.noteDetails.id+'/addLabelToNotes/'+labelId+'/add',this.labelBody,localStorage.getItem('token')).subscribe(result=>{
+      this.noteService.postAddLabelnotes(this.noteDetails.id,labelId,{})
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result=>{
         console.log(result);
         this.notesDelete.emit();
       },error=>{
         console.log(error);
         
       })
+    }
+    ngOnDestroy() {
+      this.destroy$.next(true);
+      // Now let's also unsubscribe from the subject itself:
+      this.destroy$.unsubscribe();
     }
     // removeLabel(labelId){
     //   this.labelBody={
@@ -104,14 +121,14 @@ export class MoreBtnComponent implements OnInit {
     //   })
 
     // }
-    selectCheck(labelOption){
-      if (this.noteDetails.noteLabels.some((data) => data.label == labelOption.label)) {
-      return true;
-      }
-      else {
+    // selectCheck(labelOption){
+    //   if (this.noteDetails.noteLabels.some((data) => data.label == labelOption.label)) {
+    //   return true;
+    //   }
+    //   else {
   
-       return false;
-    }
-    }
+    //    return false;
+    // }
+    // }
 
 }

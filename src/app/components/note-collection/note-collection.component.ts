@@ -1,8 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PopupComponent } from '../popup/popup.component';
 import { GeneralService } from 'src/app/core/service/data/general.service';
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -10,7 +13,8 @@ import { GeneralService } from 'src/app/core/service/data/general.service';
   templateUrl: './note-collection.component.html',
   styleUrls: ['./note-collection.component.scss']
 })
-export class NoteCollectionComponent implements OnInit {
+export class NoteCollectionComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   records = {};
   notes = [];
   interval;
@@ -23,7 +27,8 @@ export class NoteCollectionComponent implements OnInit {
   @Output() unArchiveParent = new EventEmitter();
 
   constructor(private httpService: HttpService, public dialog: MatDialog,
-    private data: GeneralService
+    private data: GeneralService,
+    public noteService: NoteService
   ) { }
 // public todayDate=new Date();
 // public tomorrowDate=new Date();
@@ -35,7 +40,9 @@ export class NoteCollectionComponent implements OnInit {
   }
   toggle = false;
   viewCard() {
-    this.data.currentMessage.subscribe(message => {
+    this.data.currentMessage
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(message => {
       this.toggle = message;
     })
   }
@@ -52,7 +59,9 @@ export class NoteCollectionComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       this.deleteParent.emit({
 
       })
@@ -64,7 +73,9 @@ export class NoteCollectionComponent implements OnInit {
       "noteId": id,
       "lableId": labelId
     }
-    this.httpService.httpAddNote('notes/' + id + '/addLabelToNotes/' + labelId + '/remove', this.labelBody, localStorage.getItem('token')).subscribe(result => {
+    this.noteService.postAddLabelnotesRemove(id ,labelId , this.labelBody)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       console.log(result);
       this.deleteParent.emit();
     }, error => {
@@ -79,7 +90,9 @@ export class NoteCollectionComponent implements OnInit {
     this.reminderBody={
       "noteIdList":[id]
     }
-    this.httpService.httpArchiveNote('notes/removeReminderNotes',this.reminderBody,this.token).subscribe(result=>{
+    this.noteService.postRemoveReminders(this.reminderBody)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result=>{
       this.deleteParent.emit({
 
       })
@@ -120,7 +133,9 @@ updatelist(id) {
     "status": this.modifiedCheckList.status
   }
   var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-  this.httpService.postNotes(url, JSON.stringify(apiData), localStorage.getItem('token')).subscribe(response => {
+  this.noteService.postUpdateChecklist(url, JSON.stringify(apiData), localStorage.getItem('token'))
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(response => {
     console.log(response);
 
   })
@@ -135,6 +150,11 @@ var currTime=this.currDate.getTime();
 if(showTime<currTime){
 return true
 }else return false
+}
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
 }
 }
 

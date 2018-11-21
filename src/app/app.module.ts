@@ -30,10 +30,10 @@ import { LoginComponent, } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { SlidePanelComponent } from './components/slide-panel/slide-panel.component';
 import { HomeComponent } from './components/home/home.component';
-
+import {InterceptService} from './core/service/interceptor/interceptor.service'
 
 import { ForgotComponent } from './components/forgot/forgot.component'
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
@@ -69,7 +69,7 @@ import { LableWindowComponent } from './components/lable-window/lable-window.com
 import { CroppedImageComponent } from './components/cropped-image/cropped-image.component';
 
 import { PinComponent } from './components/pin/pin.component';
-import { AaaddComponent} from'./components/aaadd/aaadd.component'
+
 import { MessagingService } from './core/service/messaging/messaging.service';
 
 
@@ -109,7 +109,7 @@ import { MessagingService } from './core/service/messaging/messaging.service';
     CroppedImageComponent,
    
     PinComponent,
-    AaaddComponent
+   
 
 
   ],
@@ -151,7 +151,13 @@ import { MessagingService } from './core/service/messaging/messaging.service';
 
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpService,AuthGuard,MessagingService],
+  providers: [HttpService,AuthGuard,MessagingService,
+    InterceptService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    }],
   bootstrap: [AppComponent],
   entryComponents:[PopupComponent,AddLablesComponent, CroppedImageComponent, DashboardComponent]
 })

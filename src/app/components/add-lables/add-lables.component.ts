@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from 'src/app/core/service/http/http.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import  { Note } from '../../core/model/note'
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -9,12 +12,14 @@ import  { Note } from '../../core/model/note'
   templateUrl: './add-lables.component.html',
   styleUrls: ['./add-lables.component.scss']
 })
-export class AddLablesComponent implements OnInit {
+export class AddLablesComponent implements OnInit,OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   private notes = [];
   private note:Note[]=[];
   
 
-  constructor(private httpservice: HttpService) { }
+  constructor(private httpservice: HttpService,public noteService:NoteService) { }
 
   ngOnInit() {
    this.getLabel();
@@ -24,7 +29,9 @@ export class AddLablesComponent implements OnInit {
    **/
   getLabel(){
     var token = localStorage.getItem('token');
-    this.httpservice.httpGetNotes('noteLabels/getNoteLabelList', token).subscribe(res => {
+    this.noteService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
       
       this.notes = [];
       var myData:Note[]=res['data']['details'];
@@ -48,12 +55,14 @@ export class AddLablesComponent implements OnInit {
     
     if(!this.notes.some((result)=>result.label==document.getElementById('label1').innerHTML)){
      
-      this.httpservice.httpPostLable('noteLabels',
+      this.noteService.postNoteLabels(
         {
           "label": document.getElementById('label1').innerHTML,
           "isDeleted": false,
           "userId": this.id
-        }, this.token).subscribe(
+        })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
           (data) => {
           },
           error => {
@@ -72,11 +81,18 @@ export class AddLablesComponent implements OnInit {
    *   @description : Api call for Deleting Label 
    **/
     deleteLabel(id){
-      this.httpservice.labelDeleteService("noteLabels/"+id+"/deleteNoteLabel").subscribe(res=>{
+      this.noteService.deleteData(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res=>{
         this.getLabel()
       },error=>{
 
       })
 
+    }
+    ngOnDestroy() {
+      this.destroy$.next(true);
+      // Now let's also unsubscribe from the subject itself:
+      this.destroy$.unsubscribe();
     }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, OnDestroy } from '@angular/core';
 import{ HttpService} from '../../core/service/http/http.service'
 import { GeneralService } from 'src/app/core/service/data/general.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -8,7 +10,8 @@ import { GeneralService } from 'src/app/core/service/data/general.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   notes=[];
   search;
   @Input() notesArray
@@ -31,7 +34,9 @@ export class SearchComponent implements OnInit {
     {
       this.notes=[];
       var token=localStorage.getItem('token');
-     this.httpService.httpGetNotes('notes/getNotesList',token).subscribe(result =>{
+     this.httpService.httpGetNotes('notes/getNotesList',token)
+     .pipe(takeUntil(this.destroy$))
+     .subscribe(result =>{
      
        
         result['data'].data.forEach(element => {
@@ -43,6 +48,11 @@ export class SearchComponent implements OnInit {
        });
   
     }
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

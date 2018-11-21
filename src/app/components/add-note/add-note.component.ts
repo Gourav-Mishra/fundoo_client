@@ -1,8 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import{ Note} from '../../core/model/note'
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
     selector: 'app-add-note',
@@ -11,8 +15,8 @@ import{ Note} from '../../core/model/note'
   })
 
   
-  export class AddNoteComponent implements OnInit 
-  {
+  export class AddNoteComponent implements OnInit,OnDestroy {
+    destroy$: Subject<boolean> = new Subject<boolean>();
     
      hide: boolean = true;
      labelId = [];
@@ -35,7 +39,7 @@ import{ Note} from '../../core/model/note'
       'id' : ''
     }
     constructor(private  httpService:HttpService, private snackBar: MatSnackBar,
-        private router: Router) { }
+        private router: Router, private noteService:NoteService) { }
         public todayDate= new Date();
         public  tomorrowDate=new Date()
          
@@ -73,7 +77,9 @@ import{ Note} from '../../core/model/note'
 
 
         if (this.checked == false) {
-            this.httpService.httpAddNote('notes/addNotes', body, this.accessToken).subscribe(response => {
+            this.noteService.addNotes(body)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(response => {
                
                 this.onNewEntryAdded.emit({});
                 this.labelName = [];
@@ -104,14 +110,14 @@ import{ Note} from '../../core/model/note'
                 this.status = "open"
             }
             
-            this.httpService.httpAddNote('notes/addNotes', {
+            this.noteService.addNotes( {
                 'title': document.getElementById('titleId').innerHTML,
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
                 "color":this.color,
                 'reminder':this.remindervar,
-            }, this.accessToken).subscribe(response => {
+            } ).subscribe(response => {
                 this.onNewEntryAdded.emit({});
                 this.dataArrayCheck = [];
                 this.labelName = [];
@@ -166,7 +172,8 @@ import{ Note} from '../../core/model/note'
     getAllLabels() {
         let newArray = [];
         
-        this.httpService.httpGetNote('noteLabels/getNoteLabelList', this.accessToken)
+        this.noteService.getLabels()
+        .pipe(takeUntil(this.destroy$))
             .subscribe(data => {
                 for (var i = 0; i < data['data']['details'].length; i++) {
                     if (data['data']['details'][i].isDeleted == false) {
@@ -232,6 +239,11 @@ import{ Note} from '../../core/model/note'
         this.reminderArr.pop();
         this.remindervar='';
 
+    }
+    ngOnDestroy() {
+      this.destroy$.next(true);
+      // Now let's also unsubscribe from the subject itself:
+      this.destroy$.unsubscribe();
     }
 }
 

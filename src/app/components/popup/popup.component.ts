@@ -1,7 +1,10 @@
-import { Component, OnInit,Inject, Output,EventEmitter, Input } from '@angular/core';
+import { Component, OnInit,Inject, Output,EventEmitter, Input, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { NoteCollectionComponent } from '../note-collection/note-collection.component';
 import { HttpService } from "../../core/service/http/http.service";
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -18,7 +21,8 @@ export interface DialogData {
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss']
 })
-export class PopupComponent implements OnInit {
+export class PopupComponent implements OnInit,OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
   token=localStorage.getItem('token');
   checklist=false
   tempArray=[];
@@ -35,7 +39,8 @@ export class PopupComponent implements OnInit {
   newData: { "itemName": string; "status": string; };
   constructor(
     public dialogRef: MatDialogRef<NoteCollectionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,private httpService: HttpService) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,private httpService: HttpService,
+    public noteService:NoteService) {}
     
      
   ngOnInit() {
@@ -48,7 +53,9 @@ export class PopupComponent implements OnInit {
      "title": document.getElementById('title1').innerHTML,
      "description": document.getElementById('description1').innerHTML
    }
-   this.httpService.httpUpdateNote('notes/updateNotes',this.body,this.token).subscribe(result=>{
+   this.noteService.updateNotes(this.body)
+   .pipe(takeUntil(this.destroy$))
+   .subscribe(result=>{
      this.dialogRef.close();
      this.updateNow.emit();
    })
@@ -59,7 +66,9 @@ export class PopupComponent implements OnInit {
       "status":this.modifiedCheckList.status
   }
   var url = "/notes/" +this.data['id']+ "/checklist/" + this.modifiedCheckList.id + "/update";
-  this.httpService.postNotes(url, JSON.stringify(apiData), this.token).subscribe(response => {
+  this.httpService.postNotes(url, JSON.stringify(apiData), this.token)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(response => {
     this.dialogRef.close();
 
   },
@@ -89,6 +98,7 @@ addList(event){
 var url = "/notes/" + this.data['id'] + "/checklist/add";
 
   this.httpService.postNotes(url, this.newData, this.token)
+  .pipe(takeUntil(this.destroy$))
   .subscribe(response => {
     console.log(response);
     this.newList=null;
@@ -132,13 +142,20 @@ var url = "/notes/" + this.data['id'] + "/checklist/add";
   removeCheckList(){
     var url = "/notes/" + this.data['id']+ "/checklist/" + this.removedList.id + "/remove";
 
-    this.httpService.postNotes(url,null,this.token).subscribe((response)=>{
+    this.httpService.postNotes(url,null,this.token)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((response)=>{
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
           this.tempArray.splice(i,1)
         }
       }
     })
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
   
   

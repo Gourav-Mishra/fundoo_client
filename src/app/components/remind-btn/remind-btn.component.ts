@@ -1,8 +1,11 @@
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service';
 import { MatDatepickerModule, throwMatDialogContentAlreadyAttachedError } from "@angular/material";
 import { FormControl } from '@angular/forms';
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -10,13 +13,16 @@ import { FormControl } from '@angular/forms';
   templateUrl: './remind-btn.component.html',
   styleUrls: ['./remind-btn.component.scss']
 })
-export class RemindBtnComponent implements OnInit {
+export class RemindBtnComponent implements OnInit,OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   @Input() noteDetails;
   @Output() todayEvent = new EventEmitter();
   @Output() newEvent= new EventEmitter();
 
   constructor(private httpService: HttpService,
+    private noteService:NoteService
+
   ) { }
   public message;
   public today;
@@ -42,7 +48,9 @@ export class RemindBtnComponent implements OnInit {
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 8, 0, 0, 0)
     }
     this.newEvent.emit(this.body['reminder']);
-    this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+    this.noteService.postAddUpdateReminderNotes( this.body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((result) => {
      
       this.todayEvent.emit()
     })
@@ -52,10 +60,13 @@ export class RemindBtnComponent implements OnInit {
 
     this.body = {
       "noteIdList": [this.noteDetails.id],
-      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 
+                   (this.currentDate.getDate() + 1), 8, 0, 0, 0)
     }
     this.newEvent.emit(this.body['reminder']);
-    this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+    this.noteService.postAddUpdateReminderNotes( this.body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((result) => {
       
       this.todayEvent.emit()
     })
@@ -65,10 +76,13 @@ export class RemindBtnComponent implements OnInit {
 
     this.body = {
       "noteIdList": [this.noteDetails.id],
-      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+                  (this.currentDate.getDate() + 7), 8, 0, 0, 0)
     }
     this.newEvent.emit(this.body['reminder']);
-    this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+    this.noteService.postAddUpdateReminderNotes( this.body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((result) => {
      
       this.todayEvent.emit()
     })
@@ -98,7 +112,9 @@ export class RemindBtnComponent implements OnInit {
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
       }
       this.newEvent.emit(this.body['reminder']);
-      this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+      this.noteService.postAddUpdateReminderNotes( this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
        
         this.todayEvent.emit()
       })
@@ -107,7 +123,9 @@ export class RemindBtnComponent implements OnInit {
         "noteIdList": [this.noteDetails.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
       }
-      this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+      this.noteService.postAddUpdateReminderNotes( this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
         
         this.todayEvent.emit()
       })
@@ -116,7 +134,9 @@ export class RemindBtnComponent implements OnInit {
         "noteIdList": [this.noteDetails.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
       }
-      this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+      this.noteService.postAddUpdateReminderNotes( this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
        
         this.todayEvent.emit()
       })
@@ -125,7 +145,9 @@ export class RemindBtnComponent implements OnInit {
         "noteIdList": [this.noteDetails.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0)
       }
-      this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+      this.noteService.postAddUpdateReminderNotes( this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
         
         this.todayEvent.emit()
       })
@@ -142,7 +164,9 @@ export class RemindBtnComponent implements OnInit {
           "noteIdList": [this.noteDetails.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
         }
-        this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+        this.noteService.postAddUpdateReminderNotes( this.body)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((result) => {
           
           this.todayEvent.emit()
         })
@@ -151,13 +175,20 @@ export class RemindBtnComponent implements OnInit {
           "noteIdList": [this.noteDetails.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0)
         }
-        this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
+        this.noteService.postAddUpdateReminderNotes( this.body)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((result) => {
         
           this.todayEvent.emit()
         })
       }
       
     }
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

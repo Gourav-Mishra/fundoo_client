@@ -1,44 +1,53 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { HttpService} from '../../core/service/http/http.service'
-import {GeneralService } from "../../core/service/data/general.service"
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
+import { HttpService } from '../../core/service/http/http.service'
+import { GeneralService } from "../../core/service/data/general.service"
 import { EventEmitter } from 'protractor';
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reminders',
   templateUrl: './reminders.component.html',
   styleUrls: ['./reminders.component.scss']
 })
-export class RemindersComponent implements OnInit {
- 
+export class RemindersComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor( private httpService:HttpService,
-    private data: GeneralService ) { }
+
+  constructor(private httpService: HttpService,
+    private data: GeneralService,
+    private noteService: NoteService) { }
 
   ngOnInit() {
     this.getReminderList();
     this.viewCard()
   }
-  public reminder=[]
+  public reminder = []
 
-  getReminderList(){
-       var token=localStorage.getItem('token');
-       this.httpService.httpGetNote( 'notes/getReminderNotesList',token).subscribe(result=>{
-         
-         // for(var i=0;i<result['data'].data.length;i++){
-          this.reminder= result['data'].data;
-          this.reminder.sort(this.compare)
-        // }
-         console.log(this.reminder);
+  getReminderList() {
+    var token = localStorage.getItem('token');
+    this.noteService.getReminders()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
 
-       })
+
+      this.reminder = result['data'].data;
+      this.reminder.sort(this.compare)
+
+
+
+    })
   }
   toggle = false;
   viewCard() {
-    this.data.currentMessage.subscribe(message => {
+    this.data.currentMessage
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(message => {
       this.toggle = message;
     })
   }
-  compare(a,b) {
+  compare(a, b) {
     a = new Date(a.reminder);
     b = new Date(b.reminder);
     if (a < b)
@@ -46,6 +55,11 @@ export class RemindersComponent implements OnInit {
     if (a > b)
       return 1;
     return 0;
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

@@ -12,7 +12,7 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { SearchComponent } from './components/search/search.component';
 import { LableWindowComponent } from './components/lable-window/lable-window.component';
-import {AaaddComponent } from './components/aaadd/aaadd.component'
+
 
 
 
@@ -39,7 +39,7 @@ const routes:Routes=
        { path:'trash',component : TrashComponent},
        {path : 'search',component : SearchComponent},
        {path : 'label/:params',component: LableWindowComponent},
-       {path : 'aaadd', component :AaaddComponent },
+      
       
   ]
 }

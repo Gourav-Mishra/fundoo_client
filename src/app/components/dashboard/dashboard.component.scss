@@ -220,3 +220,8 @@ vertical-align:middle;
   display: block;
   -webkit-tap-highlight-color: transparent;
 }
+.mat-nav-list a.active {
+  background:rgba(121, 110, 110, 0.445);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  }

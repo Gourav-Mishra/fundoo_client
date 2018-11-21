@@ -1,12 +1,11 @@
 // import { TestBed } from '@angular/core/testing';
+// import { InterceptorService } from './interceptor.service';
 
-// import { NoteService } from './note.service';
-
-// describe('NoteService', () => {
+// describe('InterceptorService', () => {
 //   beforeEach(() => TestBed.configureTestingModule({}));
 
 //   it('should be created', () => {
-//     const service: NoteService = TestBed.get(NoteService);
+//     const service: InterceptorService = TestBed.get(InterceptorService);
 //     expect(service).toBeTruthy();
 //   });
 // });

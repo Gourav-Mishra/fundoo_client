@@ -99,11 +99,11 @@
     <mat-nav-list>
 
 
-      <a  (click)="nameChange('Fundoo')"mat-list-item routerLink="/home/notes">
+      <a  (click)="nameChange('Fundoo')"mat-list-item routerLink="/home/notes" routerLinkActive="active">
         <img class="img"  src="../../../assets/images/notes.svg">
         <span class="space_sidebar"> Notes</span> 
       </a>
-      <a  (click)="nameChange('Reminders')" mat-list-item routerLink="/home/reminders">
+      <a  (click)="nameChange('Reminders')" mat-list-item routerLink="/home/reminders" routerLinkActive="active">
         <img class="img" src="../../../assets/images/reminders.svg">
         <span class="space_sidebar"> Reminders</span>
       </a>
@@ -113,8 +113,8 @@
           <p class="labels">Labels<p> 
         </span>
         <span>
-          <a (click)="nameChange(labels.label)"  mat-list-item *ngFor="let labels of notes" (click)="lablelist(labels)">
-            <mat-icon>label_outline</mat-icon><span class="child-links" >{{labels.label}}</span>
+          <a (click)="nameChange(labels.label)"  mat-list-item *ngFor="let labels of notes" (click)="lablelist(labels)" routerLinkActive="active" >
+            <mat-icon>label_outline</mat-icon><span  class="child-links" >{{labels.label}}</span>
           </a>
         </span>
 
@@ -124,11 +124,11 @@
 
       </div>
       <hr>
-      <a (click)="nameChange('Archive')" mat-list-item routerLink="/home/archive"><img class="img" 
+      <a (click)="nameChange('Archive')" mat-list-item routerLink="/home/archive" routerLinkActive="active"><img class="img" 
          src="../../../assets/images/archive.svg">
         <span class="space_sidebar">
           Archive</span></a>
-      <a (click)="nameChange('Trash')" mat-list-item routerLink="/home/trash"><img class="img"
+      <a (click)="nameChange('Trash')" mat-list-item routerLink="/home/trash" routerLinkActive="active"><img class="img"
           src="../../../assets/images/trash.svg">
         <span class="space_sidebar">Trash</span></a>
       <hr>

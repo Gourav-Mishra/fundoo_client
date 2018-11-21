@@ -1,16 +1,21 @@
-import { Component, OnInit,Input,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter, OnDestroy} from '@angular/core';
 import { HttpService } from 'src/app/core/service/http/http.service';
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-change-color',
   templateUrl: './change-color.component.html',
   styleUrls: ['./change-color.component.scss']
 })
-export class ChangeColorComponent implements OnInit {
+export class ChangeColorComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   @Output() notescolor=new EventEmitter();
   @Output() mainBoxColor=new EventEmitter();
 
-  constructor(private httpService:HttpService) { }
+  constructor(private httpService:HttpService,
+    private noteService:NoteService) { }
   @Input() noteDetails;
   body={
     "color":"",
@@ -73,7 +78,9 @@ if (this.noteDetails.id != '') {
     "color":color,
     "noteIdList":[this.noteDetails.id]
   }
-  this.httpService.httpColorNote('notes/changesColorNotes',this.body,token).subscribe(result=>{
+  this.noteService.postChangeColor(this.body)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(result=>{
     this.notescolor.emit(color);
        
   },error=>{
@@ -85,5 +92,9 @@ if (this.noteDetails.id != '') {
    
 
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

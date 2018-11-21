@@ -1,5 +1,8 @@
-import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input,Output,EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/service/http/http.service'
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -8,7 +11,8 @@ import { HttpService } from '../../core/service/http/http.service'
   styleUrls: ['./trash.component.scss']
 })
 
-export class TrashComponent implements OnInit {
+export class TrashComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   records = {};
   notes = [];
   delete={};
@@ -22,7 +26,8 @@ export class TrashComponent implements OnInit {
 
  
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService,
+    private noteService:NoteService) { }
   @Input() notesArray;
   @Output() deleteForever=new EventEmitter()
   ngOnInit() {
@@ -33,18 +38,20 @@ export class TrashComponent implements OnInit {
   getDelNotes() {
 
     var token = localStorage.getItem('token');
-    this.records = this.httpService.httpGetNotes('notes/getTrashNotesList', token).subscribe(result => {
-      console.log(result);
+    this.records = this.noteService.getTrashNoteList()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+      
       for (var i = result['data']['data'].length - 1; i > 0; i--) {
 
         this.notes.push(result['data']['data'][i])
 
       }
-      console.log(this.notes);
+     
       this.deleteForever.emit()
 
     }, error => {
-      console.log(error);
+ 
     });
   }
   delForever(id){
@@ -53,12 +60,14 @@ export class TrashComponent implements OnInit {
       "noteIdList": [id]
       }
        var token=localStorage.getItem('token');
-    this.httpService.httpPostdeleteForever('notes/deleteForeverNotes',this.body,token).subscribe(res=>{
-      console.log(res);
+    this.noteService.postDeleteForeverNotes(this.body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res=>{
+    
       this.deleteForever.emit();
       
     },error=>{
-       console.log(error);
+   
 
     })
 
@@ -69,16 +78,22 @@ export class TrashComponent implements OnInit {
         "noteIdList":[id]
       }
       var token=localStorage.getItem('token');
-      this.httpService.httpPostdeleteForever('notes/trashNotes',this.body,token).subscribe(res=>{
-        console.log(res);
+      this.noteService.postTrashNotes(this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res=>{
+   
         this.deleteForever.emit();
 
       },error=>{
-        console.log('error')
+     
       })
 
     }
-    
+    ngOnDestroy() {
+      this.destroy$.next(true);
+      // Now let's also unsubscribe from the subject itself:
+      this.destroy$.unsubscribe();
+    }
     
   }
 

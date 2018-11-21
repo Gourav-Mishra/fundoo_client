@@ -27,10 +27,11 @@
     </div>
 
     <div *ngFor="let lables of notes| newSearch: query" fxLayoutAlign="space-between center">
-      <mat-checkbox (click)="$event.stopPropagation(); addLabel(lables.id)" [checked]="selectCheck(lables)">{{lables.label}}
+      <mat-checkbox (click)="$event.stopPropagation(); addLabel(lables.id)" >{{lables.label}}
 
       </mat-checkbox>
 
 
     </div>
   </mat-menu>
+  <!-- [checked]="selectCheck(lables)" -->

@@ -1,16 +1,22 @@
-import { Component, OnInit,Input,EventEmitter,Output } from '@angular/core';
+import { Component, OnInit,Input,EventEmitter,Output, OnDestroy } from '@angular/core';
 import { HttpService} from '../../core/service/http/http.service'
 import { MatSnackBar} from '@angular/material'
+import { NoteService } from 'src/app/core/service/note-service/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-archive-btn',
   templateUrl: './archive-btn.component.html',
   styleUrls: ['./archive-btn.component.scss']
 })
-export class ArchiveBtnComponent implements OnInit {
+export class ArchiveBtnComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   
   token = localStorage.getItem('token')
-  constructor(private httpService: HttpService, public matSnackBar:MatSnackBar) { }
+  constructor(private httpService: HttpService,
+     public matSnackBar:MatSnackBar,
+     public noteService:NoteService) { }
   @Input() archive;
   @Output() archiveNote = new EventEmitter
   @Output() unArchiveNote = new EventEmitter<boolean>()
@@ -26,7 +32,9 @@ export class ArchiveBtnComponent implements OnInit {
       "isArchived": true,
       "noteIdList": [this.archive.id]
     }
-    this.httpService.httpPostArchive('notes/archiveNotes', this.body, this.token).subscribe(res => {
+    this.noteService.postArchiveNotes( this.body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
       console.log(res);
       this.matSnackBar.open("Archived",'Successfully',{
         duration: 3000,
@@ -45,7 +53,9 @@ export class ArchiveBtnComponent implements OnInit {
       "isArchived": false,
       "noteIdList": [this.archive.id]
     }
-    this.httpService.httpPostArchive('notes/archiveNotes', this.body, this.token).subscribe(res => {
+    this.noteService.postArchiveNotes( this.body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
       this.matSnackBar.open("UnArchived",'Successfully',{
         duration: 3000,
       });
@@ -54,5 +64,10 @@ export class ArchiveBtnComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
   }

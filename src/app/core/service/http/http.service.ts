@@ -21,45 +21,45 @@ export class HttpService {
      var httpOption={
        headers: new HttpHeaders({
          'Content-Type': 'application/x-www-form-urlencoded',
-         'Authorization':token
+        //  'Authorization':token
          
        })
      };
      return this.http.post(environment.baseUrl+"/"+nexturl,this.getFormUrlEncoded(body),httpOption)
    }
-   getFormUrlEncoded(toConvert){
-     const formBody=[];
-     for(const property in toConvert){
-       const encodeKey=encodeURIComponent(property);
-       const encodeValue=encodeURIComponent(toConvert[property]);
-       formBody.push(encodeKey+'='+encodeValue);
-     }
-     return formBody.join('&');
-   }
-   httpAddNote(nexturl,body,token){
-     var httpOptions={
-       headers:new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization':token
-       })
-     };
-     return this.http.post(environment.baseUrl+"/"+nexturl,this.getFormUrlEncoded(body),httpOptions)
-   }
-   httpGetNotes(nexturl,token){
-    var httpOptions={
-    headers:new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization':token
-     })
-   };
-   return this.http.get(environment.baseUrl+"/"+nexturl,httpOptions)
+  //  getFormUrlEncoded(toConvert){
+  //    const formBody=[];
+  //    for(const property in toConvert){
+  //      const encodeKey=encodeURIComponent(property);
+  //      const encodeValue=encodeURIComponent(toConvert[property]);
+  //      formBody.push(encodeKey+'='+encodeValue);
+  //    }
+  //    return formBody.join('&');
+  //  }
+  //  httpAddNote(nexturl,body,token){
+  //    var httpOptions={
+  //      headers:new HttpHeaders({
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Authorization':token
+  //      })
+  //    };
+  //    return this.http.post(environment.baseUrl+"/"+nexturl,this.getFormUrlEncoded(body),httpOptions)
+  //  }
+  //  httpGetNotes(nexturl,token){
+  //   var httpOptions={
+  //   headers:new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //     'Authorization':token
+  //    })
+  //  };
+  //  return this.http.get(environment.baseUrl+"/"+nexturl,httpOptions)
    
-  }
+  // }
   httpColorNote(nexturl,body,token){
     var httpOptions={
       headers:new HttpHeaders({
        'Content-Type': 'application/json',
-       'Authorization':token
+      //  'Authorization':token
       })
     };
     return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
@@ -68,7 +68,7 @@ export class HttpService {
     var httpOptions={
     headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization':token
+    // 'Authorization':token
     })
     
     };
@@ -78,7 +78,7 @@ export class HttpService {
       var httpOptions={
       headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization':token
+      // 'Authorization':token
       })
       
       };
@@ -88,7 +88,7 @@ export class HttpService {
         var httpOptions={
           headers:new HttpHeaders({
            'Content-Type': 'application/x-www-form-urlencoded',
-           'Authorization':token
+          //  'Authorization':token
           })
         };
         return this.http.post(environment.baseUrl+"/"+nexturl,this.getFormUrlEncoded(body),httpOptions)
@@ -98,7 +98,7 @@ export class HttpService {
         var httpOptions={
           headers:new HttpHeaders({
            'Content-Type': 'application/json',
-           'Authorization':token
+          //  'Authorization':token
           })
         };
         return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
@@ -108,7 +108,7 @@ export class HttpService {
         var httpOptions={
           headers:new HttpHeaders({
            
-           'Authorization':token
+          //  'Authorization':token
           })
         };
         return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
@@ -117,7 +117,7 @@ export class HttpService {
         var httpOptions={
           headers:new HttpHeaders({
            'Content-Type': 'application/json',
-           'Authorization':token
+          //  'Authorization':token
           })
         };
         return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
@@ -127,7 +127,7 @@ export class HttpService {
         var httpOptions={
           headers:new HttpHeaders({
            'Content-Type': 'application/json',
-           'Authorization':token
+          //  'Authorization':token
           })
         };
         return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
@@ -138,7 +138,7 @@ export class HttpService {
         var httpheaders = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': token
+            // 'Authorization': token
           })
         };
         return this.http.get(environment.baseUrl+ "/" + name,httpheaders);
@@ -153,7 +153,7 @@ export class HttpService {
           var httpheaders = {
             headers: new HttpHeaders({
               'Content-Type': 'application/json',
-              'Authorization': token
+              // 'Authorization': token
             })
           };
         
@@ -165,7 +165,7 @@ export class HttpService {
           var httpOptions={
             headers:new HttpHeaders({
              
-             'Authorization':token
+            //  'Authorization':token
             })
           };
           return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
@@ -176,28 +176,112 @@ export class HttpService {
           var httpOptions={
             headers:new HttpHeaders({
              
-             'Authorization':token
+            //  'Authorization':token
             })
           };
           return this.http.get(environment.baseUrl+"/"+nexturl,httpOptions)
         }
-        public httpGetNote(name,token){
-          var httpheaders = {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Authorization': token
-            })
-          };
-          return this.http.get(environment.baseUrl+ "/" + name,httpheaders);
-        }
+        // public httpGetNote(name,token){
+        //   var httpheaders = {
+        //     headers: new HttpHeaders({
+        //       'Content-Type': 'application/json',
+        //       'Authorization': token
+        //     })
+        //   };
+        //   return this.http.get(environment.baseUrl+ "/" + name,httpheaders);
+        // }
         httpPostArchive(nexturl,body,token){
           var httpOptions={
             headers:new HttpHeaders({
              'Content-Type': 'application/json',
-             'Authorization':token
+            //  'Authorization':token
             })
           };
           return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
         }
-        
+
+
+
+//---------------------------------------------------------------
+
+
+public httpPosts(url,body,token){
+  
+  var httpAuthOptions2 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': token
+    })
+  };
+  return this.http.post(url, body, httpAuthOptions2);/**passing the input & calling the  getFormUrlEncoded()*/
 }
+public httpget(url,token){
+  var httpAuthOptions3 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': token
+    })
+
+  };
+  return this.http.get(url, httpAuthOptions3);
+
+}
+public httpGetNote(name,token){
+  var httpheaders = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': token
+    })
+  };
+  return this.http.get(environment.baseUrl+ "/" + name,httpheaders);
+}
+httpGetNotes(nexturl,token){
+  var httpOptions={
+  headers:new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    // 'Authorization':token
+   })
+ };
+ return this.http.get(environment.baseUrl+"/"+nexturl,httpOptions)
+ 
+}
+httpAddNote(nexturl,body,token){
+  var httpOptions={
+    headers:new HttpHeaders({
+     'Content-Type': 'application/x-www-form-urlencoded',
+    //  'Authorization':token
+    })
+  };
+  return this.http.post(nexturl,this.getFormUrlEncoded(body),httpOptions)
+}
+
+public httppostpassword(url,body,token){
+var httpAuthOptions1 = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    // 'Authorization': token
+  })
+};
+return this.http.post(url, this.getFormUrlEncoded(body),httpAuthOptions1)/**passing the input & calling the  getFormUrlEncoded()*/
+}
+getFormUrlEncoded(toConvert) {/**a method that encodes the token*/
+  const formBody = [];
+  for (const property in toConvert) {
+    const encodedKey = encodeURIComponent(property);
+    const encodedValue = encodeURIComponent(toConvert[property]);
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
+  return formBody.join('&');
+}
+public httpImage(url,body,token){
+var http={
+  headers:new HttpHeaders({
+   
+  //  'Authorization':token
+  })
+};
+return this.http.post(url,body,http)
+}
+}
+        
+
