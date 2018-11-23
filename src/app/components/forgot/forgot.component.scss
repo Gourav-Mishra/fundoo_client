@@ -1,3 +1,24 @@
+@import '../../../scss/mixing';
+
+// using mixins from common scss folder
+.blue{
+  @include title(#4285F4,40px,500);
+  @include  font('Times New Roman')
+
+  }
+  .red{
+    @include title(#EA4335,32px,100);
+    @include  font('Times New Roman')
+  }
+  .green{
+    @include title(#FBBC05,32px,300);
+    @include  font('Times New Roman')
+  }
+  .yellow{
+    @include title(#34A853,30px,400);
+    @include  font('Times New Roman')
+  }
+
 .container2 {
     display: flex;
     flex-direction: column;
@@ -6,7 +27,6 @@
     border-radius: 15px;
    
   }
-  
   .container1 > * {
     width: 100%;
   }
@@ -14,20 +34,7 @@
 .button-row a {
   margin-right: 8px;
   margin-top:5px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  
 }
-  .blue{
-    color: #4285F4;
-    font-size: 40px;
-    }
-    .red{
-    color: #EA4335;
-    font-size: 28px;
-    }
-    .green{
-    color: #FBBC05;
-    font-size: 28px;
-    }
-    .yellow{
-    color:#34A853;
-    font-size:28px;
-    }
+  

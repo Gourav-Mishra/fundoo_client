@@ -1,3 +1,28 @@
+@import'../../../scss/mixing';    //using mixins for the common title
+
+
+
+.blue{    
+  @include title(#4285F4,50px,bold);
+  @include  font('cursive')
+
+  }
+  .red{
+    @include title(#EA4335,28px,bold);
+    @include  font('Times New Roman')
+  }
+  .green{
+    @include title(#FBBC05,22px,bold);
+    @include  font('Times New Roman')
+  }
+  .yellow{
+    @include title(#34A853,22px,bold);
+    @include  font('Times New Roman')
+  }
+
+
+
+
 .container {
     display: flex;
     flex-direction: column;
@@ -15,33 +40,14 @@
 .button-row a {
   margin-right: 8px;
 }
-.blue{
-    color: #4285F4;
-    font-size: 50px;
-    font-family: cursive;
-    }
-    .red{
-    color: rgb(235, 75, 61);
-    font-size: 28px;
-    }
-    
-    .green{
-    color: #FBBC05;
-    font-size: 22px;
-  
-    }
-    .yellow{
-    color:#34A853;
-    font-size: 22px;
-    }
+
     .red2{
       color: rgb(253, 21, 0);
-      font-size: 38px;
+      @include font-size(38px);
       }
     .logo{
         margin: 8px;
-        font-family: sans-serif;
-        
+        @include font(sans-serif);
         font-weight: bold;
         padding: 0px;
       }
@@ -51,7 +57,7 @@
       .services{
         color: red;
         font-family: 'Courier New', Courier, monospace;
-        font-size: 24px;
+        @include font-size(24px);
       }
       .card1{
         display: flex;
@@ -66,10 +72,10 @@
       
       .signin{
           color:blue;
-          font-size: 20px;
-      }
+          @include font-size(20px);
+              }
       .signup_button{
-          font-size: 20px;
+        @include font-size(20px);
       }
       .fname{
       width:45%
@@ -81,7 +87,7 @@
         width:50%
       }
       .notselected{
-background-color:black;
+           background-color:black;
 
       }
       .selected{

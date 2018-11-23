@@ -25,18 +25,18 @@ export class NoteCollectionComponent implements OnInit,OnDestroy {
   @Output() deleteParent = new EventEmitter();
   @Output() changeColorAgain = new EventEmitter();
   @Output() unArchiveParent = new EventEmitter();
+  @Output() addEntry = new EventEmitter();
+  
 
   constructor(private httpService: HttpService, public dialog: MatDialog,
     private data: GeneralService,
     public noteService: NoteService
   ) { }
-// public todayDate=new Date();
-// public tomorrowDate=new Date();
+
 
   ngOnInit() {
     this.viewCard();
-    // this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
-
+    
   }
   toggle = false;
   viewCard() {
@@ -76,10 +76,10 @@ export class NoteCollectionComponent implements OnInit,OnDestroy {
     this.noteService.postAddLabelnotesRemove(id ,labelId , this.labelBody)
     .pipe(takeUntil(this.destroy$))
     .subscribe(result => {
-      console.log(result);
+      
       this.deleteParent.emit();
     }, error => {
-      console.log(error);
+    
 
     })
 
@@ -123,7 +123,7 @@ checkBox(checkList, note) {
   else {
     checkList.status = "open"
   }
-  console.log(checkList);
+
   this.modifiedCheckList = checkList;
   this.updatelist(note.id);
 }
@@ -155,6 +155,12 @@ ngOnDestroy() {
   this.destroy$.next(true);
   // Now let's also unsubscribe from the subject itself:
   this.destroy$.unsubscribe();
+}
+addColaboratorEvent(event){
+  if(event){
+    this.addEntry.emit({})
+  }
+
 }
 }
 

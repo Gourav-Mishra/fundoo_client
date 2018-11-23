@@ -199,6 +199,19 @@ export class HttpService {
           };
           return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
         }
+        httpPostUserList(nexturl,body){
+          var httpOptions={
+            headers:new HttpHeaders({
+              'Content-Type': 'application/json'
+
+          })
+          
+        }
+        return this.http.post(environment.baseUrl+"/"+nexturl,body,httpOptions)
+       
+      
+      }
+      
 
 
 

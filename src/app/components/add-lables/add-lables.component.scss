@@ -1,9 +1,13 @@
 [contentEditable=true]:empty:before{
     content: attr(data-text)
     }
+$opacity:0.6;
+$card-width:400px;
+
+
 .card{
    
-    width:400px;
+    width:$card-width;
    
 }
 ::ng-deep.mat-dialog-container {
@@ -29,9 +33,9 @@
     overflow: hidden !important;
 }
 .delete_icon{
-    opacity: .6;
+    opacity:$opacity;
 
 }
 .edit_icon{
-    opacity:0.6;
+    opacity:$opacity;
 }

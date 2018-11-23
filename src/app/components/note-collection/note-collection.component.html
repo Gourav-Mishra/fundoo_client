@@ -116,7 +116,7 @@
     <mat-card-actions>
       <div fxLayoutAlign="space-evenly end" class="icon">
         <app-remind-btn [noteDetails]="notes" (todayEvent)=addReminder($event)></app-remind-btn>
-        <app-collaborator></app-collaborator>
+        <app-collaborator [noteDetails]="notes" (addCollaborator)=addColaboratorEvent($event)  ></app-collaborator>
         <app-change-color [noteDetails]="notes" 
                           (notescolor)="changeColor($event)"></app-change-color>
         <app-add-image></app-add-image>

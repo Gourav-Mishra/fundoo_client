@@ -1,0 +1,57 @@
+<mat-card class="main_card">
+ 
+  <div class="header_collaborator">Collaborator </div>
+  <hr>
+  
+  <div>
+    <!--Owner Detail-->
+    <div fxLayout="row">
+      <button class="profilebutton2"  [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"> </button>
+      <div class="name_email" fxLayout="column">
+        <span> {{firstName | titlecase}}{{lastName | titlecase}}<i>(owner)</i></span>
+        <span> {{email}}</span>
+      </div>
+    </div>
+     <!--Owner Detail-->
+     <!--collavborator adding details-->
+     <div fxLayout="row" *ngFor="let data of collaborator">
+      <button mat-mini-fab color="basic" class="profilebutton2 person_button" > {{data.firstName | slice:0:1}}</button>
+      <div class="name_email " fxLayout="column">
+           <span> {{data.firstName | titlecase}}{{data.lastName | titlecase}}</span>
+           <mat-icon (click)=deleteCollaborator()>close</mat-icon>
+           <span> {{data.email}}</span>
+      </div>
+    </div>
+      <!--collavborator adding details-->
+
+    <div class="user_area" fxLayout="row">
+      <span>  
+        <button mat-mini-fab color="basic" class="person_button">
+          <mat-icon>person_add</mat-icon>
+       </button>
+      </span>
+       <span>
+          <input class="searchbar"   placeholder="person or email to share with" (keyup)="searchUser()"
+          [(ngModel)]="body.searchWord" [matMenuTriggerFor]="appMenu">
+      </span>
+      <mat-menu #appMenu="matMenu">
+        <div *ngFor="let item of userList" (click)=addColaborator(item)>
+           {{item.email}}
+        </div>
+
+      </mat-menu>
+    </div>
+    
+  </div>
+  <mat-card-footer fxLayoutAlign="end end">
+   <div class="button" fxLayoutGap="10px">
+      <button  mat-raised-button color="primary"> CLOSE</button>
+      <!-- <button class="end_buttons" mat-raised-button color="primary"> save </button> -->
+  </div>
+  </mat-card-footer>
+ 
+
+</mat-card>
+
+
+ 

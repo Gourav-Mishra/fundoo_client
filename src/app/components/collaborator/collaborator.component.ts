@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { MatDialog} from '@angular/material';
+import { from } from 'rxjs';
+import { CollaboratorspopComponent } from '../collaboratorspop/collaboratorspop.component';
+
+
 
 @Component({
   selector: 'app-collaborator',
@@ -6,10 +11,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collaborator.component.scss']
 })
 export class CollaboratorComponent implements OnInit {
-
-  constructor() { }
+  @Input() noteDetails;
+  @Output() addColaboratorEvent=new EventEmitter();
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
+  collaborator(): void {
+    const dialogRef = this.dialog.open(CollaboratorspopComponent, {
+      width: '680px',
+     
+      panelClass: 'myapp-no-padding-dialog',
+      data:this.noteDetails
 
+    });
+    dialogRef.afterClosed().subscribe(result => {
+     this.addColaboratorEvent.emit({});
+    });
 }
+  }
+  

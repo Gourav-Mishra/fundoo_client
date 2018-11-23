@@ -72,6 +72,8 @@ import { PinComponent } from './components/pin/pin.component';
 
 import { MessagingService } from './core/service/messaging/messaging.service';
 
+import { CollaboratorspopComponent } from './components/collaboratorspop/collaboratorspop.component';
+
 
 
 
@@ -109,6 +111,10 @@ import { MessagingService } from './core/service/messaging/messaging.service';
     CroppedImageComponent,
    
     PinComponent,
+   
+   
+   
+    CollaboratorspopComponent,
    
 
 
@@ -159,6 +165,6 @@ import { MessagingService } from './core/service/messaging/messaging.service';
       multi: true
     }],
   bootstrap: [AppComponent],
-  entryComponents:[PopupComponent,AddLablesComponent, CroppedImageComponent, DashboardComponent]
+  entryComponents:[PopupComponent,AddLablesComponent, CroppedImageComponent, DashboardComponent,CollaboratorspopComponent]
 })
 export class AppModule { }

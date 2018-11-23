@@ -1,3 +1,7 @@
+// scss variables userd throughout the component
+$border-radius:100%;
+$background-color:#fb0;
+//-----------------------------
 @media only screen and (min-width: 200px) and  (max-width: 600px){
   .searchbar {
   
@@ -15,27 +19,21 @@
   
   }
 }
-
-
 .sidenav-container {
   height: 100%;
-  
-  
-  
- 
-  
 }
 
 .sidenav {
-  background:rgb(230, 230, 215);
+  $background-color:rgb(230, 230, 215);
+  background:$background-color;
   width: 300px;
-padding-top:60px;
+  padding-top:60px;
   position: fixed;
   
 }
 .toolbar{
  
-  background-color: #fb0;
+  background-color:$background-color;
   height:70px;
   position:fixed;
   z-index: 2
@@ -71,10 +69,12 @@ padding-top:60px;
 
 }
 input:focus{
-  background-color:white
+  $background-color:white;
+  background-color:$background-color;
 }
 .menu{
-  background-color: rgb(255, 255, 255);
+  $background-color:rgb(255, 255, 255);
+  background-color:$background-color;
 
 
 }
@@ -101,7 +101,8 @@ input:focus{
   display: block;
   height: 100%;
   overflow: auto;
-  background: rgb(255, 255, 255)
+  $background-color:rgb(255, 255, 255);
+  background-color:$background-color;
 }
 .line{
   opacity:1;
@@ -111,9 +112,8 @@ input:focus{
 height:150px
 }
 .mat-menu-content {
-  /* padding-top: 1px;
-  padding-bottom: 1px; */
-  background:rgb(255, 255, 255);
+  $background-color:rgb(255, 255, 255);
+  background-color:$background-color;
 }
 .labels{
   padding-left: 20px;
@@ -132,10 +132,11 @@ height:150px
 }
 .signup_avatar{
 
-  border-radius: 100%;
+  border-radius: $border-radius;
   width:10px;
   height:10px;
-  background:rgba(152, 235, 19, 0.808);
+  $background-color:rgba(152, 235, 19, 0.808);
+  background:$background-color;
   font-size: 15px;
 }
 .child-links{
@@ -187,28 +188,19 @@ vertical-align:middle;
  
 }
 .change_btn{
+  $background-color:rgba(0, 0, 0, 0.171);
+  background-color:$background-color;
   margin-top:30px;
-  background-color:rgba(0, 0, 0, 0.171);
   height:20px;
   width:75px;
-  border-bottom-left-radius: 100%;
-  border-bottom-right-radius: 100%;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
   z-index: 1;
   margin-top:70px;
   
   
   font-size:10px;
-  /* background: rgba(0, 0, 0, 0.7);
-    bottom: 0;
-    color: #fff;
-    font-size: 9px;
-    font-weight: bold;
-    left: 0;
-    line-height: 9px;
-    position: absolute;
-    padding: 7px 0;
-    text-align: center;
-    width: 96px; */
+
 
 }
 .name{
@@ -221,7 +213,8 @@ vertical-align:middle;
   -webkit-tap-highlight-color: transparent;
 }
 .mat-nav-list a.active {
-  background:rgba(121, 110, 110, 0.445);
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  $background-color:rgba(121, 110, 110, 0.445);
+  background:$background-color;
+  border-top-right-radius: 25% $border-radius;
+  border-bottom-right-radius: 25% $border-radius;
   }

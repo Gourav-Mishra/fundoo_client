@@ -1,0 +1,16 @@
+
+@mixin title($fundoo-font,$font-size,$bold) { // take a color,font as a parameter
+    color: $fundoo-font;
+    font-size: $font-size;;
+    font-weight: $bold;
+    
+  }
+  @mixin  font($title-font){
+      font-family: $title-font;
+  }
+  @mixin font-size($font-size) {
+      font-size:$font-size;
+  }
+  @mixin font-weight($font-weight){
+      font-weight: $font-weight;
+  }

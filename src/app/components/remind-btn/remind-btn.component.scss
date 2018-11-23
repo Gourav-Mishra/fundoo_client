@@ -1,3 +1,4 @@
+@import '../../../scss/mixing';
 
 ::ng-deep.mat-menu-content:not(:empty) {
     padding-top: 8px;
@@ -12,13 +13,14 @@
 
 }
 .reminderMenu{
-    font-family: Arial, Helvetica, sans-serif;
+    @include font(Arial);
+    // font-family: Arial, Helvetica, sans-serif;
     
    
 }
 .reminderText{
     padding-left:17px;
-    font-size:18px;
+    @include font-size(18px);
 }
 .input_choosetime{
     width: 100%;

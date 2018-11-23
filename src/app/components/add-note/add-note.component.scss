@@ -1,17 +1,23 @@
+$width-100:100%;
+$height-30px:30px;
+$box-shadow:0 10px 10px rgba(0,0,0,0.20);
+$margin-50:50px;
+$font-family:'Roboto Slab','Times New Roman',serif;
+
 @media only screen and (min-width: 200px) and  (max-width: 600px){
     .pannel{
-        width:100%;
-        margin-top:50px;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.20);
+        width:$width-100;
+        margin-top:$margin-50;
+        box-shadow: $box-shadow;
         border-radius: 5px;
-        height:30px;
+        height:$height-30px;
         flex:auto;
     }
     .pannel2{
         border-radius: 15px;
-        margin-top:50px;
-        width:100%;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.20);
+        margin-top:$margin-50;
+        width:$width-100;
+        box-shadow: $box-shadow;
         flex:auto;
     
     }
@@ -19,18 +25,18 @@
 @media only screen and (min-width: 601px) and  (max-width: 3000px){
     .pannel{
     
-        margin-top:50px;
+        margin-top:$margin-50;
         width:34em;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.20);
+        box-shadow:$box-shadow;
         border-radius: 5px;
-        height:30px;
+        height:$height-30px;
         flex:auto;
     }
     .pannel2{
         border-radius: 15px;
-        margin-top:50px;
+        margin-top:$margin-50;
         width:34em;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.20);
+        box-shadow:$box-shadow;
         flex:auto;
     
     }
@@ -45,7 +51,7 @@
 .area_content{
     width:100%;
     
-    font-family: 'Roboto Slab','Times New Roman',serif;
+    font-family: $font-family;
     font-size: 20px;
     outline: none;
    
@@ -63,30 +69,25 @@
     outline: none;
     border: none;
     width: 0px;
-    height: 30px;
+    height: $height-30px;
   }
   .fundoo33 {
     margin-left: 0px;
     opacity: 0.5;
   }
-//   .colorCard {
-//     left: 331px;
-//     margin-top: -692px;
-//     width: 144px;
-//     padding: 3px;
-//   }
+
   .colorDiv{
     margin-bottom:5px;
     display:flex;
   }
   .pannel3{
     width:100%;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.20);
+    box-shadow: $box-shadow;
 
   }
   .area_content2 {
     width: 100%;
-    font-family: 'Roboto Slab','Times New Roman',serif;
+    font-family: $font-family;
     font-size: 20px;
     outline: none;
     border:transparent;
