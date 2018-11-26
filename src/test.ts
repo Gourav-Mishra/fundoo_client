@@ -8,7 +8,7 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 
 declare const require: any;
-// declare const _karma_: any;
+declare const _karma_: any;
 // _karma_.loaded=function(){}
 
 // First, initialize the Angular testing environment.

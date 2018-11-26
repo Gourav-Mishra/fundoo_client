@@ -22,23 +22,23 @@
 //   });
 //   it('form should be invalid', async(()=>{
 //     component.regform.controls['email'].setValue('');
-//     component.regform.controls['email'].setValue('@bb.AA.com');
-//     component.regform.controls['email'].setValue('AA.23@bbb.com');
+//     component.regform.controls['email'].setValue('@bbas.AAas.com');
+//     component.regform.controls['email'].setValue('AAas.23@basbb.com');
 
 //     component.regform.controls['password'].setValue('');
-//     component.regform.controls['password'].setValue('ak');
-//     component.regform.controls['password'].setValue('aaaaaaaaaaaaaaaaaaa');
-
+//     component.regform.controls['password'].setValue('rohan');
+//     component.regform.controls['password'].setValue('asdsadasd');
+// s
 //     component.regform.controls['firstName'].setValue('');
-//     component.regform.controls['firstName'].setValue('ku');
+//     component.regform.controls['firstName'].setValue('kasdsadasdu');
 
 //     component.regform.controls['lastName'].setValue('');
-//     component.regform.controls['lastName'].setValue('hj');
+//     component.regform.controls['lastName'].setValue('hasdasdj');
 
 //     component.regform.controls['phoneNumber'].setValue('');
-//     component.regform.controls['phoneNumber'].setValue('@678');
-//     component.regform.controls['phoneNumber'].setValue('67@#8999999');
-//     component.regform.controls['phoneNumber'].setValue('111111');
+//     component.regform.controls['phoneNumber'].setValue('@6585478');
+//     component.regform.controls['phoneNumber'].setValue('67@#896565654646599999');
+//     component.regform.controls['phoneNumber'].setValue('1156465646541111');
 //     component.regform.controls['phoneNumber'].setValue('78987678@#');
     
 //     component.regform.controls['service'].setValue('');
@@ -51,8 +51,8 @@
 //   component.regform.controls['lastName'].setValue('kumar');
 //   component.regform.controls['lastName'].setValue('fyuyfyufuyfuyfuyfyufjfuyfuyfuyduyfuyfu');
 //   component.regform.controls['email'].setValue('aass@bbbb.com');
-//   component.regform.controls['password'].setValue('akm123');
-//   component.regform.controls['phoneNumber'].setValue('11111111111');
+//   component.regform.controls['password'].setValue('sadasd');
+//   component.regform.controls['phoneNumber'].setValue('55525665255');
 //   expect(component.regform.valid).toBeTruthy();
 // }))
 // it('form invalid when empty', () => {

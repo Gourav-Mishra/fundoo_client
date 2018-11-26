@@ -1,25 +1,25 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { SlidePanelComponent } from './slide-panel.component';
+import { SlidePanelComponent } from './slide-panel.component';
 
-// describe('SlidePanelComponent', () => {
-//   let component: SlidePanelComponent;
-//   let fixture: ComponentFixture<SlidePanelComponent>;
+describe('SlidePanelComponent', () => {
+  let component: SlidePanelComponent;
+  let fixture: ComponentFixture<SlidePanelComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ SlidePanelComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ SlidePanelComponent ]
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(SlidePanelComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SlidePanelComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
