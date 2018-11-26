@@ -9,7 +9,7 @@ $font: 'Roboto',arial,sans-serif;
                  border: none;
                  border-radius: 50%;
                  background: transparent;
-                    outline:none;
+                 outline:none;
    
                      }
         .name_email{
@@ -28,7 +28,7 @@ $font: 'Roboto',arial,sans-serif;
                  margin-right:20px
         }
         .person_button{
-                 margin-top:10px;
+                 margin-top:5px;
                  border: solid;
                  border-width:thin;
         }
@@ -47,7 +47,27 @@ $font: 'Roboto',arial,sans-serif;
           .user_area{
               margin-top:20px;
           }
-  
+          .name_email{
+              padding-left:15px;
+              float: right;
+          }
+          .close_icon{
+              float: right;
+          }
+          .bold{
+              font-weight:700;
+          }
+          .content_scroller{
+              overflow:auto;
+              min-height:50px;
+             max-height:200px;
+              
+          }
+       
 }
+::ng-deep.cdk-overlay-pane{
+    max-width:90vw;
+}
+
   
   

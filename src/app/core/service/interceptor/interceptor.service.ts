@@ -39,8 +39,6 @@ export class InterceptService  implements HttpInterceptor {
 	            
 	          }
 	        }, error => {
-	   			
-
 	        })
 	      )
 

@@ -94,5 +94,9 @@ export class NoteService {
     let url = this.url + "notes/trashNotes";
     return this.service.httpPosts(url, body, this.token);
   }
+  removeCollaborator(userId,noteId){
+    let url=this.url+ "/notes/"+noteId+"/removeCollaboratorsnotes/"+userId;
+    return this.service.delete(url);
+  }
 
 }

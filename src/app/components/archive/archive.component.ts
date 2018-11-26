@@ -40,7 +40,6 @@ import { takeUntil } from 'rxjs/operators';
         this.array.push(res['data']['data'][i]);
       }
     }, error => {
-      console.log(error);
     })
   }
      /**

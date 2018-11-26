@@ -44,7 +44,6 @@ export class SearchComponent implements OnInit,OnDestroy {
         });
          console.log("notes=>>",this.notes);
        },error=>{
-         console.log(error);
        });
   
     }

@@ -4,6 +4,7 @@ import { HttpService} from '../../core/service/http/http.service'
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DialogData } from '../popup/popup.component';
+import { NoteService } from 'src/app/core/service/note-service/note.service';
 
 @Component({
   selector: 'app-collaboratorspop',
@@ -13,15 +14,16 @@ import { DialogData } from '../popup/popup.component';
 export class CollaboratorspopComponent implements OnInit {
 
   constructor(private httpService: HttpService,
+    public noteService:NoteService,
     public dialogRef: MatDialogRef<CollaboratorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
    ) { }
  public firstName;
  public email;
  public lastName;
- public image2=localStorage.getItem('imageUrl');
- public img=environment.profieUrl+this.image2; 
+
  private collaborator=[]
+ 
   ngOnInit() {
     this.firstName = localStorage.getItem('firstName');
     this.email = localStorage.getItem('email');
@@ -40,6 +42,8 @@ export class CollaboratorspopComponent implements OnInit {
     })
 
   }
+  public owner=this.data['user'];
+  private img=environment.profieUrl+this.owner.imageUrl
   addColaborator(userDetails){
   
     let collaboratorBody={
@@ -54,10 +58,23 @@ this.collaborator.push(userDetails)
 
   
 }
-deleteCollaborator(){
+// deleteCollaborator(userId){
+
+//   this.noteService.removeCollaborator(userId,this.data['id']).subscribe(res=>{
+//     }) 
+// }
+deleteCollaborator(userId){
+ 
+  this.noteService.removeCollaborator(userId,this.data['id'])
   
-}
-
-
-
+  .subscribe(result=>{
+  for(let i=0; i<this.collaborator.length;i++){
+    if(userId==this.collaborator[i].userId){
+      this.collaborator.splice(i,1);
+    }
+  }
+  },
+  error=>{
+  });
+  }
 }

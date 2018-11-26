@@ -51,7 +51,6 @@ export class TrashComponent implements OnInit,OnDestroy {
       this.deleteForever.emit()
 
     }, error => {
- 
     });
   }
   delForever(id){
@@ -67,8 +66,6 @@ export class TrashComponent implements OnInit,OnDestroy {
       this.deleteForever.emit();
       
     },error=>{
-   
-
     })
 
     } 
@@ -85,7 +82,6 @@ export class TrashComponent implements OnInit,OnDestroy {
         this.deleteForever.emit();
 
       },error=>{
-     
       })
 
     }

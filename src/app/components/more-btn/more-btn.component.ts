@@ -57,7 +57,6 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
         console.log(this.notes);
      
     }, error => {
-      console.log(error);
     })
     console.log("noteslabels=>",this.notes);
     
@@ -78,11 +77,9 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
     this.snackBar.open('Note deleted', 'Successfully', {
     duration: 3000,
     });
-    console.log(this.noteDetails.id);
     this.notesDelete.emit();
     
     }, error => {
-    console.log(error);
     this.snackBar.open('Note deletion', 'Failed', {
     duration: 3000,
     });
@@ -99,8 +96,6 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
         console.log(result);
         this.notesDelete.emit();
       },error=>{
-        console.log(error);
-        
       })
     }
     ngOnDestroy() {

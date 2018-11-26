@@ -38,7 +38,6 @@ export class LableWindowComponent implements OnInit,OnDestroy {
         }
       },
         error => {
-          
         })
   }
      /**   

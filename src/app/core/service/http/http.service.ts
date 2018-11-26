@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment'
   providedIn: 'root'
 })
 export class HttpService {
+  public http0;
 
 
 
@@ -21,8 +22,6 @@ export class HttpService {
      var httpOption={
        headers: new HttpHeaders({
          'Content-Type': 'application/x-www-form-urlencoded',
-        //  'Authorization':token
-         
        })
      };
      return this.http.post(environment.baseUrl+"/"+nexturl,this.getFormUrlEncoded(body),httpOption)
@@ -294,6 +293,14 @@ var http={
   })
 };
 return this.http.post(url,body,http)
+}
+delete(url){
+  this.http0 = {
+    headers:new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
+  return this.http.delete(url,this.http0);
 }
 }
         

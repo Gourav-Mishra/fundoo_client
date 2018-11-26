@@ -1,25 +1,25 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { RemindersComponent } from './reminders.component';
+import { RemindersComponent } from './reminders.component';
 
-// describe('RemindersComponent', () => {
-//   let component: RemindersComponent;
-//   let fixture: ComponentFixture<RemindersComponent>;
+describe('RemindersComponent', () => {
+  let component: RemindersComponent;
+  let fixture: ComponentFixture<RemindersComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ RemindersComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ RemindersComponent ]
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(RemindersComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(RemindersComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

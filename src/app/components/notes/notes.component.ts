@@ -54,7 +54,6 @@ if(event){
      
        console.log(this.notes);
      },error=>{
-       console.log(error);
      });
 
   }
@@ -73,7 +72,6 @@ if(event){
     
        
      },error=>{
-       
      });
 
   }

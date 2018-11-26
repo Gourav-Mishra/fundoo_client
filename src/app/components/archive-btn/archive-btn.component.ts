@@ -41,7 +41,6 @@ export class ArchiveBtnComponent implements OnInit,OnDestroy {
       });
       this.archiveNote.emit();
     }, error => {
-      console.log(error);
     })
   }
      /**  
@@ -62,7 +61,6 @@ export class ArchiveBtnComponent implements OnInit,OnDestroy {
       console.log(res);
       this.unArchiveNote.emit(true);
     }, error => {
-      console.log(error);
     })
   }
   ngOnDestroy() {

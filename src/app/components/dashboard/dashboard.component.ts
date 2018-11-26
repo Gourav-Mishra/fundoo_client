@@ -103,7 +103,6 @@ export class DashboardComponent implements OnDestroy {
         
 
     }, error => {
-      console.log(error);
     })
   }
      /**   
@@ -136,7 +135,6 @@ export class DashboardComponent implements OnDestroy {
         console.log(this.notes);
         
     }, error => {
-     
     })
     this.data.currentMsg
     .pipe(takeUntil(this.destroy$))

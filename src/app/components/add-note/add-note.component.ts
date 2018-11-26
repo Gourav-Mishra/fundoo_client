@@ -50,8 +50,7 @@ import { takeUntil } from 'rxjs/operators';
     changeMainBoxColor(event){
              if(event){
               this.parentColor=event;
-             
-              
+
              }
             }
     toggle() {
@@ -67,7 +66,7 @@ import { takeUntil } from 'rxjs/operators';
             'labelIdList': JSON.stringify(this.labelId),
             'checklist': '',
             'isPined': 'false',
-            "color":this.color,
+            "color":this.parentColor,
             'reminder':'',
     
         }

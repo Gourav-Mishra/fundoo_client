@@ -17,12 +17,13 @@ export class CollaboratorComponent implements OnInit {
 
   ngOnInit() {
   }
+
   collaborator(): void {
     const dialogRef = this.dialog.open(CollaboratorspopComponent, {
-      width: '680px',
-     
+      // width: '680px',
       panelClass: 'myapp-no-padding-dialog',
-      data:this.noteDetails
+      data:this.noteDetails,
+      
 
     });
     dialogRef.afterClosed().subscribe(result => {

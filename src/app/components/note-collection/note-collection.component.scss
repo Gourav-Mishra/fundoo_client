@@ -1,12 +1,5 @@
-// .cardgrid{
 
-// min-height:150px;
-// min-width:260px;
-// max-width:260px;
-// word-break: break-all;
-// }
 .cardlist{
-    // width:100%;
     min-height:150px;
    width:900px;
    
@@ -206,4 +199,10 @@ font-size:27px
     }
     .pin{
         float:right;
+    }
+    .reminder_btn{
+        background-color: rgba(100, 27, 14, 0.459)
+    }
+    .space_between{
+        padding-right:5px;
     }

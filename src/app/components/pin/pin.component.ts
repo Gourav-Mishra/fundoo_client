@@ -38,10 +38,7 @@ export class PinComponent implements OnInit,OnDestroy {
       this.emitter.emit({
       })
   })
-  error=>
-  {
-    
-  }
+  error=> {}
 }
 
 Unpin()
@@ -57,10 +54,7 @@ this.noteService.postPinUnpin(this.body)
     this.emitter.emit({
     })
 })
-error=>
-{
-  
-}
+error=> {}
 }
 ngOnDestroy() {
   this.destroy$.next(true);

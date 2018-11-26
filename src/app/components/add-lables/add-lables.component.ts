@@ -40,8 +40,6 @@ export class AddLablesComponent implements OnInit,OnDestroy{
           this.notes.push(myData[i])
         }
       }
-    }, error => {
-      
     })
   }
   id = localStorage.getItem('userId')
@@ -86,7 +84,6 @@ export class AddLablesComponent implements OnInit,OnDestroy{
       .subscribe(res=>{
         this.getLabel()
       },error=>{
-
       })
 
     }

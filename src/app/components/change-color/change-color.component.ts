@@ -84,7 +84,6 @@ if (this.noteDetails.id != '') {
     this.notescolor.emit(color);
        
   },error=>{
-    
   })
 }
    

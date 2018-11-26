@@ -13,9 +13,9 @@
   <img class="img" src="../../../assets/images/search.svg" fxHide.xs="false">
 
   <!--    ----        Search bar  starts      -----  -->
-  <div class="search_flex" routerLink="/home/search" fxShow.xs=false fxShow.sm=true
+  <div class="search_flex" routerLink="/home/search" fxShow.xs="true" fxShow.sm=true
        fxShow.md=true fxShow.lg=true fxShow.gt-xs=true>
-    <input class="searchbar" matTooltip="Search Bar" aria-label="Search" 
+       <input class="searchbar" matTooltip="Search Bar" aria-label="Search" 
            autocomplete="off" placeholder="Search" value=""
            name="q" role="combobox" type="text" aria-hidden="false" 
            [(ngModel)]="body.data" (keyup)="onKeyUp($event)">
@@ -28,12 +28,14 @@
     <div fxLayoutAlign="end end" fxLayout="row wrap">
       
       <span class="left_icons" fxLayoutAlign="end end">
+        <div fx>
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav"  >
           <mat-icon matTooltip="switch to list" (click)="listView()" *ngIf="view==0" 
                     aria-label="Side nav toggle icon" >view_stream</mat-icon>
           <mat-icon matTooltip="switch to grid" (click)="gridView()" *ngIf="view==1"
                     aria-label="Side nav toggle icon" >view_module</mat-icon>
         </button>
+      </div>
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
           <mat-icon matTooltip="Notifications" aria-label="Side nav toggle icon">
                 notifications

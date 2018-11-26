@@ -49,7 +49,6 @@ export class CroppedImageComponent implements OnInit,OnDestroy {
       this.dialogRef1.close();
       this.service.cropImage(true);
     }, error => {
-
     })
 
   }
