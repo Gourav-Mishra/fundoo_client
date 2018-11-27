@@ -5,6 +5,7 @@ import { HttpService } from "../../core/service/http/http.service";
 import { NoteService } from 'src/app/core/service/note-service/note.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CollaboratorspopComponent } from '../collaboratorspop/collaboratorspop.component';
 
 
 
@@ -36,9 +37,14 @@ export class PopupComponent implements OnInit,OnDestroy{
   newList: string;
   adding= false;
   addCheck=false;
+  public bgcolor=this.data['color']
   newData: { "itemName": string; "status": string; };
+  dialog: any;
   constructor(
     public dialogRef: MatDialogRef<NoteCollectionComponent>,
+    public dialogPop:MatDialog,
+    
+
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private httpService: HttpService,
     public noteService:NoteService) {}
     
@@ -111,7 +117,9 @@ var url = "/notes/" + this.data['id'] + "/checklist/add";
 }
 }
 
- 
+changeMainBoxColor(color){
+  this.bgcolor=color;
+}
 
   checkBox(checkList, note) {
 
@@ -152,11 +160,22 @@ var url = "/notes/" + this.data['id'] + "/checklist/add";
       }
     })
   }
+  openCollaboratorUpdate(note):void{
+    this.dialogPop.open(CollaboratorspopComponent, {
+      maxWidth:'auto',
+      width:'500px',
+      data: note
+  
+    });
+  }
+
+
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
+ 
   
   
 }

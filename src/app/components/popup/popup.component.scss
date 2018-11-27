@@ -1,8 +1,13 @@
+.width{
+    width: 100%;
+}
+
+
 .card{
     box-shadow: 0 5px 5px rgba(0,0,0,0.20);
-    min-height: 90px;
-    min-width:370px;
-    max-width:250px;
+    min-height: auto;
+    // min-width:370px;
+    max-width:auto;
     overflow: auto;
     }
     /* .card:hover{
@@ -10,7 +15,7 @@
     } */
     .icon{
         padding-bottom: 0px;
-        opacity:.375;
+        // opacity:.375;
     }
     .icon:hover{
         opacity: 1;
@@ -64,12 +69,12 @@
         margin-left: 0px;
         opacity: 0.5;
       }
-      .colorCard {
-        left: 331px;
-        margin-top: -692px;
-        width: 144px;
-        padding: 3px;
-      }
+    //   .colorCard {
+    //     left: 331px;
+    //     margin-top: -692px;
+    //     width: 144px;
+    //     padding: 3px;
+    //   }
       .colorDiv{
         margin-bottom:5px;
         display:flex;
@@ -83,8 +88,8 @@
         box-sizing: border-box;
         overflow: hidden;
         outline: 0;
-        width: 93%;
-        height: 79%;
+        width: 100%;
+        height: 100%;
         min-height: inherit;
         max-height: inherit;
         overflow-y: auto;
@@ -100,4 +105,7 @@
     }
     .chip{
         margin-top:5px
+    }
+    .reminder_btn{
+        background-color:rgba(58, 13, 163, 0.836)
     }

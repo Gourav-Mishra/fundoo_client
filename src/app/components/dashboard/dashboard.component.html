@@ -1,19 +1,21 @@
 <!------fundoo Dashboard(Toolbar & sidebar )------->
-<mat-toolbar class="toolbar">
-  <div>
+<mat-toolbar class="toolbar" fxLayoutAlign="space-between center" >
+  <div class="start_2"  fxLayoutAlign="space-between center">
+  <div fxFlex=25>
     <button type="button" aria-label="Toggle sidenav" mat-icon-button 
             (click)="drawer.toggle()">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
   </div>
-  <div>
-    <span class="title">{{changeName}} </span>
+  <div fxFlex=75>
+    <div  class="title1">{{changeName}} </div>
 
   </div>
+</div>
   <img class="img" src="../../../assets/images/search.svg" fxHide.xs="false">
 
   <!--    ----        Search bar  starts      -----  -->
-  <div class="search_flex" routerLink="/home/search" fxShow.xs="true" fxShow.sm=true
+  <div class="search_flex" routerLink="/home/search" fxShow.xs="false" fxShow.sm=true
        fxShow.md=true fxShow.lg=true fxShow.gt-xs=true>
        <input class="searchbar" matTooltip="Search Bar" aria-label="Search" 
            autocomplete="off" placeholder="Search" value=""
@@ -23,55 +25,60 @@
   <!--    ----        Search bar  Ends        -----        -->
 
 
-  <!--    ----        side bar starts       -----        -->
-  <div>
-    <div fxLayoutAlign="end end" fxLayout="row wrap">
-      
-      <span class="left_icons" fxLayoutAlign="end end">
-        <div fx>
+  <!--    ----        view(list/grid) starts       -----        -->
+  
+   
+    <div fxShow.xs="false">
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav"  >
           <mat-icon matTooltip="switch to list" (click)="listView()" *ngIf="view==0" 
                     aria-label="Side nav toggle icon" >view_stream</mat-icon>
           <mat-icon matTooltip="switch to grid" (click)="gridView()" *ngIf="view==1"
                     aria-label="Side nav toggle icon" >view_module</mat-icon>
         </button>
-      </div>
+     </div>
+ <!--    ----    view(list/grid) ends       -----     -->
+  
+  
+ 
+  <div  fxLayoutAlign="end">
         <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
           <mat-icon matTooltip="Notifications" aria-label="Side nav toggle icon">
                 notifications
           </mat-icon>
         </button>
-        <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav">
+        <button  mat-icon-button aria-label="Toggle sidenav">
 
           <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-
+          
             <div fxLayoutAlign="row wrap">
               <div fxFlex=40>
-                <button class="profilebutton" (click)="$event.stopPropagation()" 
-                        [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-                  (click)="selectFile.click()" matTooltip="fundoo Account" 
-                  mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">
-                  <div class="change_btn"><p class="change_btn">change</p></div>
+                <button class="profilebutton" (click)="$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                  (click)="selectFile.click()" matTooltip="fundoo Account" mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">
+                  <div class="change_btn">
+                    <p class="change_btn">change</p>
+                  </div>
                 </button>
-                
-                <input style="display:none" (click)="$event.stopPropagation()" class="image" type="file" 
-                        (change)="onFileUpload($event)" #selectFile>
+          
+                <input style="display:none" (click)="$event.stopPropagation()" class="image" type="file" (change)="onFileUpload($event)"
+                  #selectFile>
               </div>
               <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left">
-              <div>
+                <div>
                   <div class="name">{{firstName | titlecase}}
-                       {{lastName | titlecase}}</div>
-                  <div><p class="mail"> {{email}}</p></div>
-              </div>
-               </mat-content>
-                
-
+                    {{lastName | titlecase}}</div>
+                  <div>
+                    <p class="mail"> {{email}}</p>
+                  </div>
+                </div>
+              </mat-content>
+          
+          
             </div><br>
-            
-
+          
+          
             <mat-content class="contentstyle">{{raw_data}}</mat-content>
             <hr>
-
+          
             <button class="signup_button" mat-raised-button color="primary" style="float:right" (click)="logout()">Logout</button>
           </mat-menu>
 
@@ -84,9 +91,9 @@
           </button>
           <!------------ profile-pic upload   ends  ---------------->
         </button>
-      </span>
+      
     </div>
-  </div>
+   
 
 
 
@@ -115,7 +122,7 @@
           <p class="labels">Labels<p> 
         </span>
         <span>
-          <a (click)="nameChange(labels.label)"  mat-list-item *ngFor="let labels of notes" (click)="lablelist(labels)" routerLinkActive="active" >
+          <a (click)="nameChange(labels.label)"  mat-list-item *ngFor="let labels of notes" routerLink="/home/label/{{labels.label}}"  routerLinkActive="active" >
             <mat-icon>label_outline</mat-icon><span  class="child-links" >{{labels.label}}</span>
           </a>
         </span>

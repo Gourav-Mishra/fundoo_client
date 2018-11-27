@@ -22,7 +22,7 @@ import { MatInputModule,
 import { FormsModule,
          ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -73,6 +73,8 @@ import { PinComponent } from './components/pin/pin.component';
 import { MessagingService } from './core/service/messaging/messaging.service';
 
 import { CollaboratorspopComponent } from './components/collaboratorspop/collaboratorspop.component';
+import { errorHandler } from '@angular/platform-browser/src/browser';
+import { ErrorHandlerService } from './core/service/error-handler/error-handler.service';
 
 
 
@@ -163,7 +165,12 @@ import { CollaboratorspopComponent } from './components/collaboratorspop/collabo
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
       multi: true
-    }],
+    },
+    {
+      provide: ErrorHandler,
+      useClass: ErrorHandlerService,
+      }],
+
   bootstrap: [AppComponent],
   entryComponents:[PopupComponent,AddLablesComponent, CroppedImageComponent, DashboardComponent,CollaboratorspopComponent]
 })

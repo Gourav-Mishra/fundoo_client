@@ -20,9 +20,11 @@ export class CollaboratorComponent implements OnInit {
 
   collaborator(): void {
     const dialogRef = this.dialog.open(CollaboratorspopComponent, {
-      // width: '680px',
+      width: '600px',
+      maxWidth: 'auto',
       panelClass: 'myapp-no-padding-dialog',
       data:this.noteDetails,
+      // width:'100vw'
       
 
     });

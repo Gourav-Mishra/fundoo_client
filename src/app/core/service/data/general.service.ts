@@ -19,6 +19,8 @@ currentMessage1 = this.messageSource1.asObservable();
 private searchDataSource= new BehaviorSubject(this.search)
 searchDataSearch= this.searchDataSource.asObservable();
 
+private errorSource= new BehaviorSubject(this.search)
+currentError= this.errorSource.asObservable();
   constructor() { }
 
   searchData(search:string)
@@ -32,5 +34,8 @@ searchDataSearch= this.searchDataSource.asObservable();
     }
   cropImage(message: boolean) {
       this.messageSource1.next(message);
+      }
+      errorChangeMessage(message:string){
+        this.errorSource.next(message);
       }
 }

@@ -1,5 +1,5 @@
 <div fxLayout="column">
-<app-add-note fxFlex="10" (onNewEntryAdded)='addNewEntry($event)'></app-add-note>
+<app-add-note  (onNewEntryAdded)='addNewEntry($event)'></app-add-note>
 <div *ngIf='notesPin.length!==0'>
 <div class="pinned" >pinned</div>
 
@@ -21,4 +21,5 @@
                      (deleteParent)="addNewEntry($event)" 
                      (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
+</div>
 </div>

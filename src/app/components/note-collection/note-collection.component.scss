@@ -10,23 +10,51 @@
             word-break: break-all;
             
         }
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
+        }
     }
     @media only screen and (min-width: 361px) and  (max-width: 375px){
         .cardgrid{
             width:320px !important;
             word-break: break-all;
         }
-    }
-    @media only screen and (min-width: 375px) and  (max-width: 411px){
-        .cardgrid{
-            width:330px !important;
-            word-break: break-all;
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
         }
     }
-    @media only screen and (min-width: 412px) and  (max-width: 425px){
+    @media only screen and (min-width: 375px) and  (max-width: 401px){
+        .cardgrid{
+            width:352px !important;
+            word-break: break-all;
+        }
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
+        }
+    }
+    @media only screen and (min-width: 401px) and  (max-width: 404px){
+        .cardgrid{
+            width:352px !important;
+            word-break: break-all;
+        }
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
+        }
+    }
+
+
+    @media only screen and (min-width: 405px) and  (max-width: 425px){
         .cardgrid{
             width:335px !important;
             word-break: break-all;
+        }
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
         }
     }
     @media only screen and (min-width: 426px) and  (max-width: 440px){
@@ -34,11 +62,19 @@
             width:340px !important;
             word-break: break-all;
         }
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
+        }
     }
     @media only screen and (min-width: 441px) and  (max-width: 461px){
         .cardgrid{
             width:345px !important;
             word-break: break-all;
+        }
+        .icon{
+            padding-bottom: 0px;
+            opacity:1;
         }
     }
     @media only screen and (min-width: 462px) and  (max-width: 482px){
@@ -95,8 +131,15 @@
                }
            .cardlist{
                 min-height:150px;
-            width:600px;
+                 width:600px;
                    }
+            .icon{
+             padding-bottom: 0px;
+             opacity:0.0;
+                           }
+            .icon:hover{
+             opacity: 1;
+                           }        
     }
     @media only screen and (min-width: 1001px) and  (max-width: 1500px){
         .cardgrid{
@@ -105,10 +148,17 @@
           max-width:270px;
           word-break: break-all;
                }
-           .cardlist{
+        .cardlist{
                 min-height:150px;
             width:50em;
                    }
+        .icon{
+         padding-bottom: 0px;
+         opacity:0.0;
+                }
+        .icon:hover{
+         opacity: 1;
+                }           
     }
     @media only screen and (min-width: 1501px) and  (max-width: 2500px){
         .cardgrid{
@@ -121,6 +171,13 @@
                 min-height:150px;
             width:65em;
                    }
+                   .icon{
+                    padding-bottom: 0px;
+                    opacity:0.0;
+                }
+                .icon:hover{
+                    opacity: 1;
+                }
     }
     .span{
         text-overflow: ellipsis;
@@ -138,13 +195,7 @@
     
     
 }
-.icon{
-    padding-bottom: 0px;
-    opacity:0;
-}
-.icon:hover{
-    opacity: 1;
-}
+
 .title{
 text-transform:capitalize;
 font-weight: 500;

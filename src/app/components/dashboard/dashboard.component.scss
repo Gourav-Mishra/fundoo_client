@@ -2,23 +2,27 @@
 $border-radius:100%;
 $background-color:#fb0;
 //-----------------------------
-@media only screen and (min-width: 200px) and  (max-width: 600px){
-  .searchbar {
+// @media only screen and (min-width: 200px) and  (max-width: 600px){
+//   .searchbar {
   
 
-    background: rgba(80, 80, 79, 0.096);
-    border: none;
-    font: normal 20px Roboto,sans-serif;
-    font-variant-ligatures: none;
-    height: 50px;
-    outline: none;
-    padding: 11px 16px 11px 16px;
-    box-sizing: border-box;
-    width:1em;
+//     background: rgba(80, 80, 79, 0.096);
+//     border: none;
+//     font: normal 20px Roboto,sans-serif;
+//     font-variant-ligatures: none;
+//     height: 50px;
+//     outline: none;
+//     padding: 11px 16px 11px 16px;
+//     box-sizing: border-box;
+//     width:1em;
    
   
-  }
-}
+//   }
+// }
+
+@import "../../../scss/mixing.scss"; 
+
+
 .sidenav-container {
   height: 100%;
 }
@@ -43,13 +47,25 @@ $background-color:#fb0;
   display:flex;
   
 }
-.title{
+.title1{
   font-size: 28px;
-  padding-left:10px;
-  padding-right:10px; 
+  // padding-left:10px;
+  // padding-right:10px; 
   font-family: 'Product Sans',Arial,sans-serif;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+    
 
 }
+.start_2{
+  width: 250px!important;
+ 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+}
+
 .spacer{
   padding-right: 50px
 }
@@ -218,3 +234,4 @@ vertical-align:middle;
   border-top-right-radius: 25% $border-radius;
   border-bottom-right-radius: 25% $border-radius;
   }
+

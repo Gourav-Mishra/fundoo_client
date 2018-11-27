@@ -25,6 +25,8 @@ export class DashboardComponent implements OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   notes = [];
   public ProfilePath: any;
+  private show: boolean = false;
+  private clickOnSearch: boolean = true;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -63,7 +65,7 @@ export class DashboardComponent implements OnDestroy {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddLablesComponent, {
       width: '440px',
-      height: '250px',
+     maxWidth:'auto',
       data: {}
 
     });
@@ -203,10 +205,10 @@ image={};
   loadImageFailed() {
     
   }
-  lablelist(labels) {
-    let labelName = labels.label;
-    this.router.navigate(['home/label/' + labelName])
-  }
+  // lablelist(labels) {
+  //   let labelName = labels.label;
+  //   this.router.navigate(['home/label/' + labelName])
+  // }
    /**   
      * @description  The dialog box for the cropping of the image 
      */
@@ -214,6 +216,8 @@ image={};
   openDialogCrop(data): void {
     const dialogRef1 = this.dialog.open(CroppedImageComponent, {
       width: '500px',
+      height:'500px',
+      maxWidth:'auto',
       data: data
     });
     dialogRef1.afterClosed()
@@ -232,5 +236,12 @@ ngOnDestroy() {
   this.destroy$.next(true);
   // Now let's also unsubscribe from the subject itself:
   this.destroy$.unsubscribe();
+}
+
+onEnterIcon(event) {
+  if (event.key === "Enter") {
+    this.show = false;
+    this.clickOnSearch = true;
+  }
 }
 }

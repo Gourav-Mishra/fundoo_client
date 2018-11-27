@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between start" >
-    <mat-card class="card"  [style.backgroundColor]="data.color">
+    <mat-card class="width"  [style.backgroundColor]=bgcolor>
       <div fxLayout="column"  >
         <div class="area_content"  id="title1"  contenteditable="true"
                      [innerHTML]="data.title" data-text=""></div>
@@ -29,6 +29,7 @@
             </div> -->
 
 
+            
             <div class="note" *ngFor="let check of tempArray" fxLayout="row">
     
                 <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
@@ -39,8 +40,8 @@
                 *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
               </div>
             
-                <mat-divider *ngIf="checklist"></mat-divider>
-                <div fxLayout="row" *ngIf="!checklist">
+                <!-- <mat-divider *ngIf="checklist"></mat-divider> -->
+                <!-- <div fxLayout="row" *ngIf="!checklist">
                   <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
                   <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
                   <input   fxFlex="95%" class="note" placeholder="List Item" 
@@ -56,7 +57,7 @@
                   [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
                   <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
                    *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
-            </div>
+            </div> -->
       
       <div fxLayout="row wrap" fxLayoutGap="10px">
         <div *ngFor="let item of data.noteLabels" >
@@ -68,16 +69,23 @@
        </mat-chip-list>
       </div>
     </div>
+<!-- ******************collaborator Mat-Fab Icon************************-->
+    <div fxLayout="row wrap" class="space_between">
+      <div *ngFor="let index of data.collaborators">
+      <button mat-mini-fab class="reminder_btn" (click)=openCollaboratorUpdate(data)>{{index.firstName | titlecase | slice:0:1 }}</button>
+      </div>
+    </div>
+ <!-- ******************collaborator Mat-Fab Icon************************-->
       
         <mat-card-footer >
-          <div fxLayoutAlign="space-evenly end" class="icon" fxLayoutAlign="space-around end">
+          <div fxLayoutAlign="space-between center" class="icon" fxLayoutAlign="space-around end">
             <app-remind-btn></app-remind-btn>
-            <app-collaborator></app-collaborator>
-            <app-change-color [noteDetails]="data"  ></app-change-color>
+            <app-collaborator [noteDetails]="data"></app-collaborator>
+            <app-change-color [noteDetails]="data" (mainBoxColor)="changeMainBoxColor($event)" ></app-change-color>
             <app-add-image></app-add-image>
             <app-archive-btn [archive]="data"></app-archive-btn>
             <app-more-btn [noteDetails]="data"></app-more-btn>
-            <button mat-button (click)="onNoClick()"> close</button>
+            <button mat-button (click)="onNoClick()"> Save</button>
           </div>
          
         </mat-card-footer>

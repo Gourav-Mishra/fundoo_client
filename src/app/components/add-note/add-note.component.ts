@@ -32,7 +32,7 @@ import { takeUntil } from 'rxjs/operators';
      checked = false;
      status = "open";
      accessToken = localStorage.getItem('token');
-    public parentColor;
+    public parentColor="#fafafa";
      @Output() onNewEntryAdded=new EventEmitter();
     labelArray: any[];
      note = {

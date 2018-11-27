@@ -65,9 +65,8 @@ $font: 'Roboto',arial,sans-serif;
           }
        
 }
-::ng-deep.cdk-overlay-pane{
-    max-width:90vw;
+::ng-deep.element.style{
+    max-width:100vw !important;
 }
-
   
   

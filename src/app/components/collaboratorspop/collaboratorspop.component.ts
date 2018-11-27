@@ -53,7 +53,8 @@ export class CollaboratorspopComponent implements OnInit {
       "userId":userDetails.userId
   }
   this.httpService.httpPostUserList('notes/'+this.data['id']+'/AddcollaboratorsNotes',collaboratorBody).subscribe(result=>{
-this.collaborator.push(userDetails)
+this.collaborator.push(userDetails);
+this.data['collaborators'].push(userDetails)
   })
 
   
@@ -71,10 +72,12 @@ deleteCollaborator(userId){
   for(let i=0; i<this.collaborator.length;i++){
     if(userId==this.collaborator[i].userId){
       this.collaborator.splice(i,1);
+      this.data['collaborators'].splice(i,1)
     }
   }
   },
   error=>{
   });
   }
+  
 }

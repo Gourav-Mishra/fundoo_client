@@ -6,6 +6,7 @@ import { GeneralService } from 'src/app/core/service/data/general.service';
 import { NoteService } from 'src/app/core/service/note-service/note.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CollaboratorspopComponent } from '../collaboratorspop/collaboratorspop.component';
 
 
 @Component({
@@ -54,7 +55,8 @@ export class NoteCollectionComponent implements OnInit,OnDestroy {
   }
   openDialog(notes): void {
     const dialogRef = this.dialog.open(PopupComponent, {
-      width: '440px',
+      maxWidth:'auto',
+      width:'500px',
       data: notes
 
     });
@@ -161,6 +163,14 @@ addColaboratorEvent(event){
     this.addEntry.emit({})
   }
 
+}
+openCollaborator(note){
+  const dialogRef = this.dialog.open(CollaboratorspopComponent, {
+    maxWidth:'auto',
+    width:'500px',
+    data: note
+
+  });
 }
 }
 
