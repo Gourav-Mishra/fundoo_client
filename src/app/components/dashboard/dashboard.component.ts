@@ -101,7 +101,6 @@ export class DashboardComponent implements OnDestroy {
         return 1
         return 0 
         })   
-        console.log(this.notes);
         
 
     }, error => {
@@ -134,8 +133,7 @@ export class DashboardComponent implements OnDestroy {
         return 1
         return 0 
         })   
-        console.log(this.notes);
-        
+       
     }, error => {
     })
     this.data.currentMsg
@@ -158,7 +156,7 @@ export class DashboardComponent implements OnDestroy {
   onKeyUp(event) {
     this.body.data = event.target.value;
     this.data.searchData(this.body.data)
-    console.log(event);
+
     
   }
 

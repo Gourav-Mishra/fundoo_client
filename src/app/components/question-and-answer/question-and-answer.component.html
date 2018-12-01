@@ -15,25 +15,27 @@
             <hr>
             <!--********** Question Details**********-->
             <div>
-
+            
                 <div *ngIf="show==0" fxLayoutAlign="space-between center">
-                    <div> <textarea [(ngModel)]="body.question" class="question_field" placeholder="Enter your Query"></textarea>
+                    <div>
+                        <div contenteditable="true" #quesReplyArea class="question_field" placeholder="Enter your Query"></div>
                     </div>
                     <div class="close_button"><button (click)=addQuestion() mat-button>Done</button> </div>
                 </div>
                 <div *ngIf="show!=0">
                     <div class="title"> Question.....</div>
                     <div> {{question}}</div>
-
+            
                 </div>
-
+            
             </div>
-
-        </mat-card>
-    </div>
-    <!--********** Question Details**********-->
+            
+            </mat-card>
+            </div>
+    <!--********** Question Details done**********-->
 
     <div class="overflow" fxLayout="column" *ngIf="show!=0">
+    <!------------ 1st Level Relply---------------->
         <div class="moving_pannel">
             <div fxLayout="row">
                 <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md=10 fxFlex.lg=5 fxFlex.xl=5>
@@ -49,16 +51,20 @@
                         
                         <div  fxLayout="row " class="date">{{qA[0].modifiedDate | date:'medium'}}</div>
                     </div>
-                    <div fxLayout="row wrap" fxLayoutGap="10px">
-                        <div class="main_ques_display">{{qA[0].message}}</div>
+                    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                        <div class="main_ques_display" inner>{{qA[0].message}}</div>
                         <div fxLayout="row" fxLayoutGap="10px">
                             <div>
                                 <mat-icon matTooltip="Reply" (click)="answer(qA[0].id)" class="icon">reply</mat-icon>
                             </div>
-                            <div>
-                                <mat-icon matTooltip="Like" class="icon" (click)="like(qA[0])">thumb_up_alt</mat-icon>{{qA[0].like.length}}
+                            <div fxLayout="row">
+                                <mat-icon matTooltip="Like" class="icon" (click)="like(qA[0])">thumb_up_alt</mat-icon>
+                                <div class="count_like" > {{qA[0].like.length}}</div>
                             </div>
-                            <bar-rating class="rating" matTooltip="Rate" [max]="5" (rateChange)="rating(qA[0], $event)"></bar-rating>
+                            <div *ngIf="ratingCheck(qA[0].rate)">
+                            <bar-rating class="rating" matTooltip="Rate" [(rate)]="rate" [max]="5" (rateChange)="rating(qA[0], $event)"></bar-rating>
+                            </div>
+                            <div class="rating"  >{{averageRating(qA[0].rate)}}</div>
                         </div>
                     </div>
                 </div>
@@ -67,18 +73,18 @@
             <div *ngIf="replyShow && qID==qA[0].id">
                 <div fxLayout="row">
                     <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md:=10 fxFlex.lg=5 fxFlex.xl=5>
-                        <button [ngStyle]="{'background-image':'url(' +img+qA[0].user.imageUrl+ ')','background-size':'cover'}"
+                        <button [ngStyle]="{'background-image':'url(' +img2+ ')','background-size':'cover'}"
                             mat-mini-fab>
                         </button>
                     </div>
-                    <textarea class="question_area" placeholder="Write a reply..." [(ngModel)]="replyBody.reply"></textarea>
-                    <div class="reply_button"><button (click)="reply()" mat-button>Reply</button> </div>
+                    <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div>
+                    <div ><button class="reply_button" (click)="reply()" mat-raised-button>Reply</button> </div>
                 </div>
             </div>
         </div>
 
 
-
+  <!--------********** 2nd Level Relply**************----------->
         <div style="margin-left: 50px" *ngFor="let item of qA">
             <div *ngIf="item.parentId==qA[0].id">
                 <div class="moving_pannel">
@@ -90,31 +96,29 @@
 
                         <div fxFlex.xs=70 fxFlex.sm=70 fxFlex.md=70 fxFlex.lg=80 fxFlex.xl=80 fxFlex.lt-sm=80
                             fxFlex.lt-md=80 fxFlex.lt-xl=80 fxFlex.gt-xs=80 fxFlex.gt-md=80 fxFlex.gt-lg=80 fxLayout="column">
-                            <div fxLayout="row">
+                            <div fxLayout="row" fxLayout.xs="column">
                                 <div class="username">{{item.user.firstName}} {{item.user.lastName}}</div>
 
-                                <div fxLayout="row wrap" class="date">{{item.modifiedDate | date:'medium'}}</div>
+                                <div fxLayout="row " class="date">{{item.modifiedDate | date:'medium'}}</div>
 
                             </div>
-                            <div fxLayout="row wrap" fxLayoutGap="10px">
-                                <div class="main_ques_display2">{{item.message}}</div>
+                            <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                                <div class="main_ques_display2" [innerHTML]=" item.message"></div>
                                 <div fxLayout="row" fxLayoutGap="10px">
                                     <div>
                                         <mat-icon matTooltip="Reply" (click)="answer(item.id)" class="icon">reply</mat-icon>
                                     </div>
-                                    <div>
+                                    <div fxLayout="row">
 
-                                        <mat-icon matTooltip="Like" class="icon" (click)="like(item)">thumb_up_alt</mat-icon>{{item.like.length}}
+                                        <mat-icon matTooltip="Like" class="icon" (click)="like(item)">thumb_up_alt</mat-icon>
+                                        <div class="count_like"> {{item.like.length}}</div>
 
                                     </div>
-
-                                    <div *ngIf="item.rate.length!=0">
-                                        <bar-rating matTooltip="Rate" [(rate)]="item.rate[0].rate" [max]="5"
-                                            (rateChange)="rating(item, $event)"></bar-rating>
+                                    <div *ngIf="ratingCheck(item.rate)">
+                                        <bar-rating matTooltip="Rate" [max]="5" [(rate)]="rate" (rateChange)="rating(item, $event)"></bar-rating>
                                     </div>
-                                    <div *ngIf="item.rate.length==0">
-                                        <bar-rating matTooltip="Rate" [max]="5" (rateChange)="rating(item, $event)"></bar-rating>
-                                    </div>
+                                    <div class="rating" >{{averageRating(item.rate)}}</div>
+                                 
                                 </div>
 
 
@@ -125,16 +129,17 @@
                     <div *ngIf="replyShow && qID==item.id">
                         <div fxLayout="row">
                             <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md:=10 fxFlex.lg=5 fxFlex.xl=5>
-                                <button [ngStyle]="{'background-image':'url(' +img+qA[0].user.imageUrl+ ')','background-size':'cover'}"
+                                <button [ngStyle]="{'background-image':'url(' +img2+ ')','background-size':'cover'}"
                                     mat-mini-fab>
                                 </button>
                             </div>
-                            <textarea class="question_area" placeholder="Write a reply..." [(ngModel)]="replyBody.reply"></textarea>
-                            <div class="reply_button"><button (click)="reply()" mat-button>Reply</button> </div>
+                            <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div>
+                            <div ><button class="reply_button" (click)="reply()" mat-raised-button>Reply</button> </div>
                         </div>
 
                     </div>
                 </div>
+             <!-------********** 3rd Level container************------->
 
 
                 <div style="margin-left: 40px">
@@ -151,29 +156,31 @@
                                     <div fxFlex.xs=70 fxFlex.sm=70 fxFlex.md=70 fxFlex.lg=80 fxFlex.xl=80 fxFlex.lt-sm=80
                                         fxFlex.lt-md=80 fxFlex.lt-xl=80 fxFlex.gt-xs=80 fxFlex.gt-md=80 fxFlex.gt-lg=80
                                         fxLayout="column">
-                                        <div fxLayout="row">
+                                        <div fxLayout="row" fxLayout.xs="column">
                                             <div class="username">{{item2.user.firstName}} {{item2.user.lastName}}</div>
 
-                                            <div fxLayout="row wrap" class="date">{{item2.modifiedDate |
+                                            <div fxLayout="row" class="date">{{item2.modifiedDate |
                                                 date:'medium'}}</div>
 
                                         </div>
-                                        <div fxLayout="row wrap" fxLayoutGap="10px">
-                                            <div class="main_ques_display3">{{item2.message}}</div>
+                                        <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                                            <div class="main_ques_display3" [innerHTML]="item2.message"></div>
                                             <div fxLayout="row" fxLayoutGap="10px">
-
                                                 <div>
-                                                    <mat-icon matTooltip="Like" class="icon" (click)="like(item2)">thumb_up_alt</mat-icon>{{item2.like.length}}
-
+                                                    <mat-icon matTooltip="Reply" (click)="answer(item.id)" class="icon">reply</mat-icon>
                                                 </div>
-
-                                                <div *ngIf="item2.rate.length!=0">
-                                                    <bar-rating matTooltip="Rate" [(rate)]="item2.rate[0].rate" [max]="5"
-                                                        (rateChange)="rating(item2, $event)"></bar-rating>
+                                        
+                                                <div fxLayout=row>
+                                                    <mat-icon matTooltip="Like" class="icon" (click)="like(item2)">thumb_up_alt</mat-icon>
+                                                    <div class="count_like"> {{item2.like.length}}</div>
+                                        
                                                 </div>
-                                                <div *ngIf="item2.rate.length==0">
-                                                    <bar-rating matTooltip="Rate" [max]="5" (rateChange)="rating(item2, $event)"></bar-rating>
+                                        
+                                                
+                                                <div *ngIf="ratingCheck(item2.rate)">
+                                                    <bar-rating matTooltip="Rate" [max]="5" [(rate)]="rate" (rateChange)="rating(item2, $event)"></bar-rating>
                                                 </div>
+                                                <div class="rating"  >{{averageRating(item2.rate)}}</div>
                                             </div>
                                         </div>
                                     </div>

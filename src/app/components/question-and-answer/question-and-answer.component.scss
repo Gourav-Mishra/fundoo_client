@@ -42,6 +42,7 @@
             outline:none;
             border:none;
             width:auto;
+            
 
 
         }
@@ -75,7 +76,7 @@
                margin-left:50px 
         }
         ::ng-deep.rating{
-            margin-top:-17px
+            margin-top:-10px
         }
         .reply_area{
             width:50%
@@ -91,6 +92,23 @@
         .question_area{
             outline:none;
             border: none;
-            width:100%;
+            width:90%;
+            background-color: rgba(197, 206, 203, 0.199);
+           
+          
+        }
+        [contentEditable=true]:empty:not(:focus):before{
+            content:attr(placeholder)
+        }
+        .reply_button{
+            background-color: rgba(197, 206, 203, 0.199);
+            border-radius: 5%
+        }
+        .count_like{
+            margin-top: 15px;
+        }
+        .rating{
+            margin-top:18px;
+            font-size: 15px
         }
        

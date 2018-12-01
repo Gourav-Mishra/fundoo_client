@@ -51,8 +51,6 @@ if(event){
          this.notes.push(myData[i])
         }
       }
-     
-       console.log(this.notes);
      },error=>{
      });
 
@@ -69,15 +67,12 @@ if(event){
          this.notesPin.push(myPin[i])
         }
       }
-    
-       
      },error=>{
      });
 
   }
   ngOnDestroy() {
     this.destroy$.next(true);
-    // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
   

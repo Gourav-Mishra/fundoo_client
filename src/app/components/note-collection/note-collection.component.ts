@@ -138,8 +138,6 @@ updatelist(id) {
   this.noteService.postUpdateChecklist(url, JSON.stringify(apiData), localStorage.getItem('token'))
   .pipe(takeUntil(this.destroy$))
   .subscribe(response => {
-    console.log(response);
-
   })
 }
 

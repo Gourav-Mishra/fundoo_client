@@ -56,7 +56,7 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
         return 1
         return 0 
         })   
-        console.log(this.notes);
+       
      
     }, error => {
     })
@@ -109,27 +109,5 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
 
       this.destroy$.unsubscribe();
     }
-    // removeLabel(labelId){
-    //   this.labelBody={
-    //     "noteId":this.noteDetails.id,
-    //     "lableId":labelId
-    //   }
-    //   this.httpService.httpAddNote('notes/'+this.noteDetails.id+'/addLabelToNotes/'+labelId+'/remove',this.labelBody,localStorage.getItem('token')).subscribe(result=>{
-    //     console.log(result);
-    //   },error=>{
-    //     console.log(error);
-        
-    //   })
-
-    // }
-    // selectCheck(labelOption){
-    //   if (this.noteDetails.noteLabels.some((data) => data.label == labelOption.label)) {
-    //   return true;
-    //   }
-    //   else {
-  
-    //    return false;
-    // }
-    // }
-
+    
 }
