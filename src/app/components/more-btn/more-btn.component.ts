@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { NoteService } from 'src/app/core/service/note-service/note.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 // import { EventEmitter } from 'protractor';
 
 @Component({
@@ -30,7 +31,8 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
 
 
   constructor(private httpService: HttpService,public snackBar: MatSnackBar,
-    public noteService:NoteService) { }
+    public noteService:NoteService,
+    private router:Router) { }
   @Output() notesDelete=new EventEmitter();
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
     this.httpService.httpGetNotes('noteLabels/getNoteLabelList', token)
     .pipe(takeUntil(this.destroy$))
     .subscribe(res => {
-      console.log("labels= ", res);
+      
      
       // this.notes = (res['data'].details);
       for (var i = 0; i < res['data'].details.length; i++) {
@@ -58,14 +60,14 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
      
     }, error => {
     })
-    console.log("noteslabels=>",this.notes);
+    
     
     
 
   }
   delete()       {
     var token = localStorage.getItem('token');
-    console.log("delete");
+ 
     
     this.body={
     "isDeleted": true,
@@ -93,14 +95,18 @@ export class MoreBtnComponent implements OnInit,OnDestroy {
       this.noteService.postAddLabelnotes(this.noteDetails.id,labelId,{})
       .pipe(takeUntil(this.destroy$))
       .subscribe(result=>{
-        console.log(result);
+       
         this.notesDelete.emit();
       },error=>{
       })
     }
+    askQuestion(){
+      this.router.navigate(['/home/notes/'+ this.noteDetails.id +'/questionAndAnswers'])
+      
+    }
     ngOnDestroy() {
       this.destroy$.next(true);
-      // Now let's also unsubscribe from the subject itself:
+
       this.destroy$.unsubscribe();
     }
     // removeLabel(labelId){

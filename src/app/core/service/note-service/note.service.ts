@@ -98,5 +98,26 @@ export class NoteService {
     let url=this.url+ "/notes/"+noteId+"/removeCollaboratorsnotes/"+userId;
     return this.service.delete(url);
   }
+   getNoteDetails(noteId){
+    let url = this.url + 'notes/getNotesDetail/'+noteId;
+    return this.service.get(url);
+}
+addQuestionAndAnswer(RequestBody){
+  let url=this.url+'/questionAndAnswerNotes/addQuestionAndAnswer';
+  return this.service.httpPosts(url,RequestBody,null)
 
+
+}
+likeQnA(id, RequestBody) {
+  this.url = this.url + "/questionAndAnswerNotes/like/" + id;
+  return this.service.httpPosts(this.url, RequestBody,null);
+  }
+  replyQnA(id, RequestBody) {
+  this.url = this.url + "/questionAndAnswerNotes/reply/" + id;
+  return this.service.httpPosts(this.url, RequestBody,null);
+  }
+  ratingQnA(id, RequestBody){
+  this.url = this.url + "/questionAndAnswerNotes/rate/" + id;
+  return this.service.httpPosts(this.url, RequestBody,null);
+  }
 }

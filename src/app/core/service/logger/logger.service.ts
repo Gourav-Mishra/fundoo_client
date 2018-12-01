@@ -9,7 +9,7 @@ providedIn: 'root'
 
 export class LoggerService {
 
-static log(msg: string): void {
+static log(msg: any): void {
 
 console.log(msg);
 

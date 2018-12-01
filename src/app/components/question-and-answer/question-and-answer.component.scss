@@ -1,0 +1,96 @@
+.first{
+ height:auto;
+}
+.mainCard{
+    margin-top:70px;
+   
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.568);  
+}
+
+.close_button{
+    float:right;
+    
+    font-size:18;
+
+}
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size:25px;
+    font-weight:500;
+   
+}
+.description{
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
+    font-weight:300;
+    margin-top:10px;
+    
+}
+.profilebutton2{
+    width:50px; 
+    height:50px; 
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    outline:none;
+
+        }
+        .question_field{
+            font-family: 'Times New Roman', Times, serif;
+            font-size:20px;
+            font-weight:300;
+            outline:none;
+            border:none;
+            width:auto;
+
+
+        }
+        .main_ques_display{
+            width:auto;
+            font-size:25px;
+        }
+        .username{
+            font-size: 20px;
+            width:auto;
+        }
+        .moving_pannel{
+            margin-top:10px;
+            
+        }
+        .date{
+            color:grey;
+            margin-left:5px;
+            margin-top:5px;
+            font-size: 12px;
+        }
+        .overflow{
+            overflow: auto;
+            height:450px
+
+        }
+        .icon{
+            margin-top:10px
+        }
+        .icon_list{
+               margin-left:50px 
+        }
+        ::ng-deep.rating{
+            margin-top:-17px
+        }
+        .reply_area{
+            width:50%
+        }
+        .main_ques_display2{
+            width:auto;
+            font-size:15px;
+        }
+        .main_ques_display3{
+            width:auto;
+            font-size:15px;
+        }
+        .question_area{
+            outline:none;
+            border: none;
+            width:100%;
+        }
+       

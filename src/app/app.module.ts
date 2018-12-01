@@ -21,6 +21,9 @@ import { MatInputModule,
   MatTooltipModule} from '@angular/material';
 import { FormsModule,
          ReactiveFormsModule } from '@angular/forms';
+import {RatingModule} from "ngx-rating/index.js";
+import { BarRatingModule } from "ngx-bar-rating";
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule ,CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -75,6 +78,7 @@ import { MessagingService } from './core/service/messaging/messaging.service';
 import { CollaboratorspopComponent } from './components/collaboratorspop/collaboratorspop.component';
 import { errorHandler } from '@angular/platform-browser/src/browser';
 import { ErrorHandlerService } from './core/service/error-handler/error-handler.service';
+import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 
 
 
@@ -118,6 +122,10 @@ import { ErrorHandlerService } from './core/service/error-handler/error-handler.
    
     CollaboratorspopComponent,
    
+   
+   
+    QuestionAndAnswerComponent,
+   
 
 
   ],
@@ -152,7 +160,9 @@ import { ErrorHandlerService } from './core/service/error-handler/error-handler.
     MatChipsModule,
     ImageCropperModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    RatingModule,
+    BarRatingModule
    
 
 

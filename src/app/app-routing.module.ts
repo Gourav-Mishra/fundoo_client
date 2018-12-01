@@ -12,6 +12,7 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { SearchComponent } from './components/search/search.component';
 import { LableWindowComponent } from './components/lable-window/lable-window.component';
+import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 
 
 
@@ -39,6 +40,7 @@ const routes:Routes=
        { path:'trash',component : TrashComponent},
        {path : 'search',component : SearchComponent},
        {path : 'label/:params',component: LableWindowComponent},
+       {path : 'notes/:noteId/questionAndAnswers',component: QuestionAndAnswerComponent},
       
       
   ]
