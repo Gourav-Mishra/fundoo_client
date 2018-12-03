@@ -164,6 +164,7 @@ changeMainBoxColor(color){
     this.dialogPop.open(CollaboratorspopComponent, {
       maxWidth:'auto',
       width:'500px',
+     
       data: note
   
     });

@@ -39,6 +39,7 @@ if(event){
       
 }
 }
+private load=true;
   getNotes(){
     var token=localStorage.getItem('token');
     this.records= this.noteService.getNotesList()
@@ -51,6 +52,7 @@ if(event){
          this.notes.push(myData[i])
         }
       }
+      this.load=false;
      },error=>{
      });
 
@@ -67,6 +69,7 @@ if(event){
          this.notesPin.push(myPin[i])
         }
       }
+      this.load=false;
      },error=>{
      });
 

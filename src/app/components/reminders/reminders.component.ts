@@ -24,7 +24,7 @@ export class RemindersComponent implements OnInit,OnDestroy {
     this.viewCard()
   }
   public reminder = []
-
+  private load=true;
   getReminderList() {
     var token = localStorage.getItem('token');
     this.noteService.getReminders()
@@ -34,6 +34,7 @@ export class RemindersComponent implements OnInit,OnDestroy {
 
       this.reminder = result['data'].data;
       this.reminder.sort(this.compare)
+      this.load=false;
 
 
 
@@ -45,6 +46,8 @@ export class RemindersComponent implements OnInit,OnDestroy {
     .pipe(takeUntil(this.destroy$))
     .subscribe(message => {
       this.toggle = message;
+      this.load=false;
+      
     })
   }
   compare(a, b) {

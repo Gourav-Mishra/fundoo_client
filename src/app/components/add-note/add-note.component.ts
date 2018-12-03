@@ -6,6 +6,7 @@ import{ Note} from '../../core/model/note'
 import { NoteService } from 'src/app/core/service/note-service/note.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
   
   export class AddNoteComponent implements OnInit,OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
-    
+ 
      hide: boolean = true;
      labelId = [];
      labelName = [];
@@ -42,10 +43,14 @@ import { takeUntil } from 'rxjs/operators';
         private router: Router, private noteService:NoteService) { }
         public todayDate= new Date();
         public  tomorrowDate=new Date()
-         
+        private collaborators=[];
     ngOnInit() {
         this.getAllLabels();
-        this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1)
+        this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
+        for (let i = 0; i < this.data['collaborators'].length; i++) {
+            this.collaborators.push(this.data['collaborators'][i])
+          }
+      
     }
     changeMainBoxColor(event){
              if(event){
@@ -68,6 +73,7 @@ import { takeUntil } from 'rxjs/operators';
             'isPined': 'false',
             "color":this.parentColor,
             'reminder':'',
+            "collaberators": JSON.stringify(this.collaborators)
     
         }
         if(this.remindervar!=undefined){
@@ -116,13 +122,15 @@ import { takeUntil } from 'rxjs/operators';
                 'isPined': 'false',
                 "color":this.color,
                 'reminder':this.remindervar,
+                "collaberators": JSON.stringify(this.collaborators)
             } ).subscribe(response => {
                 this.onNewEntryAdded.emit({});
                 this.dataArrayCheck = [];
                 this.labelName = [];
                 this.hide = !this.hide;
                 this.color = "#fafafa";
-                this.show = 0
+                this.show = 0;
+                this.collaborators=[];
             }, error => {
                 this.dataArrayCheck = [];
                
@@ -239,6 +247,64 @@ import { takeUntil } from 'rxjs/operators';
         this.remindervar='';
 
     }
+    private image2 = localStorage.getItem('imageUrl');
+    img = environment.profieUrl + this.image2;
+  
+    private firstName = localStorage.getItem('firstName');
+    private lastName = localStorage.getItem('lastName');
+    private email = localStorage.getItem('email');
+  
+    private requestBody = {
+      "searchWord": ""
+    }
+    private userList = [];
+    collab=true;
+   collaborator(){
+    this.collab=!this.collab;
+    
+  }
+    // searchUser() {
+    //   this.userService.searchUser(this.requestBody)
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe(result => {
+    //     this.userList = result['data']['details']
+        
+    //   })
+    // }
+    searchUser(){
+        this.httpService.httpPostUserList('user/searchUserList',this.requestBody).subscribe(result=>{
+          this.userList=result['data']['details']
+        })
+    
+      }
+    addCollaborator(userDetails) {
+      
+      let collaboratorBody = {
+        "firstName": userDetails.firstName,
+        "lastName": userDetails.lastName,
+        "email": userDetails.email,
+        "userId": userDetails.userId
+      }
+      this.collaborators.push(collaboratorBody);
+      this.requestBody.searchWord="";
+      
+    }
+    removeCollaborator(collaboratorId){
+      for(let i=0; i<this.collaborators.length; i++){
+        if(collaboratorId==this.collaborators[i].userId){
+          this.collaborators.splice(i,1);
+        }
+      }
+  
+    }
+    closeCollaborator(){
+      this.collab=!this.collab
+      
+    }
+
+
+
+
     ngOnDestroy() {
       this.destroy$.next(true);
       // Now let's also unsubscribe from the subject itself:

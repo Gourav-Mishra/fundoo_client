@@ -103,7 +103,7 @@ export class NoteService {
     return this.service.get(url);
 }
 addQuestionAndAnswer(RequestBody){
-  let url=this.url+'/questionAndAnswerNotes/addQuestionAndAnswer';
+  let url=this.url+'questionAndAnswerNotes/addQuestionAndAnswer';
   return this.service.httpPosts(url,RequestBody,null)
 
 
@@ -113,7 +113,7 @@ likeQnA(id, RequestBody) {
   return this.service.httpPosts(this.url, RequestBody,null);
   }
   replyQnA(id, RequestBody) {
-  this.url = this.url + "/questionAndAnswerNotes/reply/" + id;
+  this.url = this.url + "questionAndAnswerNotes/reply/" + id;
   return this.service.httpPosts(this.url, RequestBody,null);
   }
   ratingQnA(id, RequestBody){

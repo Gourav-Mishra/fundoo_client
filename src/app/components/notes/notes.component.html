@@ -3,23 +3,26 @@
 <div *ngIf='notesPin.length!==0'>
 <div class="pinned" >pinned</div>
 
-<app-note-collection [notesArray]="notesPin" 
+<app-note-collection *ngIf="!load" [notesArray]="notesPin" 
                      (deleteParent)="addNewEntry($event)" 
                      (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
 
 
 <div class="others">Others</div>
-<app-note-collection [notesArray]="notes" 
+<app-note-collection *ngIf="!load" [notesArray]="notes" 
                      (deleteParent)="addNewEntry($event)" 
                      (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
 </div>
 <div *ngIf='notesPin.length==0'>
 
-<app-note-collection [notesArray]="notes" 
+<app-note-collection *ngIf="!load" [notesArray]="notes" 
                      (deleteParent)="addNewEntry($event)" 
                      (changeColorAgain)="addNewEntry($event)">
 </app-note-collection>
 </div>
+
 </div>
+<div class="loader" *ngIf="load">Loading...</div>
+

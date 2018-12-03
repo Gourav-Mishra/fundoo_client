@@ -1,5 +1,5 @@
 <div  fxShow=true  fxFlex=10% ></div>
-<div  fxLayout="row wrap" fxLayoutWrap  fxLayoutGap="20px" style=" margin-bottom:50px ;margin-top:20px">
+<div  fxLayout="row wrap" fxLayoutAlign="start start"  fxLayoutGap="20px" style=" margin-bottom:50px ;margin-top:20px">
   <mat-card class="card" 
   
             *ngFor='let notes of notesArray | LockFilter: searchNote' 
@@ -111,11 +111,12 @@
 </mat-chip-list>
 
 
-   
+  </div>
+  <div>
     
      <!--- chip list for reminders Ends--->
      <!--collababorator icon-->
-     <div fxLayout="row" class="space_between" fxLayoutGap="5px">
+     <div fxLayout="row wrap" class="space_between" fxLayoutGap="5px">
             <div *ngFor="let index of notes.collaborators">
             <button mat-mini-fab class="reminder_btn" (click)=openCollaborator(notes)>{{index.firstName | titlecase | slice:0:1 }}</button>
             </div>
@@ -133,10 +134,20 @@
         <app-more-btn [noteDetails]="notes" (notesDelete)="deleteDone($event)"></app-more-btn>
       </div>
     </mat-card-actions>
+    <div *ngIf="notes.questionAndAnswerNotes.length==0">
+    
+        </div>
+        <div *ngIf="notes.questionAndAnswerNotes.length!=0">
+           <hr>
+            <div class="head" ><b>Question Asked</b></div>
+            <div class="question_content" [innerHTML]="notes.questionAndAnswerNotes[0].message | titlecase" ></div>
+        </div>
 
 </div>
+
+
   </mat-card>
 
 </div>
 
-<!-- <div style="border:solid blue" fxShow=true fxShow.xs=false fxFlex=10% ></div> -->
+

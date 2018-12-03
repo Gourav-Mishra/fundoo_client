@@ -79,5 +79,8 @@ deleteCollaborator(userId){
   error=>{
   });
   }
+  close(){
+    this.dialogRef.close('')
+  }
   
 }
