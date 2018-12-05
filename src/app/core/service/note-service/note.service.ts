@@ -102,7 +102,7 @@ export class NoteService {
     let url = this.url + 'notes/getNotesDetail/'+noteId;
     return this.service.get(url);
 }
-addQuestionAndAnswer(RequestBody){
+addQuestion(RequestBody){
   let url=this.url+'questionAndAnswerNotes/addQuestionAndAnswer';
   return this.service.httpPosts(url,RequestBody,null)
 

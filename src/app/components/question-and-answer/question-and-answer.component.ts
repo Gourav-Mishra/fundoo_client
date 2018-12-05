@@ -42,6 +42,8 @@ export class QuestionAndAnswerComponent implements OnInit {
   private replyCount;
   private value;
   private avgRate;
+  private qID;
+  private rate;
 
   ngOnInit() {
     // this.activatedRoute.params.subscribe((params: Params) => {
@@ -90,7 +92,7 @@ export class QuestionAndAnswerComponent implements OnInit {
       "message": this.quesReply.nativeElement.innerHTML,
       "notesId": this.noteId
     }
-    this.noteService.addQuestionAndAnswer(requestBody).subscribe(result => {
+    this.noteService.addQuestion(requestBody).subscribe(result => {
       this.getNotes();
     })
   }
@@ -126,7 +128,7 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.getNotes();
     })
   }
-  private qID;
+
   /**
    *   @description : Api call for Answer
    **/
@@ -138,7 +140,7 @@ export class QuestionAndAnswerComponent implements OnInit {
   private replyBody = {
     "reply": ""
   };
-  reply() {
+  replyTo() {
     let replyRequest = {
       "message": this.answerReply.nativeElement.innerHTML,
     }
@@ -146,8 +148,8 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.getNotes();
     })
   }
-  private rate;
-  ratingCheck(rateArray) {
+  
+  checkRating(rateArray) {
     this.rate = 0;
     if (rateArray.length == 0) {
       return true;

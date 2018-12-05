@@ -61,14 +61,15 @@
                                 <mat-icon matTooltip="Like" class="icon" (click)="like(qA[0])">thumb_up_alt</mat-icon>
                                 <div class="count_like"> {{qA[0].like.length}}</div>
                             </div>
-                            <div *ngIf="ratingCheck(qA[0].rate)">
+                            <div *ngIf="checkRating(qA[0].rate)">
                                 <bar-rating class="rating" matTooltip="Rate" [(rate)]="rate" [max]="5" (rateChange)="rating(qA[0], $event)"></bar-rating>
                             </div>
                             <div class="rating">{{averageRating(qA[0].rate)}}</div>
                             <div>
-                                    <mat-icon matTooltip="View {{viewReplies(qA[0])}} replies" class="down" *ngIf="open==true" (click)="open = !open">keyboard_arrow_down</mat-icon>
+                                    <mat-icon  class="down" *ngIf="open==true" (click)="open = !open">keyboard_arrow_down</mat-icon>
                                     <mat-icon matTooltip="Hide {{viewReplies(qA[0])}} replies" class="down" *ngIf="open==false" (click)="open = !open">keyboard_arrow_up</mat-icon>
                             </div>
+                            <div class="reply"> View {{viewReplies(qA[0])}} replies</div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +83,7 @@
                         </button>
                     </div>
                     <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div>
-                    <div><button class="reply_button" (click)="reply()" mat-raised-button>Reply</button> </div>
+                    <div><button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button> </div>
                 </div>
             </div>
         </div>
@@ -118,7 +119,7 @@
                                         <div class="count_like"> {{item.like.length}}</div>
 
                                     </div>
-                                    <div *ngIf="ratingCheck(item.rate)">
+                                    <div *ngIf="checkRating(item.rate)">
                                         <bar-rating matTooltip="Rate" [max]="5" [(rate)]="rate" (rateChange)="rating(item, $event)"></bar-rating>
                                     </div>
                                     <div class="rating">{{averageRating(item.rate)}}</div>
@@ -143,7 +144,7 @@
                                 </button>
                             </div>
                             <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div>
-                            <div><button class="reply_button" (click)="reply()" mat-raised-button>Reply</button> </div>
+                            <div><button class="reply_button" (click)="replyTO()" mat-raised-button>Reply</button> </div>
                         </div>
 
                     </div>
@@ -186,7 +187,7 @@
                                                 </div>
 
 
-                                                <div *ngIf="ratingCheck(item2.rate)">
+                                                <div *ngIf="checkRating(item2.rate)">
                                                     <bar-rating matTooltip="Rate" [max]="5" [(rate)]="rate"
                                                         (rateChange)="rating(item2, $event)"></bar-rating>
                                                 </div>
