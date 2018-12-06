@@ -18,7 +18,8 @@
 
                 <div *ngIf="show==0" fxLayoutAlign="space-between center">
                     <div>
-                        <div contenteditable="true" #quesReplyArea class="question_field" placeholder="Enter your Query"></div>
+                        <!-- <div contenteditable="true" #quesReplyArea class="question_field" placeholder="Enter your Query"></div> -->
+                        <div [froalaEditor] [(froalaModel)]="editorContent"></div>
                     </div>
                     <div class="close_button"><button (click)=addQuestion() mat-button>Done</button> </div>
                 </div>
@@ -82,7 +83,8 @@
                             mat-mini-fab>
                         </button>
                     </div>
-                    <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div>
+                    <!-- <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div> -->
+                    <div [froalaEditor] [(froalaModel)]="editorContent"></div>
                     <div><button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button> </div>
                 </div>
             </div>
@@ -143,8 +145,8 @@
                                     mat-mini-fab>
                                 </button>
                             </div>
-                            <div class="question_area" placeholder="Write a reply..." contenteditable="true" #replyArea></div>
-                            <div><button class="reply_button" (click)="replyTO()" mat-raised-button>Reply</button> </div>
+                            <div [froalaEditor] [(froalaModel)]="editorContent"></div>
+                            <div><button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button> </div>
                         </div>
 
                     </div>

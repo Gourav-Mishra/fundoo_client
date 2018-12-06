@@ -44,11 +44,11 @@ export class QuestionAndAnswerComponent implements OnInit {
   private avgRate;
   private qID;
   private rate;
-
+  public editorContent: string 
   ngOnInit() {
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   this.noteId = params['noteId'];
-    // });
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.noteId = params['noteId'];
+    });
     // this.noteService.getNoteDetails(this.noteId).subscribe(response => {
     //   this.title = response['data']['data'][0].title;
     //   this.description = response['data']['data'][0].description;
@@ -89,7 +89,7 @@ export class QuestionAndAnswerComponent implements OnInit {
   addQuestion() {
     this.show = !this.show;
     let requestBody = {
-      "message": this.quesReply.nativeElement.innerHTML,
+      "message": this.editorContent,
       "notesId": this.noteId
     }
     this.noteService.addQuestion(requestBody).subscribe(result => {
@@ -142,7 +142,7 @@ export class QuestionAndAnswerComponent implements OnInit {
   };
   replyTo() {
     let replyRequest = {
-      "message": this.answerReply.nativeElement.innerHTML,
+      "message": this.editorContent,
     }
     this.noteService.replyQnA(this.qID, replyRequest).subscribe(response => {
       this.getNotes();

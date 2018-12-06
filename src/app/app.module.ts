@@ -79,7 +79,7 @@ import { CollaboratorspopComponent } from './components/collaboratorspop/collabo
 import { errorHandler } from '@angular/platform-browser/src/browser';
 import { ErrorHandlerService } from './core/service/error-handler/error-handler.service';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 
 
@@ -162,7 +162,10 @@ import { QuestionAndAnswerComponent } from './components/question-and-answer/que
     MatDatepickerModule,
     MatNativeDateModule,
     RatingModule,
-    BarRatingModule
+    BarRatingModule,
+    FroalaEditorModule,
+    FroalaViewModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
    
 
 
