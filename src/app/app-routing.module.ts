@@ -13,6 +13,7 @@ import { TrashComponent } from './components/trash/trash.component';
 import { SearchComponent } from './components/search/search.component';
 import { LableWindowComponent } from './components/lable-window/lable-window.component';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 
@@ -29,6 +30,7 @@ const routes:Routes=
   { path: 'signup', component : SignupComponent},
   { path: 'forgot', component:ForgotComponent },
   {path : 'resetpassword/:id', component:ResetpasswordComponent},
+  // {path : 'shoppingCart'},
   
   { path: 'home', component : HomeComponent,
   
@@ -40,7 +42,8 @@ const routes:Routes=
        { path:'trash',component : TrashComponent},
        { path : 'search',component : SearchComponent},
        { path : 'label/:params',component: LableWindowComponent},
-       { path : 'notes/:noteId/questionAndAnswers',component: QuestionAndAnswerComponent},  
+       { path : 'notes/:noteId/questionAndAnswers',component: QuestionAndAnswerComponent}, 
+       { path: 'shopingCart' , component:ShoppingCartComponent} 
   ]
 } 
 ]

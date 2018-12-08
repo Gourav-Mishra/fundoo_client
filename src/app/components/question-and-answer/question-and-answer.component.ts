@@ -44,7 +44,8 @@ export class QuestionAndAnswerComponent implements OnInit {
   private avgRate;
   private qID;
   private rate;
-  public editorContent: string 
+  public editorContent: string ;
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.noteId = params['noteId'];
@@ -68,7 +69,10 @@ export class QuestionAndAnswerComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.noteId = params['noteId'];
     });
-    this.noteService.getNoteDetails(this.noteId).subscribe(response => {
+     
+      this.noteService.getNoteDetails(this.noteId).subscribe(response => {
+console.log(response);
+
       this.title = response['data']['data'][0].title;
       this.description = response['data']['data'][0].description;
       this.show = response['data']['data'][0].questionAndAnswerNotes.length;
@@ -78,6 +82,7 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.img = environment.profieUrl;
       this.date = response['data']['data'][0].questionAndAnswerNotes[0].modifiedDate;
       this.qA = response['data']['data'][0].questionAndAnswerNotes;
+
       this.image = localStorage.getItem('imageUrl');
       this.img2 = environment.profieUrl + this.image;
     })
@@ -186,5 +191,29 @@ export class QuestionAndAnswerComponent implements OnInit {
     }
     return this.replyCount;
   }
+  public options: Object = {
+    charCounterCount: true,
+    toolbarButtons: ['bold', 'italic', 'underline','fontFamily', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+     'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+    'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+    'insertHorizontalRule', 'removeFormat', 'fullscreen','paragraphStyles'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+     'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+    'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+    'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+     'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+    'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+    'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+     'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+    'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+    'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+  };
+  
 }
 

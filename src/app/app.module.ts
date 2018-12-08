@@ -80,6 +80,7 @@ import { errorHandler } from '@angular/platform-browser/src/browser';
 import { ErrorHandlerService } from './core/service/error-handler/error-handler.service';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 
@@ -115,16 +116,10 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     LabelSearchPipe,
     LableWindowComponent,
     CroppedImageComponent,
-   
-    PinComponent,
-   
-   
-   
+    PinComponent, 
     CollaboratorspopComponent,
-   
-   
-   
     QuestionAndAnswerComponent,
+    ShoppingCartComponent,
    
 
 
